@@ -226,6 +226,18 @@ router.post('/spkImage', adminLogin ,async(req, res, next)=> {
   fs.renameSync( req.files.image.path, pathname )
   res.json("/images/spk/"+filename);
 });
+
+
+router.post('/trackImage', adminLogin ,async(req, res, next)=> {
+  if(!req.files["image"])
+    return res.sendStatus(404)
+  //var ret= await req.knex.select("*").from("t_cbrf_spk").where({isDeleted:false}).orderBy("sortOrder")
+
+  var filename=path.basename(req.files.image.path)
+  var pathname=path.join(__dirname, '../public/images/spk/'+filename)
+  fs.renameSync( req.files.image.path, pathname )
+  res.json("/images/spk/"+filename);
+});
 router.post('/addSpk', adminLogin ,async(req, res, next)=> {
 
   delete req.body.id;
@@ -347,6 +359,22 @@ router.get('/votes', async(req, res, next) =>{
   res.json(ret);
 
 })
+router.get('/tracks', async(req, res, next) =>{
+
+//  req.knex.select("*").from("t_cbrf_codes")
+  var ret=await req.knex.select("*").from("t_cbrf_tracks").where({isDeleted:false}).orderBy("date");
+  res.json(ret);
+
+})
+router.get('/pgm', async(req, res, next) =>{
+
+//  req.knex.select("*").from("t_cbrf_codes")
+  var ret=await req.knex.select("*").from("t_cbrf_pgm").where({isDeleted:false}).orderBy(["trackid", "time"]);;
+  res.json(ret);
+
+})
+
+
 router.post('/voting', userLogin, async(req, res, next) =>{
   var a=await req.knex.select("*").from("t_cbrf_voteanswers").where({id:req.body.id})
   await req.knex("t_cbrf_voteanswers").update({count:(a[0].count+1)}).where({id:req.body.id})
@@ -373,6 +401,40 @@ router.post('/voteAdd', adminLogin,async(req, res, next) =>{
   res.json(ret[0]);
 
 })
+
+
+router.post('/trackAdd', adminLogin,async(req, res, next) =>{
+  var ret=await req.knex("t_cbrf_tracks").insert({},"*");
+  //ret[0].answers=await req.knex("t_cbrf_voteanswers").insert([{voteid:ret[0].id},{voteid:ret[0].id}],"*");
+  res.json(ret[0]);
+
+})
+router.post('/pgmAdd', adminLogin,async(req, res, next) =>{
+  var ret=await req.knex("t_cbrf_pgm").insert({},"*");
+  //ret[0].answers=await req.knex("t_cbrf_voteanswers").insert([{voteid:ret[0].id},{voteid:ret[0].id}],"*");
+  res.json(ret[0]);
+
+})
+
+router.post('/trackChange', adminLogin,async(req, res, next) =>{
+
+  var id=req.body.id;
+  delete  req.body.id;
+  var ret=await req.knex("t_cbrf_tracks").update(req.body,"*").where({id:id});
+  res.json(ret[0]);
+
+})
+
+router.post('/pgmChange', adminLogin,async(req, res, next) =>{
+
+  var id=req.body.id;
+  delete  req.body.id;
+  var ret=await req.knex("t_cbrf_pgm").update(req.body,"*").where({id:id});
+  res.json(ret[0]);
+
+})
+
+
 router.post('/addVoteAnswer', adminLogin,async(req, res, next) =>{
   var ret=await req.knex("t_cbrf_voteanswers").insert({voteid:req.body.id},"*");
   res.json(ret[0]);

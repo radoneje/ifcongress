@@ -6,8 +6,52 @@ var pgm=new Vue({
         reqModal:null,
         user:JSON.parse( localStorage.getItem("user") || '{"isPromice":false}'),
         reqProcess:false,
+        tracks:[],
+        tracksDate:[],
+        currTrack:{},
+        currShowTrack:{},
+        trackRotateTimeout:0,
+        pgm:[],
+        spk:[],
+        curSpeakersPage:0,
+        curSpeakers:[],
     },
     methods:{
+        getSessionFromSpk:function(spk){
+            var ret=[];
+            this.pgm.forEach(p=>{
+                p.moderators.forEach(m=>{
+                    if(m==spk.id)
+                        ret.push(p);
+                })
+                p.speakers.forEach(m=>{
+                    if(m==spk.id)
+                        ret.push(p);
+                })
+
+            })
+            ret.forEach(p=>{
+                var track=this.tracks.filter(t=>t.id==p.trackid);
+                p.key=moment(track[0].data).format("DD MMM")
+            });
+           return ret;
+        },
+        curSpeakersPagePreview:function(){
+            this.curSpeakersPage--;
+            if(this.curSpeakersPage<0)
+                this.curSpeakersPage=0;
+        },
+        curSpeakersPageNext:function(){
+            this.curSpeakersPage++;
+            if(this.curSpeakersPage>parseInt(spk.length/8))
+                this.curSpeakersPage--;
+        },
+        getHtml:function(string){
+            if(!string)
+                return "<br/>";
+            string=string.replace(/\n/g,"<br/>");
+            return  string
+        },
         regUser:async function(){
             if(this.reqProcess)
                 return ;
@@ -46,8 +90,31 @@ var pgm=new Vue({
 
 
 
+        },
+        getSpk:function(id){
+            var ret=this.spk.filter(s=>s.id==id);
+            return ret[0];
         }
 
+        ,
+        rotateTrack:function () {
+            this.currShowTrack=this.tracks.shift();
+            this.tracks.push(this.currShowTrack);
+            this.trackRotateTimeout=setTimeout(()=>{this.rotateTrack()}, 10000)
+        },
+        previewTrack:function () {
+            this.currShowTrack=this.tracks.pop();
+            this.tracks.unshift(this.currShowTrack);
+
+            clearTimeout(this.trackRotateTimeout)
+            this.trackRotateTimeout=setTimeout(()=>{this.rotateTrack()}, 10000)
+        },
+        nextTrack:function () {
+            this.currShowTrack=this.tracks.shift();
+            this.tracks.push(this.currShowTrack);
+            clearTimeout(this.trackRotateTimeout)
+            this.trackRotateTimeout=setTimeout(()=>{this.rotateTrack()}, 10000)
+        },
     },
     watch:{
         pgmItemModal:function () {
@@ -69,7 +136,52 @@ var pgm=new Vue({
                 document.body.style.overflow="scroll";
         }
     },
-    mounted:function () {
+    mounted:async function () {
+        moment.locale('ru')
+
+        this.tracks=(await axios.get('/api/tracks')).data;
+
+        this.tracks.forEach(t=>{
+            var key=moment(t.date).format("DD MMMM")
+            var items=this.tracksDate.filter(t=>{return t.key==key})
+            if(items.length==0) {
+                this.tracksDate.push({key: key, tracks:[]})
+            }
+            items=this.tracksDate.filter(t=>{return t.key==key})
+            t.key=key;
+            items[0].tracks.push(t);
+            items.sort(function(a, b){
+                if(a.key < b.key) { return -1; }
+                if(a.key > b.key) { return 1; }
+                return 0;
+            })
+
+        });
+        this.tracks.sort(function(a, b){
+            if(a.key < b.key) { return -1; }
+            if(a.key > b.key) { return 1; }
+            return 0;
+        });
+        this.rotateTrack();
+        this.currTrack=this.tracksDate[0].tracks[0];
+        this.pgm=(await axios.get('/api/pgm')).data;
+        this.spk=(await axios.get('/api/spk')).data;
+        var i=0;
+        var page=0;
+        this.curSpeakers[page]=[]
+           this.spk.forEach(s=>{
+               this.curSpeakers[page].push(s);
+               i++;
+               if(i>=8)
+               {
+                   i=0;
+                   page++;
+                   this.curSpeakers[page]=[]
+               }
+           })
+
+
+
         document.body.style.opacity="1"
     }
 

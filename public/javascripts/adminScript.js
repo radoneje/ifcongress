@@ -16,6 +16,8 @@ var app=new Vue({
         redirect:[],
         newRedirect:{},
         votes:[],
+        tracks:[],
+        pgm:[],
         disable,
         state:{q:true, chat:true}
     },
@@ -67,6 +69,56 @@ var app=new Vue({
         addVote:async function(){
             var ret= await axios.post("/api/voteAdd");
             this.votes.push(ret.data);
+        },
+        addTrack:async function(){
+            var ret= await axios.post("/api/trackAdd");
+            this.tracks.push(ret.data);
+        },
+        addPgm:async function(){
+            var ret= await axios.post("/api/pgmAdd");
+            this.pgm.push(ret.data);
+        },
+        editTrack:async function(track){
+            try{JSON.parse(track.speakers)}
+            catch (e) {
+                track.speakers="["+track.speakers+"]"
+            }
+            if( track.speakers.indexOf("[")<0)
+                track.speakers="["+track.speakers+"]"
+            var ret= await axios.post("/api/trackChange", track);
+            this.tracks.forEach(v=>{
+                if(v.id==ret.data.id)
+                    v=ret.data;
+            })
+        },
+        deleteTrack:async function(track){
+           track.isDeleted=true;
+           await this.editTrack(track);
+        },
+        editPgm:async function(track){
+            try{JSON.parse(track.speakers)}
+            catch (e) {
+                track.speakers="["+track.speakers+"]"
+            }
+            if( track.speakers.indexOf("[")<0)
+                track.speakers="["+track.speakers+"]"
+            try{JSON.parse(track.moderators)}
+            catch (e) {
+                track.moderators="["+track.moderators+"]"
+            }
+            if( track.moderators.indexOf("[")<0)
+                track.moderators="["+track.moderators+"]"
+
+            var ret= await axios.post("/api/pgmChange", track);
+            this.pgm.forEach(v=>{
+                if(v.id==ret.data.id)
+                    v=ret.data;
+            })
+        },
+        deletePgm:async function(track){
+            track.isDeleted=true;
+            await this.editPgm(track);
+            this.tracks=this.tracks.filter(t=>!t.isDeleted)
         },
         messageToUser:async function(item){
             item.messageIsActive=!item.messageIsActive;
@@ -147,6 +199,25 @@ var app=new Vue({
             var ret= await axios.post("/api/addSpk", item);
             this.spk.push(ret.data)
             this.newSpk={};
+        },
+        editTrackImg:async function(item){
+            var elem=document.createElement("input")
+            elem.type="file"
+            elem.display="none"
+            elem.onchange=async (e)=>{
+                var formData= new FormData()
+                formData.append("image", elem.files[0]);
+                var res=await axios.post('/api/trackImage', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                item.img=res.data;
+                elem.parentNode.removeChild(elem);
+
+            };
+            document.body.appendChild(elem);
+            elem.click()
         },
         editSpkPhoto:async function(item){
             var elem=document.createElement("input")
@@ -364,6 +435,16 @@ var app=new Vue({
             if(this.sect==8){
                 var ret=await axios.get("/api/votes");
                 this.votes=ret.data;
+                setTimeout(()=>{ this.showLoader=false;},200)
+            }
+            if(this.sect==9){
+                var ret=await axios.get("/api/tracks");
+                this.tracks=ret.data;
+                setTimeout(()=>{ this.showLoader=false;},200)
+            }
+            if(this.sect==10){
+                var ret=await axios.get("/api/pgm");
+                this.pgm=ret.data;
                 setTimeout(()=>{ this.showLoader=false;},200)
             }
         }

@@ -18,6 +18,7 @@
     "moment": "^2.29.1",
     "morgan": "~1.9.1",
     "pug": "2.0.0-beta11",
-    "videojs-hls-quality-selector": "^1.1.4"
+    "videojs-hls-quality-selector": "^1.1.4",
+    "vue2-touch-events": "^3.2.2"
   }
 }

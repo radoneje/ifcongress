@@ -95,31 +95,31 @@ html
                         .tCol
                             .carouselItemWr
                                 .corouselSwWr.showMobile
-                                    .corouselSwWrItem
+                                    .corouselSwWrItem(v-on:click="previewTrack()")
                                         <svg width="12" height="23" viewBox="0 0 12 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M11.498 11.5001C11.4987 11.8506 11.3766 12.1902 11.153 12.4601L3.65297 21.4601C3.39836 21.7664 3.0325 21.959 2.63586 21.9956C2.23922 22.0322 1.8443 21.9097 1.53797 21.6551C1.23165 21.4005 1.03901 21.0346 1.00244 20.638C0.965871 20.2413 1.08836 19.8464 1.34297 19.5401L8.06297 11.5001L1.58297 3.46007C1.45837 3.30664 1.36533 3.1301 1.30918 2.94059C1.25303 2.75108 1.23489 2.55234 1.2558 2.3558C1.27671 2.15926 1.33625 1.96878 1.43101 1.79533C1.52577 1.62187 1.65388 1.46886 1.80797 1.34507C1.9622 1.2077 2.14314 1.10366 2.33945 1.03947C2.53576 0.975286 2.74321 0.952331 2.94881 0.972046C3.1544 0.99176 3.35371 1.05372 3.53425 1.15404C3.71478 1.25437 3.87265 1.3909 3.99797 1.55507L11.243 10.5551C11.4312 10.8327 11.521 11.1654 11.498 11.5001Z" fill="white"/>
                                         </svg>
-                                    .corouselSwWrItem
+                                    .corouselSwWrItem(v-on:click="nextTrack()")
 
                                         <svg width="12" height="23" viewBox="0 0 12 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M0.502034 11.5001C0.501349 11.8506 0.623411 12.1902 0.847033 12.4601L8.34703 21.4601C8.60164 21.7664 8.9675 21.959 9.36414 21.9956C9.76078 22.0322 10.1557 21.9097 10.462 21.6551C10.7684 21.4005 10.961 21.0346 10.9976 20.638C11.0341 20.2413 10.9116 19.8464 10.657 19.5401L3.93703 11.5001L10.417 3.46007C10.5416 3.30664 10.6347 3.1301 10.6908 2.94059C10.747 2.75108 10.7651 2.55234 10.7442 2.3558C10.7233 2.15926 10.6637 1.96878 10.569 1.79533C10.4742 1.62187 10.3461 1.46886 10.192 1.34507C10.0378 1.2077 9.85686 1.10366 9.66055 1.03947C9.46424 0.975286 9.25679 0.952331 9.05119 0.972046C8.8456 0.99176 8.64629 1.05372 8.46575 1.15404C8.28522 1.25437 8.12735 1.3909 8.00203 1.55507L0.757034 10.5551C0.568759 10.8327 0.478978 11.1654 0.502034 11.5001Z" fill="white"/>
                                         </svg>
                                 .carouselItem
-                                    .carouselItemTitle Трек: Пленарные сессии
-                                    .carouselItemDescr Пандемия коронавируса в глобальном масштабе оказалась проверкой правительств и центральных банков. Настало время рефлексии над принятыми анттикризисными мерами и обсуждения плана выхода из мягкой политики.
+                                    .carouselItemTitle Трек: {{currShowTrack.title}}
+                                    .carouselItemDescr {{currShowTrack.descr}}
                                     .carouselItemFaceWr
 
-                                            .carouselItemFace(v-for="item in [1,2,3,4,5]")
-                                                .carouselItemFaceImage
-                                                .carouselItemFaceName Алексеев Михаил
-                                                .carouselItemFacePos Банк России
+                                            .carouselItemFace(v-for="(spk, i) in currShowTrack.speakers"  v-if="i<3 && getSpk(spk)")
+                                                .carouselItemFaceImage(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
+                                                .carouselItemFaceName {{getSpk(spk).i}} {{getSpk(spk).f}}
+                                                .carouselItemFacePos {{getSpk(spk).position}}
 
                             .corouselSwWr.hideMobile
-                                .corouselSwWrItem
+                                .corouselSwWrItem(v-on:click="previewTrack()")
                                     <svg width="12" height="23" viewBox="0 0 12 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11.498 11.5001C11.4987 11.8506 11.3766 12.1902 11.153 12.4601L3.65297 21.4601C3.39836 21.7664 3.0325 21.959 2.63586 21.9956C2.23922 22.0322 1.8443 21.9097 1.53797 21.6551C1.23165 21.4005 1.03901 21.0346 1.00244 20.638C0.965871 20.2413 1.08836 19.8464 1.34297 19.5401L8.06297 11.5001L1.58297 3.46007C1.45837 3.30664 1.36533 3.1301 1.30918 2.94059C1.25303 2.75108 1.23489 2.55234 1.2558 2.3558C1.27671 2.15926 1.33625 1.96878 1.43101 1.79533C1.52577 1.62187 1.65388 1.46886 1.80797 1.34507C1.9622 1.2077 2.14314 1.10366 2.33945 1.03947C2.53576 0.975286 2.74321 0.952331 2.94881 0.972046C3.1544 0.99176 3.35371 1.05372 3.53425 1.15404C3.71478 1.25437 3.87265 1.3909 3.99797 1.55507L11.243 10.5551C11.4312 10.8327 11.521 11.1654 11.498 11.5001Z" fill="white"/>
                                     </svg>
-                                .corouselSwWrItem
+                                .corouselSwWrItem(v-on:click="nextTrack()")
 
                                     <svg width="12" height="23" viewBox="0 0 12 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0.502034 11.5001C0.501349 11.8506 0.623411 12.1902 0.847033 12.4601L8.34703 21.4601C8.60164 21.7664 8.9675 21.959 9.36414 21.9956C9.76078 22.0322 10.1557 21.9097 10.462 21.6551C10.7684 21.4005 10.961 21.0346 10.9976 20.638C11.0341 20.2413 10.9116 19.8464 10.657 19.5401L3.93703 11.5001L10.417 3.46007C10.5416 3.30664 10.6347 3.1301 10.6908 2.94059C10.747 2.75108 10.7651 2.55234 10.7442 2.3558C10.7233 2.15926 10.6637 1.96878 10.569 1.79533C10.4742 1.62187 10.3461 1.46886 10.192 1.34507C10.0378 1.2077 9.85686 1.10366 9.66055 1.03947C9.46424 0.975286 9.25679 0.952331 9.05119 0.972046C8.8456 0.99176 8.64629 1.05372 8.46575 1.15404C8.28522 1.25437 8.12735 1.3909 8.00203 1.55507L0.757034 10.5551C0.568759 10.8327 0.478978 11.1654 0.502034 11.5001Z" fill="white"/>
@@ -135,48 +135,41 @@ html
                     .tower
                             .aboutTitle#pgm Программа
                             .progMenuWr
-                                each date in ['28', 29, 30, 31]
-                                    .progMenuRow.row
-                                        .progMenuDate #{date} июня
-                                        .progMenuItem bla-bla
-                                        .progMenuItem.selected bla-bla
-                                        .progMenuItem bla-bla
+                                    .progMenuRow.row(v-for="item in tracksDate")
+                                        .progMenuDate {{item.key}}
+                                        .progMenuItem(v-bind:class="{selected:currTrack.id==track.id}" v-for="track in item.tracks" v-on:click="currTrack=track") {{track.title}}
                             .progTitle
-                                .progTitleName 28 июня
-                                .progTitleTrack  Трек: Банковский сектор
+                                .progTitleName {{currTrack.key}}
+                                .progTitleTrack  Трек: {{currTrack.title}}
                             .progItemWr
 
-                                    .progitem(v-for="item in [1,2,3,4]")
-                                        .progitemTime 12:00 - 12:50
+                                    .progitem(v-for="item in pgm.filter(p=>p.trackid==currTrack.id)")
+                                        .progitemTime {{item.time}}
                                         .progItemWR
                                             .progItemTitelWr
                                                 .progitemIco
-                                                    img(src="/images/1a.png")
-                                                .progItemTitle Стратегические риски и новые возможности для банковского сектора
+                                                    img(:src="currTrack.img")
+                                                .progItemTitle {{item.title}}
                                             .progItemBtn(v-on:click="pgmItemModal=item") Подробнее
                                             .progItemTiteSPkWr.row
                                                 .progItemModBox
                                                     .progItemModTitle Модератор
                                                     .progItemSpkItemWr
-                                                        .progItemSpkItem
-                                                            .progItemSpkItemPhoto
+                                                        .progItemSpkItem(v-for="spk in item.moderators" v-if="getSpk(spk)")
+                                                            .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                             .progItemSpkItemNameWr
-                                                                .progItemSpkItemName Дмитрий Тулин
-                                                                .progItemSpkItemPos Банк России
+                                                                .progItemSpkItemName {{getSpk(spk).i}} {{getSpk(spk).f}}
+                                                                .progItemSpkItemPos {{getSpk(spk).position}}
 
                                                 .progItemModBox
                                                     .progItemModTitle Спикеры
                                                     .progItemSpkItemWr
-                                                        .progItemSpkItem
-                                                            .progItemSpkItemPhoto
+                                                        .progItemSpkItem(v-for="spk in item.speakers" v-if="getSpk(spk)")
+                                                            .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                             .progItemSpkItemNameWr
-                                                                .progItemSpkItemName Дмитрий Тулин
-                                                                .progItemSpkItemPos Банк России
-                                                        .progItemSpkItem
-                                                            .progItemSpkItemPhoto
-                                                            .progItemSpkItemNameWr
-                                                                .progItemSpkItemName Дмитрий Тулин
-                                                                .progItemSpkItemPos Банк России
+                                                                .progItemSpkItemName {{getSpk(spk).i}} {{getSpk(spk).f}}
+                                                                .progItemSpkItemPos {{getSpk(spk).position}}
+
                             .progUpBtnWr
                                 .progUpBtn(onclick="document.location.href='#pgm'") В начало программы
 
@@ -184,23 +177,23 @@ html
                     .tower
                         .aboutTitle.spkTitle#spk Спикеры
                             .spkSwitherWr.hideMobile
-                                .spkSwitherWrTitle.hideMobile 1/100
-                                .spkSwitherWrTitleUp
+                                .spkSwitherWrTitle.hideMobile {{curSpeakersPage+1}}/{{parseInt(spk.length/8)+1}}
+                                .spkSwitherWrTitleUp(v-on:click="curSpeakersPagePreview()" )
                                     <svg width="12" height="23" viewBox="0 0 12 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M11.498 11.5C11.4987 11.8505 11.3766 12.1902 11.153 12.46L3.65297 21.46C3.39836 21.7664 3.0325 21.959 2.63586 21.9956C2.23922 22.0321 1.8443 21.9097 1.53797 21.655C1.23165 21.4004 1.03901 21.0346 1.00244 20.6379C0.965871 20.2413 1.08836 19.8464 1.34297 19.54L8.06297 11.5L1.58297 3.46004C1.45837 3.30661 1.36533 3.13007 1.30918 2.94056C1.25303 2.75105 1.23489 2.55231 1.2558 2.35577C1.27671 2.15923 1.33625 1.96875 1.43101 1.7953C1.52577 1.62184 1.65388 1.46883 1.80797 1.34504C1.9622 1.20767 2.14314 1.10363 2.33945 1.03944C2.53576 0.975256 2.74321 0.952301 2.94881 0.972015C3.1544 0.99173 3.35371 1.05369 3.53425 1.15401C3.71478 1.25434 3.87265 1.39087 3.99797 1.55504L11.243 10.555C11.4312 10.8327 11.521 11.1654 11.498 11.5Z" fill="white"/>
                                     </svg>
-                                .spkSwitherWrTitleDown
+                                .spkSwitherWrTitleDown(v-on:click="curSpeakersPageNext()"  )
                                     <svg width="12" height="23" viewBox="0 0 12 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M0.502034 11.5C0.501349 11.8505 0.623411 12.1902 0.847033 12.46L8.34703 21.46C8.60164 21.7664 8.9675 21.959 9.36414 21.9956C9.76078 22.0321 10.1557 21.9097 10.462 21.655C10.7684 21.4004 10.961 21.0346 10.9976 20.6379C11.0341 20.2413 10.9116 19.8464 10.657 19.54L3.93703 11.5L10.417 3.46004C10.5416 3.30661 10.6347 3.13007 10.6908 2.94056C10.747 2.75105 10.7651 2.55231 10.7442 2.35577C10.7233 2.15923 10.6637 1.96875 10.569 1.7953C10.4742 1.62184 10.3461 1.46883 10.192 1.34504C10.0378 1.20767 9.85686 1.10363 9.66055 1.03944C9.46424 0.975256 9.25679 0.952301 9.05119 0.972015C8.8456 0.99173 8.64629 1.05369 8.46575 1.15401C8.28522 1.25434 8.12735 1.39087 8.00203 1.55504L0.757034 10.555C0.568759 10.8327 0.478978 11.1654 0.502034 11.5Z" fill="white"/>
                                     </svg>
 
 
                         .spkWr
-                            .spkPage
-                                    .spkItem(v-for="item in [1,2,3,4,5]" v-on:click="spkItemModal=item")
-                                        .spkItemPhoto
-                                        .spkItemName Иванов Иван
-                                        .spkItemPos Банк России
+                            .spkPage(v-if="curSpeakers[curSpeakersPage]")
+                                    .spkItem(v-for="item in curSpeakers[curSpeakersPage]" v-on:click="spkItemModal=item")
+                                        .spkItemPhoto(v-bind:style="{backgroundImage:'url('+item.photo+')'}")
+                                        .spkItemName {{item.i}} {{item.f}}
+                                        .spkItemPos {{item.position}}
                                     div(style="clear:both")
                             div(style="clear:both")
 
@@ -295,37 +288,28 @@ html
                 .trackAboutWr(v-if="pgmItemModal")
                         .trackAboutBox
                             .tower
-                                .aboutTitle(style="position:relative") Стратегические риски и новые  возможности для банковского сектора
+                                .aboutTitle(style="position:relative") {{pgmItemModal.title}}
                                     .trackAboutClose(v-on:click="pgmItemModal=null")
                                         include closeBtn
-                                .aboutText
-                                    p На сессии планируется обсудить видение банками наиболее значимых  рисков для сектора и перспектив развития банковского бизнеса.
-                                    p В частности, будут затронуты вопросы:
-                                    li Стратегический риск дезинтермедиации, в том числе влияние активного перехода населения к прямому инвестированию на фондовом рынке, потенциальное влияние цифровизации и введения цифрового рубля.
-                                    li Классические риски банковского сектора, в том числе риски концентрации, перегрева отдельных сегментов, снижение банковской маржи.
-                                    li Новые вызовы: климатические, социальные и риски корпоративного управлени
+                                .aboutText(v-html="getHtml(pgmItemModal.descr)")
                                 .aboutModerator
                                     .progItemModBox
                                         .progItemModTitle Модератор
                                         .progItemSpkItemWr
-                                            .progItemSpkItem
-                                                .progItemSpkItemPhoto
+                                            .progItemSpkItem(v-for="spk in pgmItemModal.moderators")
+                                                .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                 .progItemSpkItemNameWr
-                                                    .progItemSpkItemName Дмитрий Тулин
-                                                    .progItemSpkItemPos Банк России
+                                                    .progItemSpkItemName {{getSpk(spk).i}} {{getSpk(spk).f}}
+                                                    .progItemSpkItemPos {{getSpk(spk).position}}
+
                                     .progItemModBox
                                         .progItemModTitle Спикеры
                                         .progItemSpkItemWr
-                                            .progItemSpkItem
-                                                .progItemSpkItemPhoto
+                                            .progItemSpkItem(v-for="spk in pgmItemModal.speakers")
+                                                .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                 .progItemSpkItemNameWr
-                                                    .progItemSpkItemName Дмитрий Тулин
-                                                    .progItemSpkItemPos Банк России
-                                            .progItemSpkItem
-                                                .progItemSpkItemPhoto
-                                                .progItemSpkItemNameWr
-                                                    .progItemSpkItemName Дмитрий Тулин
-                                                    .progItemSpkItemPos Банк России
+                                                    .progItemSpkItemName {{getSpk(spk).i}} {{getSpk(spk).f}}
+                                                    .progItemSpkItemPos {{getSpk(spk).position}}
 
                 .trackAboutWr(v-if="spkItemModal")
                     .trackAboutBox
@@ -334,15 +318,15 @@ html
                                 .trackAboutClose(v-on:click="spkItemModal=null")
                                     include closeBtn
                                 .spkDescrTitleBox
-                                    .spkDescrPhoto
+                                    .spkDescrPhoto(v-bind:style="{backgroundImage:'url('+spkItemModal.photo+')'}")
                                     .spkDescrTitleWr
                                         .spkDescrTitleCont
-                                            .spkDescrTitle Заботкин Алексей
-                                            .spkDescrPos Заместитель Генерального директора Открытие
+                                            .spkDescrTitle {{spkItemModal.i}} {{spkItemModal.f}}
+                                            .spkDescrPos {{spkItemModal.full_pos}}
                             .spkToPgmWr
-                                    .spkToPgmItem(v-for="item in [1,2,3,4,5]")
-                                        .spkToPgmItemData 28 июня 12:00 - 12:50
-                                        .spkToPgmItemTitle Стратегические риски и новые возможности для банковского сектора
+                                    .spkToPgmItem(v-for="item in getSessionFromSpk(spkItemModal)")
+                                        .spkToPgmItemData {{item.key}} {{item.time}}
+                                        .spkToPgmItemTitle {{item.title}}
 
                 .trackAboutWr(v-if="reqModal")
                             .towerReg
@@ -370,6 +354,8 @@ html
 
 
 
-
-        script(src="/javascripts/vue.min.js")
+        script(src="/javascripts/axios.min.js")
+        script(src='/javascripts/vue.min.js')
+        //script(src='/javascripts/vueTouch.js')
+        script(src='/javascripts/moment.min.js')
         script(src="/javascripts/mainScript.js")

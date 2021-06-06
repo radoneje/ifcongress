@@ -124,6 +124,7 @@ body {
 }
 .mainMenu{
   display: flex;
+  position: relative;
 }
 .logoWr{
   padding: 25px 0;
@@ -139,6 +140,12 @@ body {
   justify-content: center;
   align-items: center;
   margin: 0 50px;
+}
+.loginWr{
+  position: absolute;
+  right: 0;
+  top:0;
+  margin-right: 0;
 }
 .menuItem{
   font-style: normal;
@@ -333,7 +340,7 @@ h4{
   color: #5C76BA;
 }
 .carouselItemDescr{
-font-weight: 500;
+font-weight: 300;
 font-size: 18px;
 line-height: 28px;
   margin-right:182px;
@@ -357,6 +364,7 @@ line-height: 28px;
   background-size: contain;
   background-repeat: no-repeat;
   margin-top:28px;
+  background-position: center;
 }
 .carouselItemFaceWr{
   display: flex;
@@ -461,7 +469,7 @@ margin-top:12px;
 }
 .progItemTitelWr{
   padding: 24px;
-  border-bottom: 1px solid rgba(127, 153, 218, 0.24);;
+  border-bottom: 2px solid rgba(127, 153, 218, 0.24);;
   display: flex;
   align-items: center;
 }
@@ -499,6 +507,9 @@ margin-top:12px;
   margin-right: 12px;
   border-radius: 4px;
   overflow: hidden;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .progItemSpkItem{
   display: flex;
@@ -631,6 +642,7 @@ position: absolute;
   background-repeat: no-repeat;
   background-position: center;
   background-image: url(/images/noUser.svg);
+  background-size: contain;
 }
 
 .spkItemName{
@@ -697,6 +709,9 @@ margin-top:4px;
   background:  linear-gradient(180deg, rgba(239,247,255,1) 0%, rgba(225,240,255,0) 10%, rgba(225,240,255,1) 100%);
   padding-top: 90px;
 }
+.footerWr .loginWr{
+  display: none;
+}
 .footerDesclaimerWr{
   display: flex;
   gap: 24px;
@@ -723,6 +738,7 @@ margin-top:4px;
   box-sizing: border-box;
   position: relative;
   padding: 90px 48px;
+  border-radius: 24px 24px 0 0;
 
 }
 .trackAboutClose{
@@ -764,6 +780,7 @@ margin-top:4px;
   background-color: #E1F0FF;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: contain;
 
 }
 .spkDescrTitle{
@@ -1095,6 +1112,7 @@ margin-top:4px;
   }
   .progItemSpkItemPhoto{
     width: ~"calc(32px + 12px)";
+
   }
   .progitemTime{
     font-size: 20px;
@@ -1140,6 +1158,7 @@ margin-top:4px;
   .footerWr{
     padding-top:48px;
   }
+
   .footerDesclaimerWr{
     flex-direction: column;
   }
