@@ -15,6 +15,7 @@ var pgm=new Vue({
         spk:[],
         curSpeakersPage:0,
         curSpeakers:[],
+        faq:[]
     },
     methods:{
         getSessionFromSpk:function(spk){
@@ -179,6 +180,7 @@ var pgm=new Vue({
                    this.curSpeakers[page]=[]
                }
            })
+        this.faq=(await axios.get('/api/faq')).data;
 
 
 

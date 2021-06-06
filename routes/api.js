@@ -366,6 +366,13 @@ router.get('/tracks', async(req, res, next) =>{
   res.json(ret);
 
 })
+router.get('/faq', async(req, res, next) =>{
+
+//  req.knex.select("*").from("t_cbrf_codes")
+  var ret=await req.knex.select("*").from("t_cbrf_faq").where({isDeleted:false});
+  res.json(ret);
+
+})
 router.get('/pgm', async(req, res, next) =>{
 
 //  req.knex.select("*").from("t_cbrf_codes")
@@ -415,6 +422,12 @@ router.post('/pgmAdd', adminLogin,async(req, res, next) =>{
   res.json(ret[0]);
 
 })
+router.post('/faqAdd', adminLogin,async(req, res, next) =>{
+  var ret=await req.knex("t_cbrf_faq").insert({},"*");
+  //ret[0].answers=await req.knex("t_cbrf_voteanswers").insert([{voteid:ret[0].id},{voteid:ret[0].id}],"*");
+  res.json(ret[0]);
+
+})
 
 router.post('/trackChange', adminLogin,async(req, res, next) =>{
 
@@ -430,6 +443,14 @@ router.post('/pgmChange', adminLogin,async(req, res, next) =>{
   var id=req.body.id;
   delete  req.body.id;
   var ret=await req.knex("t_cbrf_pgm").update(req.body,"*").where({id:id});
+  res.json(ret[0]);
+
+})
+router.post('/faqChange', adminLogin,async(req, res, next) =>{
+
+  var id=req.body.id;
+  delete  req.body.id;
+  var ret=await req.knex("t_cbrf_faq").update(req.body,"*").where({id:id});
   res.json(ret[0]);
 
 })

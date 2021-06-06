@@ -19,6 +19,7 @@ var app=new Vue({
         tracks:[],
         pgm:[],
         disable,
+        faq:[],
         state:{q:true, chat:true}
     },
     methods:{
@@ -78,6 +79,10 @@ var app=new Vue({
             var ret= await axios.post("/api/pgmAdd");
             this.pgm.push(ret.data);
         },
+        addFaq:async function(){
+            var ret= await axios.post("/api/faqAdd");
+            this.faq.push(ret.data);
+        },
         editTrack:async function(track){
             try{JSON.parse(track.speakers)}
             catch (e) {
@@ -119,6 +124,19 @@ var app=new Vue({
             track.isDeleted=true;
             await this.editPgm(track);
             this.tracks=this.tracks.filter(t=>!t.isDeleted)
+        },
+        editFaq:async function(track){
+
+            var ret= await axios.post("/api/faqChange", track);
+            this.faq.forEach(v=>{
+                if(v.id==ret.data.id)
+                    v=ret.data;
+            })
+        },
+        deleteFaq:async function(track){
+            track.isDeleted=true;
+            await this.editFaq(track);
+            this.faq=this.faq.filter(t=>!t.isDeleted)
         },
         messageToUser:async function(item){
             item.messageIsActive=!item.messageIsActive;
@@ -445,6 +463,11 @@ var app=new Vue({
             if(this.sect==10){
                 var ret=await axios.get("/api/pgm");
                 this.pgm=ret.data;
+                setTimeout(()=>{ this.showLoader=false;},200)
+            }
+            if(this.sect==11){
+                var ret=await axios.get("/api/faq");
+                this.faq=ret.data;
                 setTimeout(()=>{ this.showLoader=false;},200)
             }
         }

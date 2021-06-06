@@ -21,6 +21,7 @@ html
           .aminMenuItem(v-on:click="sect=5" v-bind:class="{active:sect==5}" v-show="chekDisable(5)") Спикеры
           .aminMenuItem(v-on:click="sect=9" v-bind:class="{active:sect==9}" v-show="chekDisable(9)") Треки
           .aminMenuItem(v-on:click="sect=10" v-bind:class="{active:sect==10}" v-show="chekDisable(10)") Программа
+          .aminMenuItem(v-on:click="sect=11" v-bind:class="{active:sect==11}" v-show="chekDisable(11)") FAQ
           .aminMenuItem(v-on:click="sect=7" v-bind:class="{active:sect==7}" v-show="chekDisable(7)") Коды
           .aminMenuItem(v-on:click="sect=6" v-bind:class="{active:sect==6}" v-show="chekDisable(6)") Редирект
       .adminWr
@@ -278,6 +279,30 @@ html
                 .adminSpkItemWr
                 .adminSpkItemPosition
                   button(v-on:click="addPgm()") Добавить пункт программы
+        .adminSect(v-if="sect==11" )
+          .adminSectLoader.loaderWr(v-if="showLoader")
+            .loader
+            .loaderText идет загрузка...
+          .adminBody(v-show="!showLoader")
+            .adminSectTitle FAQ ({{faq.length}})
+              .adminSpkItem(v-for="item in faq" v-if="!item.isDeleted")
+                .adminSpkItemWr
+                  .adminSpkItemId
+                    div  ID={{item.id}}
+                      .adminSpkItemName
+                        input(v-model="item.title" placeholder="название")
+                        input(v-model="item.title_en" placeholder="title")
+                      .adminSpkItemName
+                        textarea.adminJsonTextArea(v-model="item.descr" placeholder='Описание')
+                        textarea.adminJsonTextArea(v-model="item.descr_en" placeholder='Description')
+
+                .adminSpkItemPosition
+                  button(v-on:click="editFaq(item)") Сохранить изменения
+                  button(v-on:click="deleteFaq(item)") Удалить
+              .adminSpkItem
+                .adminSpkItemWr
+                .adminSpkItemPosition
+                  button(v-on:click="addFaq()") Добавить FAQ
 
 
 

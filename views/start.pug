@@ -203,10 +203,10 @@ html
                         .row
                             .fCol
                                 .faqWr
-                                    each fuck in [1,2,3,4,5]
-                                        .faqItem
-                                            .faqItemTitle Где найти подробную информацию о спикерах?
-                                            .faqItemText Вся подробная информация о участниках конгресса доступна на официальном сайте Банка России.
+
+                                        .faqItem(v-for="item in faq" v-if="!item.isDeleted")
+                                            .faqItemTitle {{item.title}}
+                                            .faqItemText {{item.descr}}
                             .sCol.sixBg.hideMobile
                 .sevenWr.showMobile
                     .tower
