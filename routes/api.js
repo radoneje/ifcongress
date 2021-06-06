@@ -96,7 +96,7 @@ router.post("/approveQ",adminLogin, async(req, res, next)=> {
   res.json(ret[0]);
 });
 
-router.post("/spkQ",adminLogin, async(req, res, next)=> {
+router.post("/spkQ", async(req, res, next)=> {
 
   var ret=await req.knex("t_cbrf_q").update({isSpk:req.body.isSpk}, "*").where({id:req.body.id})
   ret=await req.knex.select("*").from("v_cbrf_q").where({id:ret[0].id})
