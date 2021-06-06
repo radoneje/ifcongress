@@ -38,6 +38,12 @@ router.post('/moderator', async (req, res, next) =>{
 });
 
 router.get('/', async (req, res, next) =>{
+  return res.render('start_bak');
+  //res.render('work', { title: 'under constaction' });
+  res.redirect("/index/ru")
+
+});
+router.get('/test', async (req, res, next) =>{
   return res.render('start');
   //res.render('work', { title: 'under constaction' });
   res.redirect("/index/ru")
