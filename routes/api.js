@@ -157,7 +157,7 @@ router.get('/stat', adminLogin ,async(req, res, next)=> {
   ret.counts=[];// await req.knex.select("*").from("t_cbrf_count").where('date','>=', moment().add(-1, 'hours').toISOString())
   res.json(ret);
 });
-router.get('/spk', adminLogin ,async(req, res, next)=> {
+router.get('/spk' ,async(req, res, next)=> {
   var ret= await req.knex.select("*").from("t_cbrf_spk").where({isDeleted:false}).orderBy("sortOrder")
   res.json(ret);
 });
