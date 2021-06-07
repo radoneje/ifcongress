@@ -414,7 +414,7 @@ line-height: 28px;
 
 }
 .carouselItemFacePos{
-  font-weight: 500;
+  font-weight: 300;
   font-size: 14px;
   line-height: 20px;
   color: rgba(92, 118, 186, 0.8);
@@ -729,7 +729,7 @@ margin-top:4px;
   color: rgba(92, 118, 186, 0.8);
 }
 .faqItemText{
-  font-weight: 500;
+  font-weight: 300;
   font-size: 16px;
   line-height: 24px;
   /* or 150% */
@@ -1125,6 +1125,7 @@ margin-top:4px;
     width: 100%;
     margin-top: 28px;
     padding: 12px;
+    padding-bottom: 24px;
   }
   .corouselSwWr{
 
@@ -1149,11 +1150,11 @@ margin-top:4px;
     display: none;
   }
   .carouselItemFace{
-    margin-right: 12px;
+    margin-right: 18px;
   }
   .carouselItemFaceName{
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 18px;
+    line-height: 26px;
   }
   .carouselItemFacePos{
     font-size: 16px;
@@ -1196,7 +1197,7 @@ margin-top:4px;
     width: 100%;
   }
   .progItemSpkItemPhoto{
-    width: ~"calc(32px + 12px)";
+   // width: ~"calc(32px + 12px)";
 
   }
   .progitemTime{
@@ -1238,7 +1239,7 @@ margin-top:4px;
     display: inline-block;
   }
   .faqItem{
-    padding: 12px;
+    padding: 24px 12px;
   }
   .footerWr{
     padding-top:48px;
@@ -1257,10 +1258,13 @@ margin-top:4px;
     overflow-y: auto;
     box-sizing: border-box;
     padding: 12px;
+    margin-top: 0;
+    padding-top: 48px;
+    border-radius: 0;
   }
   .regAboutClose{
-    right: 10px;
-    top: 4px;
+    right: 24px;
+    top: 24px;
     width: 32px;
     height: 32px;
     position: fixed;
@@ -1268,6 +1272,10 @@ margin-top:4px;
   }
   .trackAboutBox{
     padding: 12px;
+    margin: 0;
+    border-radius: 0;
+    padding-top: 48px;
+    height: 100vh;
   }
   .aboutTitle{font-size: 20px;
     line-height: 28px;
@@ -1324,7 +1332,28 @@ margin-top:4px;
   .fBg svg{
     display: none;
   }
-
+  .progMenuRow{
+    margin-top:24px;
+  }
+  .progItemSpkItemNameWr{
+    width: ~"calc(100% - 32px - 12px)";
+  }
+  .trackAboutBox .aboutText{
+    margin-top:24px;
+  }
+  .sevenWr img{
+    width: 100%;
+  }
+  .footerDesclaimer div{
+    margin-top:12px;
+  }
+  .progItemSpkItemWr{
+    display: block;
+  //  margin-top: 24px;
+  }
+  .progItemSpkItem{
+    margin-top: 24px;
+  }
 }
 @media (max-width:458px) {
 
