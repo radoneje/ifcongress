@@ -289,7 +289,7 @@ html
                         .trackAboutBox
                             .tower
                                 .aboutTitle(style="position:relative") {{pgmItemModal.title}}
-                                    .trackAboutClose(v-on:click="pgmItemModal=null")
+                                    .regAboutClose(v-on:click="pgmItemModal=null")
                                         include closeBtn
                                 .aboutText(v-html="getHtml(pgmItemModal.descr)")
                                 .aboutModerator
@@ -315,7 +315,7 @@ html
                     .trackAboutBox
                         .tower
                             .spkDescrTitleWr(style="position:relative")
-                                .trackAboutClose(v-on:click="spkItemModal=null")
+                                .regAboutClose(v-on:click="spkItemModal=null")
                                     include closeBtn
                                 .spkDescrTitleBox
                                     .spkDescrPhoto(v-bind:style="{backgroundImage:'url('+spkItemModal.photo+')'}")
