@@ -132,6 +132,21 @@ body {
   display: flex;
   position: relative;
 }
+@keyframes fixedMenuAnimation {
+  0% {opacity: 0}
+  100% {opacity: 1}
+}
+.fixedMenu{
+  position: fixed;
+  left: 0;
+  top: -16px;
+  right: 0;
+  overflow: hidden;
+  background-color: #EFF7FF;
+  z-index: 100;
+  opacity: 1;
+  animation: fixedMenuAnimation 1s ;
+}
 .logoWr{
   padding: 25px 0;
   padding-top: 20px;
@@ -152,6 +167,10 @@ body {
   right: 0;
   top:0;
   margin-right: 0;
+}
+.fixedMenu .sb{
+  padding-bottom: 0;
+  padding-top: 20px;
 }
 .menuItem{
   font-style: normal;
@@ -228,6 +247,7 @@ body {
   background-position-y: bottom;
   background-position-x: right;
 }
+
 h1{
   font-size: 48px;
   font-style: normal;
@@ -274,8 +294,13 @@ h4{
 }
 .sCol{
   padding-bottom: 50px;
-  padding-top: 80px;
+  padding-top: 90px;
 }
+.firstWr .sCol{
+  padding-top: 0px;
+  background-image: none;
+}
+
 .cube{
   width: 211px;
   height: 211px;
@@ -321,6 +346,9 @@ h4{
 .firstWr{
   margin-top: 90px;
   margin-bottom: 180px;
+}
+.firstWr.fixedMenufirstWr{
+  margin-top: 178px;
 }
 .corouselSwWr{
   display: flex;
@@ -733,6 +761,7 @@ margin-top:4px;
 }
 .trackAboutWr{
   position: fixed;
+  z-index: 200;
   top:0;
   left: 0;
   height: 100%;
@@ -849,6 +878,8 @@ margin-top:4px;
   position: relative;
   margin: 32px auto;
   border-radius: 12px;
+  max-height: ~"calc(100vh - 64px)";
+  overflow-y: scroll;
 }
 .regAboutClose{
   position: absolute;
@@ -958,6 +989,35 @@ margin-top:4px;
 }
 .showMobile{
   display: none;
+}
+.regText{
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(92,118,186,0.8);
+  margin:24px 0;
+}
+@keyframes op5to1 {
+  0%{opacity: 50%;}
+  50%{opacity: 100%}
+  100%{opacity: 50%}
+}
+#rubLine{
+  opacity: 1;
+  animation: op5to1 4s infinite;
+}
+#chatDot{
+  opacity: 1;
+  animation: op5to1 2s infinite;
+}
+@keyframes UpDown {
+  0%{transform: scaleY(1);}
+  50%{transform: scaleY(1.02);}
+  100%{transform: scaleY(1);}
+}
+#p1{
+  animation: UpDown 6s infinite;
+
 }
 @media (max-width:1280px) {
 
@@ -1197,6 +1257,7 @@ margin-top:4px;
     width: 32px;
     height: 32px;
     position: fixed;
+    z-index: 300;
   }
   .trackAboutBox{
     padding: 12px;
@@ -1211,6 +1272,7 @@ margin-top:4px;
     width: 32px;
     height: 32px;
     position: fixed;
+    z-index: 300;
   }
   .aboutText{
     font-size: 16px;
@@ -1236,6 +1298,25 @@ margin-top:4px;
   }
   .sevenWr .tower svg{
     max-width: 100%;
+  }
+  .fixedMenu{
+    position: inherit;
+  }
+  .fixedMenu .sb{
+    padding: 12px 0;
+  }
+  .firstWr.fixedMenufirstWr{
+    margin-top: 48px;
+  }
+  .fBg{
+    background-image: url("/images/fIcons.svg") !important;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+    background-position-x: right;
+  }
+  .fBg svg{
+    display: none;
   }
 }
 @media (max-width:458px) {

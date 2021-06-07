@@ -189,18 +189,22 @@ var pgm=new Vue({
 
 
 })
-window.addEventListener("scroll",(e)=>{
-return;
+window.addEventListener("scroll",setMenu)
+setMenu();
+function setMenu() {
     var a=window.scrollY;
+    var elem=document.getElementById("headerMenuWr")
+    if(a>15 )
+        elem.classList.add("fixedMenu")
+    if(a<=14 )
+        elem.classList.remove("fixedMenu")
 
-var elem=document.getElementById("headerMenuWr")
-  if(a>69 && elem.style.top!="0px")
-      elem.style.top="0px"
-  if(a<=69 && elem.style.top=="0px")
-        elem.style.top="-89px"
-
-
-})
+    elem=document.getElementById("firstWr")
+    if(a>15 )
+        elem.classList.add("fixedMenufirstWr")
+    if(a<=14 )
+        elem.classList.remove("fixedMenufirstWr")
+}
 var EPPZScrollTo =
     {
         /**

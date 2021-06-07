@@ -1,5 +1,5 @@
 .mainMenu
-                    .logoWr
+                    .logoWr.sb
                         <svg width="80" height="40" viewBox="0 0 80 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M44.6942 10.1322C44.6942 10.1322 46.4723 5.47146 50.569 0H46.9991C46.9991 0 40.2626 5.28738 36.9805 10.0774L44.6942 10.1322Z" fill="#5C76BA"/>
                         <path d="M50.0068 0C50.0068 0 61.3375 12.7974 64.8624 39.8688H80C80 39.8688 71.5088 14.4169 53.8098 0H50.0068Z" fill="#5C76BA"/>
@@ -51,11 +51,11 @@
                         </svg>
 
 
-                    .menuWr
-                        .menuItem(onclick="document.location.href='#about'") О Конгрессе
-                        .menuItem(onclick="document.location.href='#pgm'") Программа
-                        .menuItem(onclick="document.location.href='#spk'") Спикеры
-                        .menuItem(onclick="document.location.href='#faq'") Частые вопросы
-                    .loginWr
+                    .menuWr.sb
+                        .menuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('about', 100)") О Конгрессе
+                        .menuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('pgm', 100)") Программа
+                        .menuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('spk', 100)") Спикеры
+                        .menuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('faq', 100)") Частые вопросы
+                    .loginWr.sb
                         .regBtn(v-on:click="reqModal=true") Регистрация
                         .langBtn Rus
