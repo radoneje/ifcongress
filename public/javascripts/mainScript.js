@@ -99,6 +99,7 @@ var pgm=new Vue({
 
         ,
         rotateTrack:function () {
+            return;
             this.currShowTrack=this.tracks.shift();
             this.tracks.push(this.currShowTrack);
             this.trackRotateTimeout=setTimeout(()=>{this.rotateTrack()}, 10000)
