@@ -543,12 +543,11 @@ margin-top:12px;
   display: flex;gap: 24px;
 }
 .progItemBtn{
-  background: rgba(127, 153, 218, 0.24);
-  border-radius: 8px;
+
   padding:  8px 24px;
   position: absolute;
 
-  background: rgba(127, 153, 218, 0.24);
+  background: rgba(127, 153, 218, 0.5);
   border-radius: 8px;
   font-weight: 500;
   font-size: 16px;
@@ -560,8 +559,8 @@ margin-top:12px;
   color: #5C76BA;
 }
 .progItemBtn:hover{
-  background: rgba(223, 232, 255, 0.24);
-  color:#95AAE2
+  background: #7F99DA;
+  color:#ffffff
 }
 .progUpBtnWr{
   display: flex;
@@ -617,7 +616,7 @@ position: absolute;
   color: #5C76BA;
 }
 .spkSwitherWrTitleUp, .spkSwitherWrTitleDown{
-  background: #E0E6F6;
+  background: rgba(127, 153, 218, 0.5);
   border-radius: 12px;
   transform: matrix(-1, 0, 0, 1, 0, 0);
   width: 45px;
@@ -645,6 +644,11 @@ position: absolute;
   background-position: center;
   background-image: url(/images/noUser.svg);
   background-size: contain;
+  filter: brightness(100%);
+}
+.spkItemPhoto:hover{
+
+  filter: brightness(80%);
 }
 
 .spkItemName{
