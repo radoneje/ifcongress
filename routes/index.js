@@ -37,6 +37,16 @@ router.post('/moderator', async (req, res, next) =>{
   }
 });
 
+router.get('/user_agreement', async (req, res, next) =>{
+  return res.redirect('/ua_ru.pdf');
+  //res.render('work', { title: 'under constaction' });
+
+});
+router.get('/eng/user_agreement/', async (req, res, next) =>{
+  return res.redirect('/ua_en.pdf');
+  //res.render('work', { title: 'under constaction' });
+
+});
 router.get('/', async (req, res, next) =>{
   return res.render('start_bak');
   //res.render('work', { title: 'under constaction' });
