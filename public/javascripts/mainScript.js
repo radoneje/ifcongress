@@ -218,6 +218,7 @@ var pgm=new Vue({
                     this.curSpeakers[this.curSpeakersPage].push(this.spk[i])
                     console.log( this.curSpeakers[this.curSpeakersPage]);
                 }
+                this.curSpeakers=this.curSpeakers.filter(r=>{return true})
             }
         };
         var observer = new IntersectionObserver(callback, options);
