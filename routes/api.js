@@ -521,7 +521,7 @@ async function sendMailToUser(user){
       "\n" +
       "<p><b>Команда МФК</b>\n" +
       "<br>e-mail: info@ifcongress.org</p></div>"+
-      "<div style='width: 100%; text-align: right'><img src='htts://ifcongress.ru/images/letterfooter.png' width='337' height='60' src='' alt='Congress' style='margin: 24px auto'></div>"+
+      "<div style='width: 100%; text-align: right'><img src='https://ifcongress.ru/images/letterfooter.png' width='337' height='60' src='' alt='Congress' style='margin: 24px auto'></div>"+
       "</div>";
 
   console.log(text)
