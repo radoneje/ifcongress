@@ -374,7 +374,7 @@ html
                                         .progItemWR
                                             .progItemTitelWr
                                                 .progitemIco
-                                                    img(:src="currTrack.img")
+                                                    img(:src="item.img")
                                                 .progItemTitle {{item.title}}
                                             .progItemBtn(v-on:click="pgmItemModal=item") Подробнее
                                             .progItemTiteSPkWr.row
@@ -382,7 +382,7 @@ html
                                                     .progItemModTitle Модератор
                                                     .progItemSpkItemWr
                                                         .progItemSpkItem(v-for="spk in item.moderators" v-if="getSpk(spk)")
-                                                            .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+item.img+')'}")
+                                                            .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                             .progItemSpkItemNameWr
                                                                 .progItemSpkItemName {{getSpk(spk).i}} {{getSpk(spk).f}}
                                                                 .progItemSpkItemPos {{getSpk(spk).position}}
