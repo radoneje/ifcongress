@@ -3,6 +3,7 @@ var moment= require('moment');
 var fs= require('fs');
 var path= require('path');
 var router = express.Router();
+const nodemailer = require("nodemailer");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -256,12 +257,18 @@ router.post('/addSpk', adminLogin ,async(req, res, next)=> {
 router.post('/regUser', async(req, res, next)=> {
 
   var usr = await req.knex("t_cbrf_users").insert({
-    f: req.body.user.f,
-    i: req.body.user.i,
-    o: req.body.user.o,
-    email: req.body.user.email.toLowerCase(),
+    f: req.body.f,
+    i: req.body.i,
+    o: req.body.o,
+    email: req.body.email.toLowerCase(),
     date: new Date(),
   }, "*")
+  try {
+    await sendMailToUser(usr[0])
+  }
+  catch (e) {
+    console.warn(e);
+  }
   res.json(usr[0]);
 });
 router.post('/messageToUser', async(req, res, next)=> {
@@ -487,7 +494,52 @@ router.post('/state', adminLogin,async(req, res, next) =>{
 })
 
 
+async function sendMailToUser(user){
+  let mailAccount = await nodemailer.createTestAccount();
+  let transporter = nodemailer.createTransport({
+    host: "smtp.yandex.ru",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "info@ifcongress.org", // generated ethereal user
+      pass: "KongresInf@", // generated ethereal password
+    },
+    tls: {
+      ciphers:'SSLv3'
+    }
+  });
+  var text="Dear "+user.i+",\n" +
+      "\n" +
+      "Thank you for registering for the International Financial Congress 2021. \n" +
+      "\n" +
+      "Your registration is successfully completed.\n" +
+      "\n" +
+      "You can watch IFC 2021’s events, send your questions to speakers and participate in polls at ifcongress.ru. \n" +
+      "\n" +
+      "The broadcast will also be available on the Bank of Russia’s YouTube channel.\n" +
+      "\n" +
+      "Sincerely,\n" +
+      "IFC TeamDear Mr/Ms…,\n" +
+      "\n" +
+      "Thank you for registering for the International Financial Congress 2021. \n" +
+      "\n" +
+      "Your registration is successfully completed.\n" +
+      "\n" +
+      "You can watch IFC 2021’s events, send your questions to speakers and participate in polls at ifcongress.ru. \n" +
+      "\n" +
+      "The broadcast will also be available on the Bank of Russia’s YouTube channel.\n" +
+      "\n" +
+      "Sincerely,\n" +
+      "IFC Team"
+  let info = await transporter.sendMail({
+    from: 'info@ifcongress.org', // sender address
+    to: user.email, // list of receivers
+    subject: "registering for the International Financial Congress 2021", // Subject line
+    //text: , // plain text body
+    html: "text", // html body
+  });
 
+}
 
 
 

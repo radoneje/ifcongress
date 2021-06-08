@@ -63,11 +63,11 @@ var pgm=new Vue({
             if(this.user.id)
                 return ;
             this.reqProcess=true;
-            setTimeout(()=>{
-                this.reqProcess=false;
-                this.user.id=1;
-                localStorage.setItem("user", JSON.stringify(this.user))
-            },2000)
+            var ret=await axios.post("/api/regUser", this.user);
+            this.user=ret.data;
+            this.user.isPromice=true;
+            localStorage.setItem("user", JSON.stringify(this.user))
+            this.reqProcess=false;
         },
         checkUser:function() {
 
