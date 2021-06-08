@@ -508,35 +508,24 @@ async function sendMailToUser(user){
       ciphers:'SSLv3'
     }
   });
-  var text="Dear "+user.i+",\n" +
+  var text="<div style='background-color: #EFF7FF'><p><b>Dear "+user.i+"</b></p>,\n" +
       "\n" +
-      "Thank you for registering for the International Financial Congress 2021. \n" +
+      "<p>Thank you for registering for the International Financial Congress 2021. </p>\n" +
       "\n" +
-      "Your registration is successfully completed.\n" +
+      "<p>Your registration is successfully completed.</p>\n" +
       "\n" +
-      "You can watch IFC 2021’s events, send your questions to speakers and participate in polls at ifcongress.ru. \n" +
+      "<p>You can watch IFC 2021’s events, send your questions to speakers and participate in polls at ifcongress.ru. \n" +
       "\n" +
-      "The broadcast will also be available on the Bank of Russia’s YouTube channel.\n" +
+      "<br>The broadcast will also be available on the Bank of Russia’s YouTube channel.</p>\n" +
       "\n" +
-      "Sincerely,\n" +
-      "IFC TeamDear Mr/Ms…,\n" +
-      "\n" +
-      "Thank you for registering for the International Financial Congress 2021. \n" +
-      "\n" +
-      "Your registration is successfully completed.\n" +
-      "\n" +
-      "You can watch IFC 2021’s events, send your questions to speakers and participate in polls at ifcongress.ru. \n" +
-      "\n" +
-      "The broadcast will also be available on the Bank of Russia’s YouTube channel.\n" +
-      "\n" +
-      "Sincerely,\n" +
-      "IFC Team"
+      "<p>Sincerely,\n" +
+      "<br>IFC Team</p></div>"
   let info = await transporter.sendMail({
     from: 'info@ifcongress.org', // sender address
     to: user.email, // list of receivers
     subject: "registering for the International Financial Congress 2021", // Subject line
     //text: , // plain text body
-    html: "text", // html body
+    html: text, // html body
   });
 
 }
