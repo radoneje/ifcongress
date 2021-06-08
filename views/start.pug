@@ -361,11 +361,11 @@ html
                             .progMenuWr
                                     .progMenuRow.row(v-for="item in tracksDate")
                                         .progMenuDate {{item.key}}
-                                        .progMenuItem(v-bind:class="{selected:currTrack.id==track.id}" v-for="track in item.tracks" v-on:click="currTrack=track") {{track.title}}
+                                        .progMenuItem(v-bind:class="{selected:currTrack.id==track.id}" v-for="track in item.tracks" v-on:click="changePgmItem(track)") {{track.title}}
                             .progTitle
                                 .progTitleName {{currTrack.key}}
                                 .progTitleTrack  Трек: {{currTrack.title}}
-                            .progItemWr
+                            .progItemWr#pgmItems
 
                                     .progitem(v-for="item in pgm.filter(p=>p.trackid==currTrack.id)")
                                         .progitemTime {{item.time}}

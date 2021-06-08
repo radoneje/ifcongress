@@ -44,7 +44,7 @@ var pgm=new Vue({
         },
         curSpeakersPageNext:function(){
             this.curSpeakersPage++;
-            if(this.curSpeakersPage>parseInt(spk.length/8))
+            if(this.curSpeakersPage>parseInt(this.spk.length/8))
                 this.curSpeakersPage--;
         },
         getHtml:function(string){
@@ -116,6 +116,11 @@ var pgm=new Vue({
             this.tracks.push(this.currShowTrack);
             clearTimeout(this.trackRotateTimeout)
             this.trackRotateTimeout=setTimeout(()=>{this.rotateTrack()}, 10000)
+        },
+        changePgmItem:function(track){
+            this.currTrack=track;
+
+            EPPZScrollTo.scrollVerticalToElementById('pgmItems', 100)
         },
     },
     watch:{
