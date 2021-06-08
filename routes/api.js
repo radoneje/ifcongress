@@ -508,7 +508,9 @@ async function sendMailToUser(user){
       ciphers:'SSLv3'
     }
   });
-  var text="<div style='background-color: #EFF7FF;padding:24px;'><p>Здравствуйте <b>"+user.i+",</b></p>\n" +
+  var text="<div style='background-color: #E5E5E5; padding: 24px'>"+
+      +"<img width='337' height='60' src='htts://ifcongress.ru/images/letterheader.png' alt='Congress logo' style='margin: 24px auto'>"
+      "<div style='background-color: #E2F0FF;padding:24px;border-radius: 24px'><p>Здравствуйте <b>"+user.i+",</b></p>\n" +
       "\n" +
       "<p>Благодарим за регистрацию <br>на Международный Финансовый Конгресс. </p>\n" +
       "\n" +
@@ -518,7 +520,9 @@ async function sendMailToUser(user){
       "\n" +
       "\n" +
       "<p><b>Команда МФК</b>\n" +
-      "<br>info@ifcongress.org</p></div>"
+      "<br>e-mail: info@ifcongress.org</p></div>"+
+          +"<img width='337' height='60' src='' alt='Congress logo' style='margin: 24px auto'>"+
+      "</div>"
 
   let info = await transporter.sendMail({
     from: 'info@ifcongress.org', // sender address
