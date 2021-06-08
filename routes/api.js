@@ -509,7 +509,7 @@ async function sendMailToUser(user){
     }
   });
   var text="<div style='background-color: #E5E5E5; padding: 24px'>"+
-      +"<div style='width: 100%; text-align: center'><img width='337' height='60' src='htts://ifcongress.ru/images/letterheader.png' alt='Congress logo' style='margin: 24px auto'></div>"
+      "<div style='width: 100%; text-align: center'><img width='337' height='60' src='htts://ifcongress.ru/images/letterheader.png' alt='Congress logo' style='margin: 24px auto'></div>"
       "<div style='background-color: #E2F0FF;padding:24px;border-radius: 24px'><p>Здравствуйте <b>"+user.i+",</b></p>\n" +
       "\n" +
       "<p>Благодарим за регистрацию <br>на Международный Финансовый Конгресс. </p>\n" +
@@ -522,12 +522,14 @@ async function sendMailToUser(user){
       "<p><b>Команда МФК</b>\n" +
       "<br>e-mail: info@ifcongress.org</p></div>"+
           +"<div style='width: 100%; text-align: right'><img src='htts://ifcongress.ru/images/letterfooter.png' width='337' height='60' src='' alt='Congress' style='margin: 24px auto'></div>"+
-      "</div>"
+      "</div>";
+
+  console.log(text)
 
   let info = await transporter.sendMail({
     from: 'info@ifcongress.org', // sender address
     to: user.email, // list of receivers
-    subject: "registering for the International Financial Congress 2021", // Subject line
+    subject: "Registering for the International Financial Congress 2021", // Subject line
     //text: , // plain text body
     html: text, // html body
   });
