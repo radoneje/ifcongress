@@ -471,6 +471,17 @@ router.post('/addVoteAnswer', adminLogin,async(req, res, next) =>{
 
 })
 
+router.get('/resort', adminLogin,async(req, res, next) =>{
+  var ret=await req.knex("t_cbrf_spk").orderBy("f")
+  var i=10;
+  for(var item of ret){
+    await req.knex("t_cbrf_spk").update({sortOrder:i}).where({id:item.id});
+    i=i+10;
+  }
+  res.send(200);
+
+})
+
 router.post('/voteChange', adminLogin,async(req, res, next) =>{
   var id=req.body.id;
   delete req.body.id;
