@@ -21,14 +21,16 @@ var pgm=new Vue({
         getSessionFromSpk:function(spk){
             var ret=[];
             this.pgm.forEach(p=>{
-                p.moderators.forEach(m=>{
-                    if(m==spk.id)
-                        ret.push(p);
-                })
-                p.speakers.forEach(m=>{
-                    if(m==spk.id)
-                        ret.push(p);
-                })
+                if(p.moderators)
+                    p.moderators.forEach(m=>{
+                        if(m==spk.id)
+                            ret.push(p);
+                    })
+                if(p.speakers)
+                    p.speakers.forEach(m=>{
+                        if(m==spk.id)
+                            ret.push(p);
+                    })
 
             })
             ret.forEach(p=>{
