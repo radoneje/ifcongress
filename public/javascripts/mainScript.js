@@ -108,15 +108,21 @@ var pgm=new Vue({
             this.trackRotateTimeout=setTimeout(()=>{this.rotateTrack()}, 10000)
         },
         previewTrack:function () {
+            var lastid=this.currShowTrack.id;
             this.currShowTrack=this.tracks.pop();
             this.tracks.unshift(this.currShowTrack);
-
+            if(lastid==this.currShowTrack.id)
+                return this.previewTrack();
             clearTimeout(this.trackRotateTimeout)
             this.trackRotateTimeout=setTimeout(()=>{this.rotateTrack()}, 10000)
+
         },
         nextTrack:function () {
+            var lastid=this.currShowTrack.id;
             this.currShowTrack=this.tracks.shift();
             this.tracks.push(this.currShowTrack);
+            if(lastid==this.currShowTrack.id)
+                return this.nextTrack();
             clearTimeout(this.trackRotateTimeout)
             this.trackRotateTimeout=setTimeout(()=>{this.rotateTrack()}, 10000)
         },
