@@ -509,7 +509,7 @@ async function sendMailToUser(user){
     }
   });
   var text="<div style='background-color: #EFF7FF; padding: 24px'>"+
-      "<div style='width: 100%; text-align: center'><img width='337' height='60' src='https://ifcongress.ru/images/letterheader.png' alt='Congress logo' style='margin: 24px auto'/></div>"+
+      "<div style='width: 100%; text-align: center'><img  src='https://ifcongress.ru/images/letterheader.png' alt='Congress logo' style='margin: 24px auto'/></div>"+
       "<div style='background-color: #E2F0FF;padding:24px;border-radius: 24px'><p>Здравствуйте <b>"+user.i+",</b></p>\n" +
       "\n" +
       "<p>Благодарим за регистрацию <br>на Международный Финансовый Конгресс. </p>\n" +
@@ -521,7 +521,7 @@ async function sendMailToUser(user){
       "\n" +
       "<p><b>Команда МФК</b>\n" +
       "<br>e-mail: info@ifcongress.org</p></div>"+
-      "<div style='width: 100%; text-align: right'><img src='https://ifcongress.ru/images/letterfooter.png' width='337' height='60' src='' alt='Congress' style='margin: 24px auto'></div>"+
+      "<div style='width: 100%; text-align: right'><img src='https://ifcongress.ru/images/letterfooter.png'  src='https://ifcongress.ru/images/letterfooter.pn'  style='margin: 24px auto'></div>"+
       "</div>";
 
   console.log(text)
