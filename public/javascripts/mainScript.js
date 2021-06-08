@@ -206,6 +206,26 @@ var pgm=new Vue({
            })
         this.faq=(await axios.get('/api/faq')).data;
 
+        var options = {
+            root: document.querySelector('#spkPage'),
+            rootMargin: '0px',
+            threshold: 0.1
+        }
+        var callback = (entries, observer) =>{
+            if(entries[0].isIntersecting){
+                var currLen=this.curSpeakers[this.curSpeakersPage].length
+                for(var i=currLen;i<this.spk.length && i<currLen+8  ;i++) {
+                    this.curSpeakers[this.curSpeakersPage].push(this.spk[i])
+                    console.log( this.curSpeakers[this.curSpeakersPage]);
+                }
+            }
+        };
+        var observer = new IntersectionObserver(callback, options);
+        var target = document.querySelector('#spkChild');
+        setTimeout(()=>{
+            observer.observe(target);
+            document.querySelectorAll('#spkChild').forEach(img => observer.observe(img))
+            },1000)
 
 
         document.body.style.opacity="1"
