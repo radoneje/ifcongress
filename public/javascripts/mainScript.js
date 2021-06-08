@@ -55,6 +55,7 @@ var pgm=new Vue({
             string=string.replace(/\n/g,"<br/>");
             return  string
         },
+
         regUser:async function(){
             if(this.reqProcess)
                 return ;
