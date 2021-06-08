@@ -378,7 +378,7 @@ html
                                                 .progItemTitle {{item.title}}
                                             .progItemBtn(v-on:click="pgmItemModal=item") Подробнее
                                             .progItemTiteSPkWr.row
-                                                .progItemModBox(v-if="item.moderators.length>0")
+                                                .progItemModBox.listMod(v-if="item.moderators.length>0")
                                                     .progItemModTitle Модератор
                                                     .progItemSpkItemWr
                                                         .progItemSpkItem(v-for="spk in item.moderators" v-if="getSpk(spk)")
@@ -387,7 +387,7 @@ html
                                                                 .progItemSpkItemName {{getSpk(spk).i}}<br/>{{getSpk(spk).f}}
                                                                 .progItemSpkItemPos {{getSpk(spk).position}}
 
-                                                .progItemModBox
+                                                .progItemModBox.listSpk
                                                     .progItemModTitle Спикеры
                                                     .progItemSpkItemWr
                                                         .progItemSpkItem(v-for="spk in item.speakers" v-if="getSpk(spk)")
