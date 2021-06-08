@@ -181,6 +181,7 @@ var pgm=new Vue({
             this.currShowTrack=plenar[0]
         else
             this.currShowTrack=this.tracks[0]
+        this.currTrack=this.currShowTrack
         this.pgm=(await axios.get('/api/pgm')).data;
         this.spk=(await axios.get('/api/spk')).data;
         var i=0;
