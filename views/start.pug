@@ -384,7 +384,9 @@ html
                                                         .progItemSpkItem(v-for="spk in item.moderators" v-if="getSpk(spk)")
                                                             .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                             .progItemSpkItemNameWr
-                                                                .progItemSpkItemName {{getSpk(spk).i}}<br/>{{getSpk(spk).f}}
+                                                                .progItemSpkItemName
+                                                                    span {{getSpk(spk).i}}
+                                                                    span {{getSpk(spk).f}}
                                                                 .progItemSpkItemPos {{getSpk(spk).position}}
 
                                                 .progItemModBox.listSpk
@@ -393,7 +395,9 @@ html
                                                         .progItemSpkItem(v-for="spk in item.speakers" v-if="getSpk(spk)")
                                                             .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                             .progItemSpkItemNameWr
-                                                                .progItemSpkItemName {{getSpk(spk).i}}<br/>{{getSpk(spk).f}}
+                                                                .progItemSpkItemName
+                                                                    span {{getSpk(spk).i}}
+                                                                    span {{getSpk(spk).f}}
                                                                 .progItemSpkItemPos {{getSpk(spk).position}}
 
                             .progUpBtnWr
