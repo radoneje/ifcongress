@@ -206,6 +206,10 @@ var pgm=new Vue({
 
 
         this.spk=(await axios.get('/api/spk')).data;
+        this.spk.forEach(s=>{
+            s.i=s.i.replace(/\s/g,"")
+            s.f=s.f.replace(/\s/g,"")
+        })
         var i=0;
         var page=0;
         this.curSpeakers[page]=[]
