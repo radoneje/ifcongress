@@ -335,7 +335,9 @@ html
 
                                             .carouselItemFace(v-for="(spk, i) in currShowTrack.speakers"  v-if="i<3 && getSpk(spk)")
                                                 .carouselItemFaceImage(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
-                                                .carouselItemFaceName {{getSpk(spk).i}} {{getSpk(spk).f}}
+                                                .carouselItemFaceName
+                                                    div {{getSpk(spk).i}}
+                                                    div {{getSpk(spk).f}}
                                                 .carouselItemFacePos {{getSpk(spk).position}}
 
                             .corouselSwWr.hideMobile
