@@ -271,7 +271,9 @@ html
                       .adminSpkItemName
                         textarea.adminJsonTextArea(v-model="item.descr" placeholder='Описание')
                         textarea.adminJsonTextArea(v-model="item.descr_en" placeholder='Description')
-
+                  .adminSpkItemPhoto
+                    .adminSpkItemPhotoWr(:style="{ backgroundImage: `url(${item.img})` }")
+                    button(v-on:click="editTrackImg(item)") Изменть фото
                 .adminSpkItemPosition
                   button(v-on:click="editPgm(item)") Сохранить изменения
                   button(v-on:click="deletePgm(item)") Удалить

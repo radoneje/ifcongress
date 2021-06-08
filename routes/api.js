@@ -239,6 +239,8 @@ router.post('/trackImage', adminLogin ,async(req, res, next)=> {
   fs.renameSync( req.files.image.path, pathname )
   res.json("/images/spk/"+filename);
 });
+
+
 router.post('/addSpk', adminLogin ,async(req, res, next)=> {
 
   delete req.body.id;

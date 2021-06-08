@@ -237,6 +237,7 @@ var app=new Vue({
             document.body.appendChild(elem);
             elem.click()
         },
+
         editSpkPhoto:async function(item){
             var elem=document.createElement("input")
             elem.type="file"
