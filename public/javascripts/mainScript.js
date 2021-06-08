@@ -122,6 +122,9 @@ var pgm=new Vue({
 
             EPPZScrollTo.scrollVerticalToElementById('pgmItems', 100)
         },
+        showPopSpeaker:function (item) {
+            this.spkItemModal=item
+        }
     },
     watch:{
         pgmItemModal:function () {
