@@ -20,6 +20,7 @@ var pgm=new Vue({
     methods:{
         getSessionFromSpk:function(spk){
             var ret=[];
+
             this.pgm.forEach(p=>{
                 if(p.moderators)
                     p.moderators.forEach(m=>{
@@ -33,10 +34,13 @@ var pgm=new Vue({
                     })
 
             })
+
             ret.forEach(p=>{
-                var track=this.tracks.filter(t=>t.id==p.trackid);
-                p.key=moment(track[0].data).format("DD MMM")
+             //   var track=this.tracks.filter(t=>t.id==p.trackid);
+             //   p.key=moment(track[0].data).format("DD MMM")
             });
+
+
            return ret;
         },
         curSpeakersPagePreview:function(){
@@ -190,6 +194,17 @@ var pgm=new Vue({
             this.currShowTrack=this.tracks[0]
         this.currTrack=this.currShowTrack
         this.pgm=(await axios.get('/api/pgm')).data;
+
+        this.pgm.forEach(p=>{
+            var track=this.tracks.filter(t=>t.id==p.trackid);
+            if(track.length>0) {
+                p.key = track[0].key;
+
+            }
+
+        })
+
+
         this.spk=(await axios.get('/api/spk')).data;
         var i=0;
         var page=0;
