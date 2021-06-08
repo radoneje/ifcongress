@@ -175,7 +175,12 @@ var pgm=new Vue({
             return 0;
         });
         this.rotateTrack();
-        this.currTrack=this.tracksDate[0].tracks[0];
+
+        var plenar=this.tracks.filter(t=>t.id==6);
+        if(plenar.length>0)
+            this.currTrack=plenar[0]
+        else
+            this.currTrack=this.tracks[0]
         this.pgm=(await axios.get('/api/pgm')).data;
         this.spk=(await axios.get('/api/spk')).data;
         var i=0;
