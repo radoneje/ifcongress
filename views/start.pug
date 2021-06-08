@@ -415,7 +415,7 @@ html
                         .spkWr
                             .spkPage(v-if="curSpeakers[curSpeakersPage]")
                                     .spkItem(v-for="item in curSpeakers[curSpeakersPage]" v-on:click="spkItemModal=item")
-                                        .spkItemPhoto(v-bind:style="{backgroundImage:'url('+item.photo+')'}")
+                                        .spkItemPhoto(v-bind:style="{backgroundImage:'url('+item.photo+')'}" v-on:click.stop.prevent="spkItemModal=item")
                                         .spkItemName {{item.i}} {{item.f}}
                                         .spkItemPos {{item.position}}
                                     div(style="clear:both")
