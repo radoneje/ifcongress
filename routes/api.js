@@ -508,7 +508,7 @@ async function sendMailToUser(user){
       ciphers:'SSLv3'
     }
   });
-  var text="<div style='background-color: #EFF7FF'><p><b>Dear "+user.i+"</b></p>,\n" +
+  var text="<div style='background-color: #EFF7FF;padding:24px;'><p><b>Dear "+user.i+",</b></p>\n" +
       "\n" +
       "<p>Thank you for registering for the International Financial Congress 2021. </p>\n" +
       "\n" +
