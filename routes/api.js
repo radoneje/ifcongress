@@ -508,18 +508,18 @@ async function sendMailToUser(user){
       ciphers:'SSLv3'
     }
   });
-  var text="<div style='background-color: #EFF7FF;padding:24px;'><p><b>Dear "+user.i+",</b></p>\n" +
+  var text="<div style='background-color: #EFF7FF;padding:24px;'><p>Здраствуйте <b>"+user.i+",</b></p>\n" +
       "\n" +
-      "<p>Thank you for registering for the International Financial Congress 2021. </p>\n" +
+      "<p>Благодарим за регистрацию <br>на Международный Финансовый Конгресс. </p>\n" +
       "\n" +
-      "<p>Your registration is successfully completed.</p>\n" +
+      "<p><b>Ваша регистрация прошла успешно.</b></p>\n" +
       "\n" +
-      "<p>You can watch IFC 2021’s events, send your questions to speakers and participate in polls at ifcongress.ru. \n" +
+      "<p>Вы можете смотреть мероприятия конгресса, задавать вопросы спикерам и участвовать в опросах на сайте <a href='https://ifcongress.ru'>ifcongress.ru</a>. <br>Трансляция будет доступна на YouTube канале Банка России." +
       "\n" +
-      "<br>The broadcast will also be available on the Bank of Russia’s YouTube channel.</p>\n" +
       "\n" +
-      "<p>Sincerely,\n" +
-      "<br>IFC Team</p></div>"
+      "<p><b>Команда МФК</b>\n" +
+      "<br>info@ifcongress.org/p></div>"
+
   let info = await transporter.sendMail({
     from: 'info@ifcongress.org', // sender address
     to: user.email, // list of receivers
