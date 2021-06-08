@@ -518,7 +518,7 @@ async function sendMailToUser(user){
       "\n" +
       "\n" +
       "<p><b>Команда МФК</b>\n" +
-      "<br>info@ifcongress.org/p></div>"
+      "<br>info@ifcongress.org</p></div>"
 
   let info = await transporter.sendMail({
     from: 'info@ifcongress.org', // sender address
