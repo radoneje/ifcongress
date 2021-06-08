@@ -1,4 +1,4 @@
-var pgm=new Vue({
+var app=new Vue({
     el:"#app",
     data:{
         pgmItemModal:null,
@@ -15,7 +15,8 @@ var pgm=new Vue({
         spk:[],
         curSpeakersPage:0,
         curSpeakers:[],
-        faq:[]
+        faq:[],
+        menuModal:false,
     },
     methods:{
         getSessionFromSpk:function(spk){
@@ -153,7 +154,15 @@ var pgm=new Vue({
                 document.body.style.overflow="scroll";
         },
         reqModal:function () {
-            if(this.reqModal)
+            if(this.reqModal) {
+                this.menuModal=false;
+                document.body.style.overflow = "hidden";
+            }
+            else
+                document.body.style.overflow="scroll";
+        },
+        menuModal:function () {
+            if(this.menuModal)
                 document.body.style.overflow="hidden";
             else
                 document.body.style.overflow="scroll";
@@ -207,7 +216,9 @@ var pgm=new Vue({
 
         this.spk=(await axios.get('/api/spk')).data;
         this.spk.forEach(s=>{
+            if(s.i)
             s.i=s.i.replace(/\s/g,"")
+            if(s.f)
             s.f=s.f.replace(/\s/g,"")
         })
         var i=0;

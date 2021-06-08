@@ -1072,7 +1072,8 @@ margin-top:4px;
     padding: 12px 0;
   }
   .mainMenu{
-    display: block;
+    display: flex;
+    justify-content: space-between;
     width: 100%;
     background: white;
     text-align: center;
@@ -1397,6 +1398,28 @@ margin-top:4px;
   .progItemSpkItemName span{
     display: inline-block;
     margin-right: .5em;
+  }
+  .gamburger{
+    padding-top: 12px;
+  }
+  .mobileMenuWr{
+    position: fixed;
+    z-index: 200;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: ~"rgb(255 255 255 / 50%)";;
+    backdrop-filter: blur(12px);
+  }
+  .mobileMenuItem{
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 31px;
+    /* identical to box height */
+    text-align: center;
+    margin-top:40px;
+    color: rgba(92, 118, 186, 0.8);
   }
 }
 @media (max-width:458px) {

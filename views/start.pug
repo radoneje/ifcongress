@@ -521,6 +521,20 @@ html
                                         .reqProcess(v-if="reqProcess")
                                 .regText Телефон технической поддержки
                                     span.newLine +7 (495) 260-19-93.
+                .mobileMenuWr(v-if="menuModal")
+                    .towerReg
+                        .regAboutClose(v-on:click="menuModal=null")
+                            include closeBtn
+                        .mobileMenuItemWr(v-on:click="menuModal=null")
+                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('about', 100)") О конгрессе
+                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('pgm', 100)") Программа
+                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('spk', 100)") Спикеры
+                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('faq', 100)") Частые вопросы
+
+                        .mobileMenuBtnWr
+                            .regSubmitBtnWr ENG
+                            .regSubmitBtnWr.active(v-on:click="reqModal=true") Регистрация
+
 
 
 
