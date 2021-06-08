@@ -133,6 +133,8 @@ html
                     input(v-model="item.full_pos" placeholder="полная должность")
                     input(v-model="item.full_pos_en" placeholder="full position")
                   .adminSpkItemPosition
+                    input(v-model="item.sortOrder" placeholder="порядок сортировки")
+                  .adminSpkItemPosition
                     button(v-on:click="editSpk(item)") Сохранить изменения
                     button(v-on:click="repositionSpk(item, -15)") Выше
                     button(v-on:click="repositionSpk(item, +15)") Ниже
