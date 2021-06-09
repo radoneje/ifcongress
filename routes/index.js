@@ -49,8 +49,9 @@ router.get('/eng/user_agreement/', async (req, res, next) =>{
 });
 router.get('/zoom/:id' ,async(req, res, next)=> {
   var ret=await req.knex.select("*").from("t_cbrf_redirect").where({id:req.params.id});
+  console.log("ret", ret)
   if(ret.length==0)
-    return res.status(404);
+    return res.status(404).send("not found");
   res.redirect(ret[0].value)
 });
 router.get('/', async (req, res, next) =>{
