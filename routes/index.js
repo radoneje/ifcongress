@@ -47,7 +47,7 @@ router.get('/eng/user_agreement/', async (req, res, next) =>{
   //res.render('work', { title: 'under constaction' });
 
 });
-router.get('/zoom/:id', adminLogin ,async(req, res, next)=> {
+router.get('/zoom/:id' ,async(req, res, next)=> {
   var ret=await req.knex.select("*").from("t_cbrf_redirect").where({id:req.params.id});
   if(ret.length==0)
     return res.status(404);
