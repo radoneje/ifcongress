@@ -47,6 +47,10 @@ router.get('/eng/user_agreement/', async (req, res, next) =>{
   //res.render('work', { title: 'under constaction' });
 
 });
+router.get('/zoom', adminLogin ,async(req, res, next)=> {
+  var ret=await req.knex.select("*").from("t_cbrf_redirect").orderBy("id")
+  res.json(ret);
+});
 router.get('/', async (req, res, next) =>{
   return res.render('start_bak');
   //res.render('work', { title: 'under constaction' });

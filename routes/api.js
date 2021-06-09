@@ -177,10 +177,7 @@ router.get('/redirect', adminLogin ,async(req, res, next)=> {
   var ret=await req.knex.select("*").from("t_cbrf_redirect").orderBy("id")
   res.json(ret);
 });
-router.get('/zoom', adminLogin ,async(req, res, next)=> {
-  var ret=await req.knex.select("*").from("t_cbrf_redirect").orderBy("id")
-  res.json(ret);
-});
+
 
 router.get('/codes', adminLogin ,async(req, res, next)=> {
   var ret=await req.knex.select("*").from("t_cbrf_codes").orderBy("f").orderBy("i").orderBy("o")
