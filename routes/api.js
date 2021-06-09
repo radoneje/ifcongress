@@ -177,6 +177,10 @@ router.get('/redirect', adminLogin ,async(req, res, next)=> {
   var ret=await req.knex.select("*").from("t_cbrf_redirect").orderBy("id")
   res.json(ret);
 });
+router.get('/zoom', adminLogin ,async(req, res, next)=> {
+  var ret=await req.knex.select("*").from("t_cbrf_redirect").orderBy("id")
+  res.json(ret);
+});
 
 router.get('/codes', adminLogin ,async(req, res, next)=> {
   var ret=await req.knex.select("*").from("t_cbrf_codes").orderBy("f").orderBy("i").orderBy("o")
@@ -471,16 +475,7 @@ router.post('/addVoteAnswer', adminLogin,async(req, res, next) =>{
 
 })
 
-router.get('/resort', adminLogin,async(req, res, next) =>{
-  var ret=await req.knex("t_cbrf_spk").orderBy("f")
-  var i=10;
-  for(var item of ret){
-    await req.knex("t_cbrf_spk").update({sortOrder:i}).where({id:item.id});
-    i=i+10;
-  }
-  res.send(200);
 
-})
 
 router.post('/voteChange', adminLogin,async(req, res, next) =>{
   var id=req.body.id;
