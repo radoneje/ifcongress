@@ -55,7 +55,7 @@ router.get('/zoom/:id' ,async(req, res, next)=> {
   res.redirect(ret[0].value)
 });
 router.get('/', async (req, res, next) =>{
-  return res.render('start_bak');
+  //return res.render('start_bak');
   //res.render('work', { title: 'under constaction' });
   res.redirect("/index/ru")
 
