@@ -477,7 +477,7 @@ html
                                                 .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                 .progItemSpkItemNameWr
                                                     .progItemSpkItemName {{getSpk(spk).i}} {{getSpk(spk).f}}
-                                                    .progItemSpkItemPos {{getSpk(spk).position}}
+                                                    .progItemSpkItemPos {{getSpk(spk).full_pos}}
 
                                     .progItemModBox
                                         .progItemModTitle !{content.speakert2}
@@ -486,7 +486,7 @@ html
                                                 .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                 .progItemSpkItemNameWr
                                                     .progItemSpkItemName {{getSpk(spk).i}} {{getSpk(spk).f}}
-                                                    .progItemSpkItemPos {{getSpk(spk).position}}
+                                                    .progItemSpkItemPos {{getSpk(spk).full_pos}}
 
                 .trackAboutWr(v-if="spkItemModal")
                     .trackAboutBox
@@ -553,5 +553,5 @@ html
         script(src="/javascripts/axios.min.js")
         script(src='/javascripts/vue.min.js')
         //script(src='/javascripts/vueTouch.js')
-        script(src='/javascripts/moment.min.js')
+        script( src='/javascripts/moment.min.js')
         script(src="/javascripts/mainScript.js")
