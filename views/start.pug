@@ -1,10 +1,10 @@
 doctype html
 html
     head
-        title="Международный Финансовый Конгресс"
+        title=content.title
         <meta charset="UTF-8">
-        <meta name="description" content="Международный Финансовый Конгресс">
-        <meta name="keywords" content="Международный Финансовый Конгресс">
+        <meta name="description" content="!{content.title}">
+        <meta name="keywords" content="!{content.title}с">
         <meta name="author" content="ifcongress.ru">
         <meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0">
         <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
@@ -24,11 +24,11 @@ html
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
-        <meta property="og:locale" content="ru_RU">
+        <meta property="og:locale" content="#!{lang==ru?'ru_RU':'en_US'}">
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://vcbr.ru/" />
-        meta(property="og:title" content="Международный Финансовый Конгресс")
-        meta(property="og:description" content="Ежегодный международный финансовый конгресс Банка России - площадка для общения участников финансового рынка, экспертов в области экономики и финансов, национальных регуляторов и международных экспертов. Темы дискуссий охватывают денежно-кредитную политику, вопросы развития секторов финансового рынка, корпоративного управления, финансовых технологий и кибербезопасности." )
+        meta(property="og:title" content=content.title)
+        meta(property="og:description" content=content.ogtitle )
         <meta property="og:image" content="https://www.cbr.ru//favicon/mgf-01.png" />
         link(rel='stylesheet', href='/stylesheets/style.css')
         script.
@@ -50,10 +50,10 @@ html
                 .tower
                     .row
                         .fCol
-                            h1 Международный Финансовый Конгресс
-                            h2 28 июня - 02 июля 2021&nbsp;&nbsp;&nbsp; <span class="br">Формат: Бесплатно, онлайн</span>
-                            h4 Зарегистрированные участники получают возможность<br> задавать вопросы спикерам
-                            .regBtn2(v-on:click="reqModal=true") Регистрация
+                            h1 #{content.title}
+                            h2 #{content.date}&nbsp;&nbsp;&nbsp; <span class="br">#{content.format}</span>
+                            h4 !{content.formatDescr}
+                            .regBtn2(v-on:click="reqModal=true") #{content.register}
                         .sCol.fBg
                             <svg width="445" height="445" viewBox="0 0 445 445" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <rect y="182" width="172" height="172" rx="32" fill="url(#pattern0)"/>
@@ -283,23 +283,23 @@ html
                 .tower
                     .row
                         .fCol
-                            .aboutTitle#about О Конгрессе
-                            .aboutDescr Ежегодный международный финансовый конгресс Банка России - площадка для общения участников финансового рынка, экспертов в области экономики и финансов, национальных регуляторов и международных экспертов. Темы дискуссий охватывают денежно-кредитную политику, вопросы развития секторов финансового рынка, корпоративного управления, финансовых технологий и кибербезопасности.
+                            .aboutTitle#about !{content.about}
+                            .aboutDescr #{content.abautDescr}
                         .sCol.hideMobile
                             .fCube.cube
                                 div
                                     .cubeTitle 200
-                                    .cubeDescr Спикеров
+                                    .cubeDescr !{content.Speakers}
                             .sCube.cube
                                 div
                                     .cubeTitle 40
-                                    .cubeDescr Тем
+                                    .cubeDescr !{content.themes}
                             div(style="clear:both")
                         .sMobileCol.showMobile
                             .fCube.cube
                                 div
                                     .cubeTitle 200
-                                    .cubeDescr Спикеров
+                                    .cubeDescr !{content.Speakers}
                             .sCube.cube.mobileBgCube
 
                             div(style="clear:both")
@@ -307,11 +307,11 @@ html
                             .fCube.cube
                                 div
                                     .cubeTitle 40
-                                    .cubeDescr Тем
+                                    .cubeDescr !{content.themes}
                             .sCube.cube
                                 div
                                     .cubeTitle 5
-                                    .cubeDescr Дней
+                                    .cubeDescr !{content.days}
                             div(style="clear:both")
             .thWr
                 .tower
@@ -329,7 +329,7 @@ html
                                         <path d="M0.502034 11.5001C0.501349 11.8506 0.623411 12.1902 0.847033 12.4601L8.34703 21.4601C8.60164 21.7664 8.9675 21.959 9.36414 21.9956C9.76078 22.0322 10.1557 21.9097 10.462 21.6551C10.7684 21.4005 10.961 21.0346 10.9976 20.638C11.0341 20.2413 10.9116 19.8464 10.657 19.5401L3.93703 11.5001L10.417 3.46007C10.5416 3.30664 10.6347 3.1301 10.6908 2.94059C10.747 2.75108 10.7651 2.55234 10.7442 2.3558C10.7233 2.15926 10.6637 1.96878 10.569 1.79533C10.4742 1.62187 10.3461 1.46886 10.192 1.34507C10.0378 1.2077 9.85686 1.10366 9.66055 1.03947C9.46424 0.975286 9.25679 0.952331 9.05119 0.972046C8.8456 0.99176 8.64629 1.05372 8.46575 1.15404C8.28522 1.25437 8.12735 1.3909 8.00203 1.55507L0.757034 10.5551C0.568759 10.8327 0.478978 11.1654 0.502034 11.5001Z" fill="white"/>
                                         </svg>
                                 .carouselItem
-                                    .carouselItemTitle Трек: {{currShowTrack.title}}
+                                    .carouselItemTitle !{content.track}: {{currShowTrack.title}}
                                     .carouselItemDescr {{currShowTrack.descr}}
                                     .carouselItemFaceWr
 
@@ -355,11 +355,13 @@ html
                             .fourCube.cube
                                 div
                                     .cubeTitle 5
-                                    .cubeDescr Дней
+                                    .cubeDescr !{content.days}
                             div(style="clear:both")
                 .fourWr
                     .tower
-                            .aboutTitle#pgm Программа
+                            .aboutTitle#pgm !{content.pgm}
+                            .progUpBtnWr
+                                .progUpBtn(onclick="window.open('"+content.pgmLink+"')") !{content.allPgm}
                             .progMenuWr
                                     .progMenuRow.row(v-for="item in tracksDate")
                                         .progMenuDate {{item.key}}
@@ -367,6 +369,7 @@ html
                             .progTitle
                                 .progTitleName {{currTrack.key}}
                                 .progTitleTrack  Трек: {{currTrack.title}}
+
                             .progItemWr#pgmItems
 
                                     .progitem(v-for="item in pgm.filter(p=>p.trackid==currTrack.id)")
@@ -376,10 +379,10 @@ html
                                                 .progitemIco
                                                     img(:src="item.img")
                                                 .progItemTitle {{item.title}}
-                                            .progItemBtn(v-on:click="pgmItemModal=item") Подробнее
+                                            .progItemBtn(v-on:click="pgmItemModal=item") !{content.details}
                                             .progItemTiteSPkWr.row
                                                 .progItemModBox.listMod(v-if="item.moderators.length>0")
-                                                    .progItemModTitle Модератор
+                                                    .progItemModTitle !{content.moderator}
                                                     .progItemSpkItemWr
                                                         .progItemSpkItem(v-for="spk in item.moderators" v-if="getSpk(spk)")
                                                             .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
@@ -390,7 +393,7 @@ html
                                                                 .progItemSpkItemPos {{getSpk(spk).position}}
 
                                                 .progItemModBox.listSpk
-                                                    .progItemModTitle Спикеры
+                                                    .progItemModTitle !{content.speakert2}
                                                     .progItemSpkItemWr
                                                         .progItemSpkItem(v-for="spk in item.speakers" v-if="getSpk(spk)")
                                                             .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
@@ -401,11 +404,11 @@ html
                                                                 .progItemSpkItemPos {{getSpk(spk).position}}
 
                             .progUpBtnWr
-                                .progUpBtn(onclick="document.location.href='#pgm'") В начало программы
+                                .progUpBtn(onclick="document.location.href='#pgm'") !{content.topgmstart}
 
                 .fiveWr
                     .tower
-                        .aboutTitle.spkTitle#spk Спикеры
+                        .aboutTitle.spkTitle#spk !{content.speakert2}
                             .spkSwitherWr.hideMobile
                                 .spkSwitherWrTitle.hideMobile {{curSpeakersPage+1}}/{{parseInt(spk.length/8)+1}}
                                 .spkSwitherWrTitleUp(v-on:click="curSpeakersPagePreview()" )
@@ -430,7 +433,7 @@ html
 
                 .sixWr
                     .tower
-                        .aboutTitle.spkTitle#faq Частые вопросы
+                        .aboutTitle.spkTitle#faq !{content.faq}
                         .row
                             .fCol
                                 .faqWr
@@ -449,10 +452,10 @@ html
                         .hideMobile
                             include mainMenu
                         .footerDesclaimerWr
-                            .footerDesclaimer Использование материалов, размещенных на сайте, допускается только с письменного разрешения Правообладателя.  Запрещается автоматизированное извлечение размещенной информации любыми сервисами без официального разрешения Правообладателя
+                            .footerDesclaimer !{content.footer}
                             .footerDesclaimer
-                                div Связь с организаторами info@ifcongress.org
-                                div С условиями пользовательского соглашения можно ознакомиться <a href="/ua_ru.pdf" target="_blank">  здесь </a>
+                                div !{content.footer2}
+                                div !{content.footer3}
                 .trackAboutWr(v-if="pgmItemModal")
                         .trackAboutBox
                             .tower
@@ -461,8 +464,8 @@ html
                                         include closeBtn
                                 .aboutText(v-html="getHtml(pgmItemModal.descr)")
                                 .aboutModerator
-                                    .progItemModBox
-                                        .progItemModTitle Модератор
+                                    .progItemModBox(v-if="pgmItemModal.moderators.length>0")
+                                        .progItemModTitle !{content.moderator}
                                         .progItemSpkItemWr
                                             .progItemSpkItem(v-for="spk in pgmItemModal.moderators")
                                                 .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
@@ -471,7 +474,7 @@ html
                                                     .progItemSpkItemPos {{getSpk(spk).position}}
 
                                     .progItemModBox
-                                        .progItemModTitle Спикеры
+                                        .progItemModTitle !{content.speakert2}
                                         .progItemSpkItemWr
                                             .progItemSpkItem(v-for="spk in pgmItemModal.speakers")
                                                 .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
@@ -501,12 +504,12 @@ html
                                 .regAboutClose(v-on:click="reqModal=null")
                                     include closeBtn
                                 .regTitle
-                                    div Международный
-                                    div Финансовый Конгресс
-                                .spkDescrPos 28 июня - 02 июля 2021
+                                    div #{content.title1}
+                                    div #{content.title2}
+                                .spkDescrPos #{content.date}
                                 .regFrm
-                                    input( name="name" placeholder="Имя*" v-model="user.i")
-                                    input(name="suname" placeholder="Фамилия*" v-model="user.f")
+                                    input( name="name" placeholder=content.i+"*" v-model="user.i")
+                                    input(name="suname" placeholder=content.f+"*" v-model="user.f")
                                     input(type="email" placeholder="Email*" v-model="user.email")
                                     .promiceWr(v-on:click="user.isPromice=!user.isPromice")
                                         .promiceArrow
@@ -514,30 +517,32 @@ html
                                             <path fill-rule="evenodd" clip-rule="evenodd" d="M13.7064 0.293031C13.8939 0.480558 13.9992 0.734866 13.9992 1.00003C13.9992 1.26519 13.8939 1.5195 13.7064 1.70703L5.70643 9.70703C5.5189 9.8945 5.2646 9.99982 4.99943 9.99982C4.73427 9.99982 4.47996 9.8945 4.29243 9.70703L0.292431 5.70703C0.110272 5.51843 0.00947813 5.26583 0.0117566 5.00363C0.014035 4.74143 0.119204 4.49062 0.304612 4.30521C0.49002 4.1198 0.740832 4.01464 1.00303 4.01236C1.26523 4.01008 1.51783 4.11087 1.70643 4.29303L4.99943 7.58603L12.2924 0.293031C12.48 0.10556 12.7343 0.000244141 12.9994 0.000244141C13.2646 0.000244141 13.5189 0.10556 13.7064 0.293031Z" fill="#7F99DA"/>
                                             </svg>
 
-                                        .promiceText Подтверждаю свое согласие с условиями  Пользовательского <a href="/ua_ru.pdf" target="_blank">соглашения</a>
+                                        .promiceText !{content.promice}
                                     .regSubmitBtnWr(v-bind:class="{active:checkUser()}" v-on:click="regUser()")
-                                        span(v-if="!user.id") Зарегистрироваться
-                                        span(v-else) Вы зарегистрированы
+                                        span(v-if="!user.id") #{content.regUncompl}
+                                        span(v-else) #{content.regCompl}
                                         .reqProcess(v-if="reqProcess")
-                                .regText Телефон технической поддержки
+                                .regText #{content.tel}
                                     span.newLine +7 (495) 260-19-93.
                 .mobileMenuWr(v-if="menuModal")
                     .towerReg
                         .regAboutClose(v-on:click="menuModal=null")
                             include closeBtn
                         .mobileMenuItemWr(v-on:click="menuModal=null")
-                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('about', 100)") О конгрессе
-                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('pgm', 100)") Программа
-                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('spk', 100)") Спикеры
-                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('faq', 100)") Частые вопросы
+                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('about', 100)") #{content.menu1}
+                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('pgm', 100)") #{content.menu1}
+                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('spk', 100)") #{content.menu1}
+                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('faq', 100)") #{content.menu1}
 
                         .mobileMenuBtnWr
-                            .regSubmitBtnWr ENG
-                            .regSubmitBtnWr.active(v-on:click="reqModal=true") Регистрация
+                            //.regSubmitBtnWr(onclick="document.location.href='/index/"+(lang=="ru"?"en":"ru")+"'") #{lang=="ru"?"ENG":"РУС"}
+                            .regSubmitBtnWr.active(v-on:click="reqModal=true") #{content.register}
 
 
 
-
+        script.
+            var lang = "#{lang}"
+            var content=!{JSON.stringify(content)};
         script(src="/javascripts/axios.min.js")
         script(src='/javascripts/vue.min.js')
         //script(src='/javascripts/vueTouch.js')

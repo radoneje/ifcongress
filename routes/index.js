@@ -60,27 +60,34 @@ router.get('/', async (req, res, next) =>{
   res.redirect("/index/ru")
 
 });
-router.get('/test', async (req, res, next) =>{
+router.get('/test/:lang?', async (req, res, next) =>{
+  if(!req.params.lang) {
+    return  res.redirect("/index/"+ req.params.lang)
+  }
+  req.params.lang=req.params.lang.toLowerCase();
+  if(!req.params.lang=="ru" || req.parmas.lang=="en") {
+    req.params.lang = "en"
+
+  }
+  return  res.redirect("/index/"+ req.params.lang)
   return res.render('start');
   //res.render('work', { title: 'under constaction' });
   res.redirect("/index/ru")
 
 });
-/*router.get('/index/:lang?', async (req, res, next) =>{
+
+router.get('/index/:lang?', async (req, res, next) =>{
   if(!req.params.lang)
     req.params.lang="ru"
   req.params.lang=req.params.lang.toLowerCase();
   if(!(req.params.lang=="ru" || req.params.lang=="en"))
-    res.redirect("/index/ru")
+    return res.redirect("/index/ru")
   //res.render('work', { title: 'under constaction' });
   var content=await req.knex.select("*").from("t_cbrf_settings").orderBy("id", 'desc')
-  var speakers=await req.knex.select("*").from("t_cbrf_spk").orderBy("sortOrder")
-  //res.redirect("/login/ru")
-      // res.sendStatus(404)
-  res.render('start')
- // res.render('index', {  lang:req.params.lang, speakers:speakers, site:content[0].site, content:content[0].content });
+  console.log((content[0].content)["ru"])
+  res.render('start', {  lang:req.params.lang, content:(content[0].content)["ru"]});
 
-});*/
+});
 
 router.get('/login/:lang?', async (req, res, next) =>{
   return res.render('start');

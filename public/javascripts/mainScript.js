@@ -69,7 +69,7 @@ var app=new Vue({
             if(this.user.id)
                 return ;
             this.reqProcess=true;
-            var ret=await axios.post("/api/regUser", this.user);
+            var ret=await axios.post("/api/regUser/"+lang, this.user);
             this.user=ret.data;
             this.user.isPromice=true;
             localStorage.setItem("user", JSON.stringify(this.user))
@@ -169,7 +169,7 @@ var app=new Vue({
         }
     },
     mounted:async function () {
-        moment.locale('ru')
+        moment.locale(lang)
 
         this.tracks=(await axios.get('/api/tracks')).data;
 

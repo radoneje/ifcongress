@@ -257,7 +257,7 @@ router.post('/addSpk', adminLogin ,async(req, res, next)=> {
 
 
 
-router.post('/regUser', async(req, res, next)=> {
+router.post('/regUser/:lang', async(req, res, next)=> {
 
   var usr = await req.knex("t_cbrf_users").insert({
     f: req.body.f,
@@ -267,7 +267,7 @@ router.post('/regUser', async(req, res, next)=> {
     date: new Date(),
   }, "*")
   try {
-    await sendMailToUser(usr[0])
+    await sendMailToUser(usr[0], req.params.lang)
   }
   catch (e) {
     console.warn(e);
@@ -499,7 +499,7 @@ router.post('/state', adminLogin,async(req, res, next) =>{
 })
 
 
-async function sendMailToUser(user){
+async function sendMailToUser(user, lang){
   let mailAccount = await nodemailer.createTestAccount();
   let transporter = nodemailer.createTransport({
     host: "smtp.yandex.ru",
@@ -529,7 +529,22 @@ async function sendMailToUser(user){
       "<div style='width: 100%; text-align: right'><img src='https://ifcongress.ru/images/letterfooter.png'  src='https://ifcongress.ru/images/letterfooter.pn'  style='margin: 24px auto'></div>"+
       "</div>";
 
-  console.log(text)
+ if(lang=="en")
+      text="<div style='background-color: #EFF7FF; padding: 24px'>"+
+       "<div style='width: 100%; text-align: center'><img  src='https://ifcongress.ru/images/letterheader_en.png'  style='margin: 24px auto;width: 280px;height: auto;'/></div>"+
+       "<div style='background-color: #E2F0FF;padding:24px;border-radius: 24px'><p>Dear Mr/Ms  <b>"+user.i+",</b></p>\n" +
+       "\n" +
+       "<p>Thank you for registering <br>for the International Financial Congress 2021. </p>\n" +
+       "\n" +
+       "<p><b>Your registration is successfully completed.</b></p>\n" +
+       "\n" +
+       "<p> You can watch IFC 2021’s events, send your questions to speakers and participate in polls at  <a href='https://ifcongress.ru'>ifcongress.ru</a>. <br>The broadcast will also be available on the Bank of Russia’s YouTube channel." +
+       "\n" +
+       "\n" +
+       "<p><b>Sincerely, IFC Team </b>\n" +
+       "<br>e-mail: info@ifcongress.org</p></div>"+
+       "<div style='width: 100%; text-align: right'><img src='https://ifcongress.ru/images/letterfooter.png'  src='https://ifcongress.ru/images/letterfooter.pn'  style='margin: 24px auto'></div>"+
+       "</div>";
 
   let info = await transporter.sendMail({
     from: 'info@ifcongress.org', // sender address
