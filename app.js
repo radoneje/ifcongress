@@ -88,6 +88,7 @@ app.use("/", (req,res, next)=>{req.counter=counter;next();});
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
+app.use('/adminAapi', apiRouter);
 app.use('/screen', screenRouter);
 
 
