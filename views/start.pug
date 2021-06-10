@@ -38,9 +38,16 @@ html
                 console.log(e)
                 document.location.href = "/badbrowser"
             }
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WD4C64RD24"></script>
+
+
         link(rel='stylesheet', href='/stylesheets/style.css')
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-JM6R582NS1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-JM6R582NS1');
+        </script>
     body(style="opacity: 0;")
         #app
             .mainMenuWr#headerMenuWr
