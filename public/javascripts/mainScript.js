@@ -121,7 +121,7 @@ var app;
                     this.tracks.unshift(this.currShowTrack);
                     if (lastid == this.currShowTrack.id)
                         return this.previewTrack();
-                    if(this.currShowTrack.id==1)
+                    if(!this.currShowTrack.showInBanner)
                         return this.previewTrack();
                     clearTimeout(this.trackRotateTimeout)
                     this.trackRotateTimeout = setTimeout(() => {
@@ -135,7 +135,7 @@ var app;
                     this.tracks.push(this.currShowTrack);
                     if (lastid == this.currShowTrack.id)
                         return this.nextTrack();
-                    if(this.currShowTrack.id==1)
+                    if(this.currShowTrack.showInBanner)
                         return this.nextTrack();
                     clearTimeout(this.trackRotateTimeout)
                     this.trackRotateTimeout = setTimeout(() => {
