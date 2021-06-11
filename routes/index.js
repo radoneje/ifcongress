@@ -84,7 +84,7 @@ router.get('/index/:lang?', async (req, res, next) =>{
     return res.redirect("/index/ru")
   //res.render('work', { title: 'under constaction' });
   var content=await req.knex.select("*").from("t_cbrf_settings").orderBy("id", 'desc')
-  res.render('start', {  lang:req.params.lang, content:(content[0].content)[/*req.params.lang*/"ru"]});
+  res.render('start', {  lang:req.params.lang, content:(content[0].content)[req.params.lang]});
 
 });
 
