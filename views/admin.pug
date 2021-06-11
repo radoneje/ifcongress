@@ -241,6 +241,11 @@ html
                       .adminSpkItemName
                         textarea.adminJsonTextArea(v-model="track.descr" placeholder='Описание')
                         textarea.adminJsonTextArea(v-model="track.descr_en" placeholder='Description')
+                      .adminSpkItemName
+                        div показывать в баннере
+                        select(v-model="track.showInBanner")
+                          option(value="true") показывать
+                          option(value="false") не показывать
                   .adminSpkItemPhoto
                     .adminSpkItemPhotoWr(:style="{ backgroundImage: `url(${track.img||'/images/nouser.png'})` }")
                     button(v-on:click="editTrackImg(track)") Изменть фото
