@@ -386,10 +386,10 @@ html
                             .progMenuWr
                                     .progMenuRow.row(v-for="item in tracksDate")
                                         .progMenuDate {{item.key}}
-                                        .progMenuItem(v-bind:class="{selected:currTrack.id==track.id}" v-for="track in item.tracks" v-on:click="changePgmItem(track)") {{track.title}}
+                                        .progMenuItem(v-bind:class="{selected:currTrack.id==track.id}" v-for="track in item.tracks" v-on:click="changePgmItem(track)") {{lang=="ru"?track.title:track.title_en}}
                             .progTitle
                                 .progTitleName {{currTrack.key}}
-                                .progTitleTrack  Трек: {{currTrack.title}}
+                                .progTitleTrack  Трек: {{lang=="ru"?currTrack.title:currTrack.title_en}}
 
                             .progItemWr#pgmItems
 
@@ -399,7 +399,7 @@ html
                                             .progItemTitelWr
                                                 .progitemIco
                                                     img(:src="item.img")
-                                                .progItemTitle {{item.title}}
+                                                .progItemTitle {{lang=="ru"?item.title:item.title_en}}
                                             .progItemBtn(v-on:click="pgmItemModal=item") !{content.details}
                                             .progItemTiteSPkWr.row
                                                 .progItemModBox.listMod(v-if="item.moderators.length>0")
@@ -409,9 +409,9 @@ html
                                                             .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                             .progItemSpkItemNameWr
                                                                 .progItemSpkItemName
-                                                                    span {{getSpk(spk).i}}
-                                                                    span {{getSpk(spk).f}}
-                                                                .progItemSpkItemPos {{getSpk(spk).position}}
+                                                                    span {{lang=="ru"?(getSpk(spk).i):(getSpk(spk).i_en)}}
+                                                                    span {{lang=="ru"?(getSpk(spk).f):(getSpk(spk).f_en)}}
+                                                                .progItemSpkItemPos {{lang=="ru"?(getSpk(spk).position):(getSpk(spk).position_en)}}
 
                                                 .progItemModBox.listSpk
                                                     .progItemModTitle !{content.speakert2}
@@ -420,9 +420,9 @@ html
                                                             .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                             .progItemSpkItemNameWr
                                                                 .progItemSpkItemName
-                                                                    span {{getSpk(spk).i}}
-                                                                    span {{getSpk(spk).f}}
-                                                                .progItemSpkItemPos {{getSpk(spk).position}}
+                                                                    span {{lang=="ru"?(getSpk(spk).i):(getSpk(spk).i_en)}}
+                                                                    span {{lang=="ru"?(getSpk(spk).f):(getSpk(spk).f_en)}}
+                                                                .progItemSpkItemPos {{lang=="ru"?(getSpk(spk).position):(getSpk(spk).position_en)}}
 
                             .progUpBtnWr
                                 .progUpBtn(onclick="document.location.href='#pgm'") !{content.topgmstart}
