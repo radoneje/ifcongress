@@ -513,12 +513,12 @@ html
                                     .spkDescrPhoto(v-bind:style="{backgroundImage:'url('+spkItemModal.photo+')'}")
                                     .spkDescrTitleWr
                                         .spkDescrTitleCont
-                                            .spkDescrTitle {{spkItemModal.i}} {{spkItemModal.f}}
-                                            .spkDescrPos {{spkItemModal.full_pos}}
+                                            .spkDescrTitle {{lang=="ru"?spkItemModal.i:spkItemModal.i_en}} {{lang=="ru"?spkItemModal.f:spkItemModal.f_en}}
+                                            .spkDescrPos {{lang=="ru"?spkItemModal.full_pos:spkItemModal.full_pos_en}}
                             .spkToPgmWr
                                     .spkToPgmItem(v-for="item in getSessionFromSpk(spkItemModal)")
                                         .spkToPgmItemData {{item.key}} {{item.time}}
-                                        .spkToPgmItemTitle {{item.title}}
+                                        .spkToPgmItemTitle {{lang=="ru"?item.title:item.title_en}}
 
                 .trackAboutWr(v-if="reqModal")
                             .towerReg
