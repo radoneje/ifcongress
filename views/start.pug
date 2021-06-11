@@ -480,10 +480,10 @@ html
                 .trackAboutWr(v-if="pgmItemModal")
                         .trackAboutBox
                             .tower
-                                .aboutTitle(style="position:relative") {{pgmItemModal.title}}
+                                .aboutTitle(style="position:relative") {{lang=="ru"?pgmItemModal.title:pgmItemModal.title_en}}
                                     .regAboutClose(v-on:click="pgmItemModal=null")
                                         include closeBtn
-                                .aboutText(v-html="getHtml(pgmItemModal.descr)")
+                                .aboutText(v-html='getHtml(lang=="ru"?pgmItemModal.descr:pgmItemModal.descr_en)')
                                 .aboutModerator
                                     .progItemModBox(v-if="pgmItemModal.moderators.length>0")
                                         .progItemModTitle !{content.moderator}
