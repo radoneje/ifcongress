@@ -350,16 +350,16 @@ html
                                         <path d="M0.502034 11.5001C0.501349 11.8506 0.623411 12.1902 0.847033 12.4601L8.34703 21.4601C8.60164 21.7664 8.9675 21.959 9.36414 21.9956C9.76078 22.0322 10.1557 21.9097 10.462 21.6551C10.7684 21.4005 10.961 21.0346 10.9976 20.638C11.0341 20.2413 10.9116 19.8464 10.657 19.5401L3.93703 11.5001L10.417 3.46007C10.5416 3.30664 10.6347 3.1301 10.6908 2.94059C10.747 2.75108 10.7651 2.55234 10.7442 2.3558C10.7233 2.15926 10.6637 1.96878 10.569 1.79533C10.4742 1.62187 10.3461 1.46886 10.192 1.34507C10.0378 1.2077 9.85686 1.10366 9.66055 1.03947C9.46424 0.975286 9.25679 0.952331 9.05119 0.972046C8.8456 0.99176 8.64629 1.05372 8.46575 1.15404C8.28522 1.25437 8.12735 1.3909 8.00203 1.55507L0.757034 10.5551C0.568759 10.8327 0.478978 11.1654 0.502034 11.5001Z" fill="white"/>
                                         </svg>
                                 .carouselItem
-                                    .carouselItemTitle !{content.track}: {{currShowTrack.title}}
-                                    .carouselItemDescr {{currShowTrack.descr}}
+                                    .carouselItemTitle !{content.track}: {{lang=="ru"?currShowTrack.title:currShowTrack.title_en}}
+                                    .carouselItemDescr {{lang=="ru"?currShowTrack.descr:currShowTrack.descr_en}}
                                     .carouselItemFaceWr
 
                                             .carouselItemFace(v-for="(spk, i) in currShowTrack.speakers"  v-if="i<3 && getSpk(spk)")
                                                 .carouselItemFaceImage(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                 .carouselItemFaceName
-                                                    div {{getSpk(spk).i}}
-                                                    div {{getSpk(spk).f}}
-                                                .carouselItemFacePos {{getSpk(spk).position}}
+                                                    div {{lang=="ru"?(getSpk(spk).i):(getSpk(spk).i_en)}}
+                                                    div {{lang=="ru"?(getSpk(spk).f):(getSpk(spk).f_en)}}
+                                                .carouselItemFacePos {{lang=="ru"?(getSpk(spk).position):(getSpk(spk).position_en)}}
 
                             .corouselSwWr.hideMobile
                                 .corouselSwWrItem(v-on:click="previewTrack()")

@@ -19,6 +19,7 @@ var app;
                 curSpeakers: [],
                 faq: [],
                 menuModal: false,
+                lang:lang,
             },
             methods: {
                 getSessionFromSpk: function (spk) {
