@@ -532,7 +532,7 @@ async function sendMailToUser(user, lang){
       "\n" +
       "<p><b>Команда МФК</b>\n" +
       "<br>e-mail: info@ifcongress.org</p></div>"+
-      "<div style='width: 100%; text-align: right'><img src='https://ifcongress.ru/images/letterfooter.png'  src='https://ifcongress.ru/images/letterfooter.pn'  style='margin: 24px auto'></div>"+
+      "<div style='width: 100%; text-align: right'><img src='https://ifcongress.ru/images/letterfooter.png'  src='https://ifcongress.ru/images/letterfooter.png'  style='margin: 24px auto'></div>"+
       "</div>";
 
  if(lang=="en")
@@ -549,7 +549,7 @@ async function sendMailToUser(user, lang){
        "\n" +
        "<p><b>Sincerely, IFC Team </b>\n" +
        "<br>e-mail: info@ifcongress.org</p></div>"+
-       "<div style='width: 100%; text-align: right'><img src='https://ifcongress.ru/images/letterfooter.png'  src='https://ifcongress.ru/images/letterfooter.pn'  style='margin: 24px auto'></div>"+
+       "<div style='width: 100%; text-align: right'><img src='https://ifcongress.ru/images/letterfooter.png'  src='https://ifcongress.ru/images/letterfooter.png'  style='margin: 24px auto'></div>"+
        "</div>";
 
   let info = await transporter.sendMail({
