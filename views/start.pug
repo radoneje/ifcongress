@@ -390,7 +390,7 @@ html
                                         .progMenuItem(v-bind:class="{selected:currTrack.id==track.id}" v-for="track in item.tracks" v-on:click="changePgmItem(track)") {{lang=="ru"?track.title:track.title_en}}
                             .progTitle
                                 .progTitleName {{currTrack.key}}
-                                .progTitleTrack  Трек: {{lang=="ru"?currTrack.title:currTrack.title_en}}
+                                .progTitleTrack  !{content.track}: {{lang=="ru"?currTrack.title:currTrack.title_en}}
 
                             .progItemWr#pgmItems
 
@@ -546,7 +546,7 @@ html
                                         span(v-else) #{content.regCompl}
                                         .reqProcess(v-if="reqProcess")
                                 .regText #{content.tel}
-                                    span.newLine +7 (495) 260-19-93.
+                                    span.newLine +7 (495) 260-19-93
                 .mobileMenuWr(v-if="menuModal")
                     .towerReg
                         .regAboutClose(v-on:click="menuModal=null")
