@@ -50,7 +50,7 @@ var app;
                 curSpeakersPagePreview: function () {
                     this.curSpeakersPage--;
                     if (this.curSpeakersPage < 0)
-                        this.curSpeakersPage = 0;
+                        this.curSpeakersPage = parseInt(this.spk.length / 8);
                 },
                 curSpeakersPageNext: function () {
                     this.curSpeakersPage++;
