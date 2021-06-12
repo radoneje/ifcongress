@@ -55,7 +55,7 @@ var app;
                 curSpeakersPageNext: function () {
                     this.curSpeakersPage++;
                     if (this.curSpeakersPage > parseInt(this.spk.length / 8))
-                        this.curSpeakersPage--;
+                        this.curSpeakersPage=0;
                 },
                 getHtml: function (string) {
                     if (!string)
