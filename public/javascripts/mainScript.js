@@ -273,8 +273,9 @@ var app;
                         }
                         if(inserted==0){
                             var tmp=[];
-                            this.curSpeakers.forEach(c=>{tmp.push(c)});
-                            tmp.forEach(c=>{this.curSpeakers.push(c)})
+                            this.curSpeakers[this.curSpeakersPage].forEach(c=>{tmp.push(c)});
+                            console.log("push all spk", tmp)
+                            tmp.forEach(c=>{this.curSpeakers[this.curSpeakersPage].push(c)})
                         }
                         this.curSpeakers = this.curSpeakers.filter(r => {
                             return true
