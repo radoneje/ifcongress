@@ -355,7 +355,7 @@ html
                                     .carouselItemDescr {{lang=="ru"?currShowTrack.descr:currShowTrack.descr_en}}
                                     .carouselItemFaceWr
 
-                                            .carouselItemFace(v-for="(spk, i) in currShowTrack.speakers"  v-if="i<3 && getSpk(spk)")
+                                            .carouselItemFace(v-for="(spk, i) in currShowTrack.speakers"  v-if="i<3 && getSpk(spk)" v-on:click.stop.prevent="showPopSpeaker(getSpk(spk))")
                                                 .carouselItemFaceImage(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                 .carouselItemFaceName
                                                     div {{lang=="ru"?(getSpk(spk).i):(getSpk(spk).i_en)}}
@@ -406,7 +406,7 @@ html
                                                 .progItemModBox.listMod(v-if="item.moderators.length>0")
                                                     .progItemModTitle !{content.moderator}
                                                     .progItemSpkItemWr
-                                                        .progItemSpkItem(v-for="spk in item.moderators" v-if="getSpk(spk)")
+                                                        .progItemSpkItem(v-for="spk in item.moderators" v-if="getSpk(spk)" v-on:click.stop.prevent="showPopSpeaker(getSpk(spk))")
                                                             .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                             .progItemSpkItemNameWr
                                                                 .progItemSpkItemName
@@ -417,7 +417,7 @@ html
                                                 .progItemModBox.listSpk
                                                     .progItemModTitle !{content.speakert2}
                                                     .progItemSpkItemWr
-                                                        .progItemSpkItem(v-for="spk in item.speakers" v-if="getSpk(spk)")
+                                                        .progItemSpkItem(v-for="spk in item.speakers" v-if="getSpk(spk)" v-on:click.stop.prevent="showPopSpeaker(getSpk(spk))")
                                                             .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                             .progItemSpkItemNameWr
                                                                 .progItemSpkItemName
