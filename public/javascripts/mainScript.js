@@ -266,9 +266,15 @@ var app;
                 var callback = (entries, observer) => {
                     if (entries[0].isIntersecting) {
                         var currLen = this.curSpeakers[this.curSpeakersPage].length
+                        var inserted=0;
                         for (var i = currLen; i < this.spk.length && i < currLen + 8; i++) {
                             this.curSpeakers[this.curSpeakersPage].push(this.spk[i])
-                            console.log(this.curSpeakers[this.curSpeakersPage]);
+                            inserted++;
+                        }
+                        if(inserted==0){
+                            var tmp=[];
+                            this.curSpeakers.forEach(c=>{tmp.push(c)});
+                            tmp.forEach(c=>{this.curSpeakers.push(c)})
                         }
                         this.curSpeakers = this.curSpeakers.filter(r => {
                             return true
