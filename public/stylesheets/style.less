@@ -1033,7 +1033,7 @@ margin-top:4px;
   50%{opacity: 100%}
   100%{opacity: 50%}
 }
-#rubLine{
+#rubLine, #svgEq{
   opacity: 1;
   animation: op5to1 4s infinite;
 }
@@ -1076,6 +1076,57 @@ margin-top:4px;
   0%{opacity: 0}
   100%{
     opacity: 1;}
+}
+@keyframes rotate {
+  0%{transform: rotate(0);}
+ // 50%{transform: rotate(180deg);}
+  100%{
+    transform: rotate(360deg);}
+}
+@keyframes rotate {
+  0%{transform: rotate(0);}
+  // 50%{transform: rotate(180deg);}
+  100%{
+    transform: rotate(360deg);}
+}
+.svgFade{
+  animation:  op5to1 4s infinite ease;
+}
+#svgL{
+  transform-origin: 218px 397px;
+  animation:  rotate 4s infinite linear;
+}
+@keyframes op5scale {
+  0%{transform: scale(1.0);}
+  50%{transform: scale(1.5);}
+  100%{transform: scale(1.0);}
+}
+#svgScale{
+  transform-origin: 148px 116px;
+  animation:  op5scale 4s infinite ease;
+}
+@keyframes op5Arroe {
+  0%{transform: scaleX(.75);}
+  50%{transform: scaleX(1.0);}
+  100%{transform: scaleX(.75);}
+}
+#svgArrow{
+
+  transform-origin: 373PX 78px;
+  animation:  op5Arroe 4s infinite ease;
+}
+#sbgRotate{
+  animation: rotate 20s infinite linear;
+  transform-origin: 223px 315px;
+}
+@keyframes op5Bar {
+  0%{transform: scaleX(1);}
+  50%{transform: scaleY(2.5);}
+  100%{transform: scaleX(1);}
+}
+#svgBar{
+  animation: op5Bar 4s infinite ease;
+  transform-origin: 120px 393px;
 }
 .fixedBottomButton{
   position: fixed;
