@@ -4,6 +4,7 @@ var fs= require('fs');
 var path= require('path');
 var router = express.Router();
 const nodemailer = require("nodemailer");
+const { check } = require('express-validator');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -257,7 +258,11 @@ router.post('/addSpk', adminLogin ,async(req, res, next)=> {
 
 
 
-router.post('/regUser/:lang', async(req, res, next)=> {
+router.post('/regUser/:lang',[
+  check('f').isLength({ min: 2 }).trim().escape(),
+  check('i').isLength({ min: 2 }).trim().escape(),
+  check('email').isEmail().normalizeEmail()
+], async(req, res, next)=> {
 
   var usr = await req.knex("t_cbrf_users").insert({
     f: req.body.f,
@@ -265,6 +270,7 @@ router.post('/regUser/:lang', async(req, res, next)=> {
     o: req.body.o,
     email: req.body.email.toLowerCase(),
     date: new Date(),
+    deptTitle:req.params.lang
   }, "*")
   try {
     await sendMailToUser(usr[0], req.params.lang)
@@ -379,7 +385,7 @@ router.get('/tracks', async(req, res, next) =>{
 router.get('/faq', async(req, res, next) =>{
 
 //  req.knex.select("*").from("t_cbrf_codes")
-  var ret=await req.knex.select("*").from("t_cbrf_faq").where({isDeleted:false});
+  var ret=await req.knex.select("*").from("t_cbrf_faq").where({isDeleted:false}).orderBy("id");
   res.json(ret);
 
 })
