@@ -283,6 +283,49 @@ var app;
                 }, 1000)
 
 
+                var pgmobserver = new IntersectionObserver((entries, observer)=>{
+                    if (entries[0].isIntersecting)
+                        document.getElementById("progUpBtnWr").classList.add("fixedBottomButton")
+                    else
+                        document.getElementById("progUpBtnWr").classList.remove("fixedBottomButton")
+
+
+                }, {
+                    //root: document.querySelector('#spkPage'),
+                    rootMargin: '0px',
+                    threshold: 0
+                });
+
+
+                setTimeout(() => {
+                    pgmobserver.observe(document.querySelector('#pgmItems'));
+                }, 1000)
+
+
+
+
+
+
+                var spkbserver = new IntersectionObserver((entries, observer)=>{
+                    if (entries[0].isIntersecting)
+                        document.getElementById("progUpBtnWr").classList.add("hide")
+                    else
+                        document.getElementById("progUpBtnWr").classList.remove("hide")
+
+
+                }, {
+                    //root: document.querySelector('#spkPage'),
+                    rootMargin: '0px',
+                    threshold: .01
+                });
+
+
+                setTimeout(() => {
+                    spkbserver.observe(document.querySelector('#spkPage'));
+                }, 1000)
+
+
+
                 document.body.style.opacity = "1"
             }
 
