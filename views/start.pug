@@ -491,6 +491,8 @@ html
                                 .aboutTitle(style="position:relative") {{lang=="ru"?pgmItemModal.title:pgmItemModal.title_en}}
                                     .regAboutClose(v-on:click="pgmItemModal=null")
                                         include closeBtn
+                                    .pgmItemModalCopyLinkWr
+                                        .progItemBtn(v-on:click="copyPgmLink(pgmItemModal, $event)") !{content.copyLink}
                                 .aboutText(v-html='getHtml(lang=="ru"?pgmItemModal.descr:pgmItemModal.descr_en)')
                                 .aboutModerator
                                     .progItemModBox(v-if="pgmItemModal.moderators.length>0")

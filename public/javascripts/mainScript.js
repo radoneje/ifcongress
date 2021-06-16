@@ -150,6 +150,19 @@ var app;
                 },
                 showPopSpeaker: function (item) {
                     this.spkItemModal = item
+                },
+                copyPgmLink:async function(pgmItemModal, event){
+                    var url_string= window.location.href
+                    var url = new URL(url_string);
+                    var link=url.origin+""+ url.pathname+"?sessionid="+pgmItemModal.id;
+                    var txt=event.target.innerHTML;
+                    await navigator.clipboard.writeText(link)
+                    console.log("event",event)
+                    event.target.innerHTML= lang=="ru"?"Скопировано" :"Copied";
+                    setTimeout(async ()=>{
+                        event.target.innerHTML=txt;
+                    },2000)
+                    console.log(event, url)
                 }
             },
             watch: {
@@ -237,6 +250,8 @@ var app;
                 })
 
 
+
+
                 this.spk = (await axios.get('/api/spk')).data;
                 this.spk.forEach(s => {
                     if (s.i)
@@ -257,6 +272,23 @@ var app;
                     }
                 })
                 this.faq = (await axios.get('/api/faq')).data;
+
+                var url_string= window.location.href
+                var url = new URL(url_string);
+                var sessionid = url.searchParams.get("sessionid");
+                if(sessionid && sessionid.match(/\d{1,2}/)){
+                    this.pgm.forEach(p=>{
+                        if(p.id==sessionid){
+                            this.tracks.forEach(t=>{
+                                if(t.id==p.trackid)
+                                    this.currTrack=t;
+                            })
+                            console.log("this.pgmItemModa", p)
+                            this.pgmItemModal=p;
+                        }
+                    });
+                }
+
 
                 var options = {
                     root: document.querySelector('#spkPage'),
@@ -310,9 +342,6 @@ var app;
 
 
 
-
-
-
                 var spkbserver = new IntersectionObserver((entries, observer)=>{
                     if (entries[0].isIntersecting)
                         document.getElementById("progUpBtnWr").classList.add("hide")
@@ -330,9 +359,6 @@ var app;
                 setTimeout(() => {
                     spkbserver.observe(document.querySelector('#spkPage'));
                 }, 1000)
-
-
-
                 document.body.style.opacity = "1"
             }
 
