@@ -541,6 +541,7 @@ html
                                 .regFrm
                                     input( name="name" placeholder=content.i+"*" v-model="user.i")
                                     input(name="suname" placeholder=content.f+"*" v-model="user.f")
+                                    input(name="suname" placeholder=content.company+"*" v-model="user.company")
                                     input(type="email" placeholder="Email*" v-model="user.email")
                                     .promiceWr(v-on:click="user.isPromice=!user.isPromice")
                                         .promiceArrow

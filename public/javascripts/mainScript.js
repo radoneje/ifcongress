@@ -86,6 +86,8 @@ var app;
                         return false
                     if (!this.user.email)
                         return false
+                    if (!this.user.company)
+                        return false
                     if (!this.user.isPromice)
                         return false
 
@@ -93,6 +95,9 @@ var app;
                         return false
                     if (this.user.i.length < 2)
                         return false
+                    if (this.user.company < 2)
+                        return false
+
                     console.log("validateEmail", validateEmail(this.user.email))
                     if (!validateEmail(this.user.email))
                         return false
