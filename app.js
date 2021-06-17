@@ -25,6 +25,11 @@ const options = {
   autoClean: true
 };
 
+config.pgConnection.host = process.env.DBHOST || config.pgConnection.host;
+config.pgConnection.database = process.env.DBNAME || config.pgConnection.database;
+config.pgConnection.user = process.env.DBUSER || config.pgConnection.user;
+config.pgConnection.password = process.env.DBPASS || config.pgConnection.password;
+
 // parse data with connect-multiparty.
 app.use(formData.parse(options));
 // delete from the request all empty files (size == 0)
@@ -39,6 +44,7 @@ var knex = require('knex')({
   pool: { min: 0, max: 40 }
 });
 app.set('trust proxy', 1) // trust first proxy
+
 // view engine setup
 const pgSession = require('connect-pg-simple')(session);
 const pgStoreConfig = {conObject: config.pgConnection}
