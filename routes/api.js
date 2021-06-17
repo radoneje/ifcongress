@@ -65,6 +65,8 @@ router.get('/regUser', adminLogin ,async(req, res, next)=> {
 });
 
 
+
+
 router.post("/q",userLogin, async(req, res, next)=> {
   if(!req.body.text)
     return res.sendStatus(405)
@@ -282,6 +284,28 @@ router.post('/regUser/:lang',[
   }
   res.json(usr[0]);
 });
+
+
+router.post('/logUser/:lang',[
+  check('email').isEmail().normalizeEmail()
+], async(req, res, next)=> {
+
+  var usr = await req.knex.select("*").from("t_cbrf_users").orderBy("id");
+  var find=null;
+  var txt=req.body.email.toLowerCase().replace(/\./g,"")
+  usr.forEach(u=>{
+    if(u.email.toLowerCase().replace(/\./g,"")==txt)
+      find=u;
+  })
+  console.log("usr", req.body.email);
+  if(!find)
+    return res.json(null);
+
+  await req.knex("t_cbrf_userLogins").insert({userid:find.id});
+  res.json(find);
+});
+
+
 router.post('/messageToUser', async(req, res, next)=> {
   var usr = await req.knex("t_cbrf_users").update({message:req.body.user.message, messageIsActive:req.body.user.messageIsActive}, "*").where({id:req.body.user.id})
 
@@ -509,6 +533,7 @@ router.post('/state', adminLogin,async(req, res, next) =>{
 
 async function sendMailToUser(user, lang){
 
+  console.log("sendMailToUser")
   let mailAccount = await nodemailer.createTestAccount();
   let transporter = nodemailer.createTransport({
     host: "smtp.yandex.ru",
@@ -530,9 +555,10 @@ async function sendMailToUser(user, lang){
       "\n" +
       "<p><b>Ваша регистрация прошла успешно.</b></p>\n" +
       "\n" +
-      "<p>Вы можете смотреть мероприятия конгресса, задавать вопросы спикерам и участвовать в опросах на сайте <a href='https://ifcongress.ru'>ifcongress.ru</a>. <br>Трансляция будет доступна на YouTube канале Банка России." +
-      "\n" +
-      "\n" +
+      "<p>Вы можете смотреть мероприятия конгресса, задавать вопросы спикерам и участвовать в опросах на сайте <a href='https://ifcongress.ru'>ifcongress.ru</a>."+
+      "<br>Для авторизации на сайте нажмите кнопку «Войти» и введите e-mail, который Вы использовали при регистрации. <br>Трансляция будет доступна на сайте https://ifcongress.ru с 28 июня по 2 июля 2021 года." +
+      "</p>\n" +
+      "<p>Трансляция будет также доступна на YouTube канале Банка России.</p>" +
       "<p><b>Команда МФК</b>\n" +
       "<br>e-mail: info@ifcongress.org</p></div>"+
       "<div style='width: 100%; text-align: right'><img src='https://ifcongress.ru/images/letterfooter.png'  src='https://ifcongress.ru/images/letterfooter.png'  style='margin: 24px auto'></div>"+

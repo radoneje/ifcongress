@@ -20,6 +20,9 @@ var app;
                 faq: [],
                 menuModal: false,
                 lang:lang,
+                loginModal:false,
+                loginUser:JSON.parse(localStorage.getItem("user") || '{}'),
+                loginUserErr:false,
             },
             methods: {
                 getSessionFromSpk: function (spk) {
@@ -63,7 +66,11 @@ var app;
                     string = string.replace(/\n/g, "<br/>");
                     return string
                 },
-
+                goToReg:function(){
+                    this.user={"isPromice":false};
+                    localStorage.setItem("user", JSON.stringify(this.user))
+                    this.reqModal=true
+                },
                 regUser: async function () {
                     if (this.reqProcess)
                         return;
@@ -77,6 +84,42 @@ var app;
                     this.user.isPromice = true;
                     localStorage.setItem("user", JSON.stringify(this.user))
                     this.reqProcess = false;
+                    this.loginUser= this.user;
+                    localStorage.setItem("loginUser", JSON.stringify(this.user))
+                },
+                logOut:function(){
+                    this.loginUser={"isPromice":false};
+                    localStorage.setItem("loginUser", JSON.stringify(this.loginUser))
+                    this.user={"isPromice":false};
+                    localStorage.setItem("user", JSON.stringify(this.user))
+                },
+                logUser:async function () {
+                    if (this.reqProcess)
+                        return;
+                    if (!this.checkLoginUser())
+                        return;
+
+                    this.reqProcess = true;
+                    var ret = await axios.post("/api/logUser/" + lang, this.user);
+                    console.log(" ret.data",  ret.data)
+                    if(!ret.data) {
+                        this.loginUserErr=true;
+                        this.reqProcess = false;
+                        return;
+                    }
+
+                    this.reqProcess = false;
+                    this.user = ret.data;
+                    this.loginUser= ret.data;
+                    this.loginModal=false;
+                    localStorage.setItem("loginUser", JSON.stringify(this.user))
+
+                },
+                checkLoginUser:function () {
+
+                    if (!validateEmail(this.user.email))
+                        return false
+                    return true;
                 },
                 checkUser: function () {
 
@@ -186,6 +229,7 @@ var app;
                 reqModal: function () {
                     if (this.reqModal) {
                         this.menuModal = false;
+                        this.loginModal=false;
                         document.body.style.overflow = "hidden";
                     } else
                         document.body.style.overflow = "scroll";
@@ -195,11 +239,19 @@ var app;
                         document.body.style.overflow = "hidden";
                     else
                         document.body.style.overflow = "scroll";
+                },
+                loginModal: function () {
+                    if (this.loginModal) {
+                        document.body.style.overflow = "hidden";
+                        this.loginUserErr=false;
+                    }
+                    else
+                        document.body.style.overflow = "scroll";
                 }
             },
             mounted: async function () {
                 moment.locale(lang)
-
+                console.log("loginUser", this.loginUser)
                 this.tracks = (await axios.get('/api/tracks')).data;
 
                 this.tracks.forEach(t => {

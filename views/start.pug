@@ -75,7 +75,7 @@ html
                             h1 #{content.title}
                             h2 #{content.date}&nbsp;&nbsp;&nbsp; <span class="br">#{content.format}</span>
                             h4 !{content.formatDescr}
-                            .regBtn2(v-on:click="reqModal=true") #{content.register}
+                            .regBtn2(v-on:click="reqModal=true" v-if="!loginUser.id") #{content.register}
                         .sCol.fBg
                             <svg width="445" height="445" viewBox="0 0 445 445" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <rect y="182" width="172" height="172" rx="32" fill="url(#pattern0)"/>
@@ -529,6 +529,21 @@ html
                                     .spkToPgmItem(v-for="item in getSessionFromSpk(spkItemModal)")
                                         .spkToPgmItemData {{item.key}} {{item.time}}
                                         .spkToPgmItemTitle {{lang=="ru"?item.title:item.title_en}}
+                .trackAboutWr(v-if="loginModal")
+                    .towerReg
+                        .regAboutClose(v-on:click="loginModal=null")
+                            include closeBtn
+                        .regTitle
+                            div #{content.title1}
+                            div #{content.title2}
+                        .spkDescrPos #{content.date}
+                        .regFrm
+                            input(type="email" placeholder="Email*" v-model="user.email")
+                            .promiceWr(v-if="loginUserErr")
+                                .promiceText Email не найден. Проверьте правильность ввода или перейдите к <a v-on:click="goToReg()"><u> регистрации</u></a>.
+                            .regSubmitBtnWr(v-bind:class="{active:checkLoginUser()}" v-on:click="logUser()")
+                                span Войти
+
 
                 .trackAboutWr(v-if="reqModal")
                             .towerReg
