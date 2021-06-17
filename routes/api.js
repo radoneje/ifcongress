@@ -261,7 +261,7 @@ router.post('/addSpk', adminLogin ,async(req, res, next)=> {
 router.post('/regUser/:lang',[
   check('f').isLength({ min: 2 }).trim().escape(),
   check('i').isLength({ min: 2 }).trim().escape(),
-  check('company').isLength({ min: 2 }).trim().escape(),
+  check('company').isLength({ min: 2, max:20000 }).trim().escape(),
   check('email').isEmail().normalizeEmail()
 ], async(req, res, next)=> {
 
