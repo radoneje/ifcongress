@@ -262,7 +262,7 @@ router.post('/regUser/:lang',[
   check('f').isLength({ min: 2 }).trim().escape(),
   check('i').isLength({ min: 2 }).trim().escape(),
   check('company').isLength({ min: 2 }).trim().escape(),
-  check('email').isEmail().normalizeEmail()
+  check('email').isEmail()
 ], async(req, res, next)=> {
 
   var usr = await req.knex("t_cbrf_users").insert({
