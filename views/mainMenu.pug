@@ -106,7 +106,9 @@
                         if lang=="ru"
                             .regBtn(v-on:click="loginModal=true" v-if="!loginUser.id") Вход
                         .regBtn(v-on:click="reqModal=true" v-if="!loginUser.id") !{content.register}
-                        .regBtn( v-else v-on:click="logOut()")  {{loginUser.f}} {{loginUser.i}}  Выйти
+                        .regTextWr( v-else)
+                            .regTextName {{loginUser.f}} {{loginUser.i}}
+                            .regBtn( v-on:click="logOut()")  Выйти
                         .langBtn(onclick="document.location.href='/index/"+(lang=="ru"?"en":"ru")+"'") #{lang=="ru"?"eng":"рус"}
                     .gamburger.showMobile(v-on:click="menuModal=true")
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
