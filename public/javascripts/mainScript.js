@@ -244,6 +244,8 @@ var app;
                     if (this.loginModal) {
                         document.body.style.overflow = "hidden";
                         this.loginUserErr=false;
+                        this.menuModal = false;
+                        this.reqModal= false;
                     }
                     else
                         document.body.style.overflow = "scroll";

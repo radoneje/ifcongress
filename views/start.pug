@@ -584,7 +584,9 @@ html
 
                         .mobileMenuBtnWr
                             .regSubmitBtnWr(onclick="document.location.href='/index/"+(lang=="ru"?"en":"ru")+"'") #{lang=="ru"?"ENG":"РУС"}
-                            .regSubmitBtnWr.active(v-on:click="reqModal=true") #{content.register}
+                            .regSubmitBtnWr.active(v-on:click="reqModal=true" v-if="!loginUser.id") #{content.register}
+                            .regSubmitBtnWr(v-on:click="loginModal=true" v-if="!loginUser.id") Вход
+                            .regSubmitBtnWr( v-else v-on:click="logOut()")  {{loginUser.f}} {{loginUser.i}}  Выйти
 
 
 

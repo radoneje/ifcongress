@@ -103,7 +103,8 @@
                         .menuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('spk', 100)") !{content.menu3}
                         .menuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('faq', 100)") !{content.menu4}
                     .loginWr.sb(v-if="loginUser")
-                        .regBtn(v-on:click="loginModal=true" v-if="!loginUser.id") Вход
+                        if lang=="ru"
+                            .regBtn(v-on:click="loginModal=true" v-if="!loginUser.id") Вход
                         .regBtn(v-on:click="reqModal=true" v-if="!loginUser.id") !{content.register}
                         .regBtn( v-else v-on:click="logOut()")  {{loginUser.f}} {{loginUser.i}}  Выйти
                         .langBtn(onclick="document.location.href='/index/"+(lang=="ru"?"en":"ru")+"'") #{lang=="ru"?"eng":"рус"}
