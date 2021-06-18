@@ -113,6 +113,7 @@ var app;
                     this.loginUser= ret.data;
                     this.loginModal=false;
                     localStorage.setItem("loginUser", JSON.stringify(this.user))
+                    localStorage.setItem("user", JSON.stringify(this.user))
 
                 },
                 checkLoginUser:function () {
