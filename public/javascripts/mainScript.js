@@ -21,7 +21,7 @@ var app;
                 menuModal: false,
                 lang:lang,
                 loginModal:false,
-                loginUser:JSON.parse(localStorage.getItem("user") || '{}'),
+                loginUser:JSON.parse(localStorage.getItem("user") || '{"isPromice":false}'),
                 loginUserErr:false,
             },
             methods: {
