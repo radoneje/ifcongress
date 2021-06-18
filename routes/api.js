@@ -573,9 +573,11 @@ async function sendMailToUser(user, lang){
        "\n" +
        "<p><b>Your registration is successfully completed.</b></p>\n" +
        "\n" +
-       "<p> You can watch IFC 2021’s events, send your questions to speakers and participate in polls at  <a href='https://ifcongress.ru'>ifcongress.ru</a>. <br>The broadcast will also be available on the Bank of Russia’s YouTube channel." +
-       "\n" +
-       "\n" +
+       "<p> You can watch IFC 2021’s events, send your questions to speakers and participate in polls at  <a href='https://ifcongress.ru/index/en'>ifcongress.ru</a>.</p>"+
+          "<p>The broadcast will start on June,28 on the website <a href='https://ifcongress.ru/index/en'>https://ifcongress.ru/index/en</a></p> " +
+       "<p>To get access to all the features available to registered participants, press the “Log in” button on the IFC’s website  <a href='https://ifcongress.ru/index/en'>https://ifcongress.ru/index/en</a> and enter the email address you used for the registration.</p>" +
+       "<p>The broadcast willalso be available on the Bank of Russia’s YouTube channel.</p>" +
+        "<p>See you at the IFC 2021!</p>"+
        "<p><b>Sincerely, IFC Team </b>\n" +
        "<br>e-mail: info@ifcongress.org</p></div>"+
        "<div style='width: 100%; text-align: right'><img src='https://ifcongress.ru/images/letterfooter.png'  src='https://ifcongress.ru/images/letterfooter.png'  style='margin: 24px auto'></div>"+

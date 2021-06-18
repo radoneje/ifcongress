@@ -540,9 +540,16 @@ html
                         .regFrm
                             input(type="email" placeholder="Email*" v-model="user.email")
                             .promiceWr(v-if="loginUserErr")
-                                .promiceText Email не найден. Проверьте правильность ввода или перейдите к <a v-on:click="goToReg()"><u> регистрации</u></a>.
+                                .promiceText
+                                    if lang=="ru"
+                                        span Email не найден. Проверьте правильность ввода или перейдите к <a v-on:click="goToReg()"><u> регистрации</u></a>.
+                                    else
+                                        span E-mail was not found. Please ensure you enter it correctly or <a v-on:click="goToReg()"><u> register</u></a>.
                             .regSubmitBtnWr(v-bind:class="{active:checkLoginUser()}" v-on:click="logUser()")
-                                span Войти
+                                if lang=="ru"
+                                    span Войти
+                                else
+                                    span Log In
 
 
                 .trackAboutWr(v-if="reqModal")
@@ -585,8 +592,16 @@ html
                         .mobileMenuBtnWr
                             .regSubmitBtnWr(onclick="document.location.href='/index/"+(lang=="ru"?"en":"ru")+"'") #{lang=="ru"?"ENG":"РУС"}
                             .regSubmitBtnWr.active(v-on:click="reqModal=true" v-if="!loginUser.id") #{content.register}
-                            .regSubmitBtnWr(v-on:click="loginModal=true" v-if="!loginUser.id") Вход
-                            .regSubmitBtnWr( v-else v-on:click="logOut()")  {{loginUser.f}} {{loginUser.i}}  Выйти
+                            .regSubmitBtnWr(v-on:click="loginModal=true" v-if="!loginUser.id")
+                                if lang=="ru"
+                                    span Вход
+                                else
+                                    span Log In
+                            if lang=="ru"
+                                .regSubmitBtnWr( v-else v-on:click="logOut()")  {{loginUser.f}} {{loginUser.i}}  Выйти
+                            else
+                                .regSubmitBtnWr( v-else v-on:click="logOut()")  {{loginUser.f}} {{loginUser.i}}  Log Out
+
 
 
 

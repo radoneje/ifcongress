@@ -105,6 +105,8 @@
                     .loginWr.sb(v-if="loginUser")
                         if lang=="ru"
                             .regBtn(v-on:click="loginModal=true" v-if="!loginUser.id") Вход
+                        else
+                            .regBtn(v-on:click="loginModal=true" v-if="!loginUser.id") Log In
                         .regBtn(v-on:click="reqModal=true" v-if="!loginUser.id") !{content.register}
                         .regTextWr( v-else)
                             .regTextName {{loginUser.f}} {{loginUser.i}}
