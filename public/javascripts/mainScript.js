@@ -1,5 +1,5 @@
 var app;
-
+var PlayerObserver=false;
         app = new Vue({
             el: "#app",
             data: {
@@ -23,8 +23,131 @@ var app;
                 loginModal:false,
                 loginUser:JSON.parse(localStorage.getItem("user") || '{"isPromice":false}'),
                 loginUserErr:false,
+                liveTracks:[],
+                currLiveTrack:null,
+                isQ:true,
+                q:[],
+                qText:"",
+                chat:[],
+                chatText:"",
+                chatTextSend:false,
+                votes:[],
+                myVotes:[],
+
             },
             methods: {
+                voting:async function(answer){
+
+                    var myVote={voteid:answer.voteid, id:answer.id};
+                    var len=this.myVotes.length;
+                    var old=this.myVotes.filter(v=>v.voteid==myVote.voteid);
+                    if(old.length>0){
+                        await axios.post("/api/unvote",old);
+                        this.myVotes=this.myVotes.filter(v=>v.voteid!=myVote.voteid);
+                    }
+                    this.myVotes.push(myVote);
+                    await axios.post("/api/voting",myVote);
+                    localStorage.setItem("votes",JSON.stringify(this.myVotes) )
+                },
+                checkVote: function(answer){
+                    console.log(this.myVotes.filter(v=>v.voteid==answer.voteid && v.id==answer.id).length>0)
+                    return this.myVotes.filter(v=>v.voteid==answer.voteid && v.id==answer.id).length>0
+                },
+                reloadQ:async function(){
+                    console.log("reloadQ", "/api/q/"+this.currLiveTrack.id)
+                    try {
+                        if (this.currLiveTrack)
+                            this.q = (await axios.get("/api/q/" + this.currLiveTrack.id)).data.q;
+                        console.log(this.q)
+                    }
+                    catch (e) {
+                        console.warn(e)
+                    }
+                },
+                reloadChat:async function(){
+
+                    try {
+                    if(this.currLiveTrack)
+                        this.chat=(await axios.get("/api/chat/"+this.currLiveTrack.id)).data.chat;
+                    }
+                    catch (e) {
+                        console.warn(e)
+                    }
+                },
+                reloadVote:async function(){
+                    try {
+                        var ret = await axios.get("/api/votes/"+this.currLiveTrack.id);
+                        this.votes = ret.data;
+                    }
+                    catch (e) {
+                        console.warn(e)
+                    }
+
+
+                },
+                updateChat:async function(){
+                    if(this.currLiveTrack)
+                        await this.reloadChat();
+                    setTimeout(()=>{this.updateChat()},10000);
+                },
+                updateVote:async function(){
+                    if(this.currLiveTrack)
+                        await this.reloadVote();
+                    setTimeout(()=>{this.updateVote()},10000);
+                },
+                updateQ:async function(){
+                    if(this.currLiveTrack)
+                        await this.reloadQ();
+                    setTimeout(()=>{this.updateQ()},10000);
+                },
+                newChat:async function(){
+                    this.chatTextSend=true
+                    try{
+
+                        if(this.chatText.length>0){
+                            var ret=await axios.post("/api/chat",{text:this.chatText, trackid:this.currLiveTrack.id, userid:this.user.id });
+                            this.chatText="";
+                            this.chat.push(ret.data);
+                            var objDiv = document.getElementById("chatBox");
+                            if(objDiv)
+                                setTimeout(function () {
+                                    objDiv.scrollTop = objDiv.scrollHeight;
+                                }, 0)
+                            setTimeout(()=>{this.chatTextSend=false},2000)
+                        }
+                        else
+                            this.chatTextSend=false
+                    }
+                    catch (e) {
+                        console.warn(e);
+                        this.chatTextSend=false
+
+                    }
+                },
+                newQ:async function(){
+                    this.chatTextSend=true
+                    try{
+
+                        if(this.qText.length>0){
+                            var ret=await axios.post("/api/q",{text:this.qText, trackid:this.currLiveTrack.id, userid:this.user.id});
+                            this.qText="";
+                            this.q.push(ret.data);
+                            var objDiv = document.getElementById("qBox");
+                            if(objDiv)
+                                setTimeout(function () {
+                                    objDiv.scrollTop = objDiv.scrollHeight;
+                                }, 0)
+                            setTimeout(()=>{this.chatTextSend=false},2000)
+                        }
+                        else
+                            this.chatTextSend=false
+                    }
+                    catch (e) {
+                        console.warn(e);
+                        this.chatTextSend=false
+
+                    }
+                },
                 getSessionFromSpk: function (spk) {
                     var ret = [];
 
@@ -212,6 +335,16 @@ var app;
                         event.target.innerHTML=txt;
                     },2000)
                     console.log(event, url)
+                },
+                updatePlayer:async function () {
+                    try {
+                        this.liveTracks=(await axios.get("/api/liveTracks")).data;
+
+                    }
+                    catch (e) {
+                        console.warn(e)
+                    }
+                    setTimeout(()=>{this.updatePlayer()},10000);
                 }
             },
             watch: {
@@ -250,6 +383,52 @@ var app;
                     }
                     else
                         document.body.style.overflow = "scroll";
+                },
+                liveTracks:function () {
+
+                    if(this.liveTracks.length==0)
+                        return this.currLiveTrack=null;
+                    if(!this.currLiveTrack )
+                        return this.currLiveTrack=this.liveTracks[0];
+                    if(this.liveTracks.filter(t=>{return t.id==this.currLiveTrack.id}).length==0)
+                        return this.currLiveTrack=this.liveTracks[0];
+
+                },
+                currLiveTrack:function () {
+                    this.reloadQ();
+                    this.reloadVote();
+                    console.log("init on")
+                    if(this.currLiveTrack && !PlayerObserver){
+                        PlayerObserver = new IntersectionObserver((entries, observer)=>{
+                            console.log("INTERSEPT", entries[0])
+                            var elem=document.querySelector('#playerBody').querySelector("iframe")
+                            console.log(elem)
+                            if(elem) {
+                                if (!entries[0].isIntersecting) {
+                                    var top = document.querySelector('#playerBody').offsetTop;
+                                    if(window.pageYOffset>top)
+                                    elem.classList.add("fixed")
+                                }
+                                else
+                                    elem.classList.remove("fixed")
+
+                            }
+
+                                }, {
+                                    //root: document.querySelector('#spkPage'),
+                                    rootMargin: '0px',
+                                    threshold: .0
+                                });
+
+
+                        setTimeout(() => {
+                            PlayerObserver.observe(document.querySelector('#playerBody'));
+                        }, 1000)
+                    }
+                    if(!this.currLiveTrack ){
+                        PlayerObserver=null;
+                        console.log("init off")
+                    }
                 }
             },
             mounted: async function () {
@@ -419,7 +598,21 @@ var app;
                 setTimeout(() => {
                     spkbserver.observe(document.querySelector('#spkPage'));
                 }, 1000)
+
                 document.body.style.opacity = "1"
+                await this.updatePlayer();
+                this.updateQ();
+                this.updateChat();
+                this.updateVote();
+                try {
+                    var jsonvotes = localStorage.getItem("votes")
+                    if (jsonvotes) {
+                        this.myVotes = JSON.parse(jsonvotes)
+
+                    }
+                }catch (e) {
+                    console.warn(e)
+                }
             }
 
 

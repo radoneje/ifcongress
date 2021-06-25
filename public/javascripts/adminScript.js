@@ -20,7 +20,8 @@ var app=new Vue({
         pgm:[],
         disable,
         faq:[],
-        state:{q:true, chat:true}
+        state:{q:true, chat:true},
+        qTrackId:0,
     },
     methods:{
         visibleQ:async function(val){
@@ -32,6 +33,7 @@ var app=new Vue({
             return !disable.filter(d=>d==item).length>0
         },
         addVoteAnswer:async function(vote){
+
             var ret= await axios.post("/adminApi/addVoteAnswer", vote);
             this.votes.forEach(v=>{
                 if(v.id==vote.id)
@@ -68,7 +70,7 @@ var app=new Vue({
             })
         },
         addVote:async function(){
-            var ret= await axios.post("/adminApi/voteAdd");
+            var ret= await axios.post("/adminApi/voteAdd",{trackid:this.qTrackId});
             this.votes.push(ret.data);
         },
         addTrack:async function(){
@@ -309,7 +311,10 @@ var app=new Vue({
                 if(update)
                     this.chat = ret.data.chat;
                 this.q = ret.data.q;
+
                 this.state = ret.data.state;
+                ret=await axios.get("/adminApi/tracks");
+                this.tracks=ret.data;
             }
             catch (e) {
                 console.warn(e)
@@ -338,6 +343,15 @@ var app=new Vue({
         },
         approveQ:async function(item){
             var res=await axios.post("/adminApi/approveQ/",{id:item.id, isReady:!item.isReady});
+            this.q.forEach(q=>{
+                if(q.id==res.data.id) {
+                    q.isReady = res.data.isReady;
+                }
+            })
+
+        },
+        stateQ:async function(item){
+            var res=await axios.post("/adminApi/stateQ/",{id:item.id, state:item.state});
             this.q.forEach(q=>{
                 if(q.id==res.data.id) {
                     q.isReady = res.data.isReady;

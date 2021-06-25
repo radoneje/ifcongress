@@ -2,6 +2,8 @@ var pgm=new Vue({
     el:"#app",
     data:{
         q:[],
+        tracks:[],
+        track:null,
     },
     methods:{
         updateQ:async function(){
@@ -18,7 +20,9 @@ var pgm=new Vue({
     },
     watch: {
     },
-    mounted:function () {
+    mounted:async function () {
+        this.tracks=(await axios.get("/api/tracks")).data;
+        console.log(this.tracks);
         this.updateQ();
         setTimeout(()=>{   document.body.style.opacity=1;
         },500)
