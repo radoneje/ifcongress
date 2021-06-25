@@ -20,7 +20,7 @@ body{
     overflow: hidden;
 }
 .video-js, button {
-    font-family: 'SB Sans Display';
+    font-family: 'Stem';
 }
 #bg1{
     position: absolute;
@@ -301,7 +301,7 @@ body{
 textarea.fbName{
     margin-top: 40px;
     height: 96px;
-    font-family: SB Sans Text;
+    font-family: 'Stem';
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
