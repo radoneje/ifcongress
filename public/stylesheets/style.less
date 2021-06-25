@@ -1432,16 +1432,30 @@ margin-top:4px;
   top: 0;
   left: 0;
   z-index: 20;
+  background-color: #ffffff;
+  padding: 12px;
+  padding-top:80px;
+  box-sizing: border-box;
+}
+.screenWr .voteWr{
+  padding: 0;
 
 }
 .voteBox{
   width: 100%;
-  height: 100%;
+  border-radius: 4px;
+  //height: 100%;
+  height: auto;
   box-sizing: border-box;
   padding: 20px;
   overflow-y: scroll;
-  background-color: #E1F0FF;
+ // background-color: #E1F0FF;
+  background-color: #F6F6F6;
   color: #5C76BA;
+}
+.screenWr .voteBox{
+  background-color: #E1F0FF;
+  height: 100%;
 }
 .voteItem{
   margin-bottom: 40px;
@@ -2089,7 +2103,9 @@ color:#ffffff;
     top: 48px;
 
   }
-
+  .voteWr{
+    padding: 0;
+  }
 }
 @media (max-width:458px) {
 
