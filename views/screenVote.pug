@@ -19,6 +19,8 @@ html
         .screenWr#app
             .voteWr(v-if="votes.length>0")
                 include votes
+        script.
+            var trackid=!{trackid}
         script(src="/javascripts/vue.min.js")
         script(src="/javascripts/moment.min.js")
         script(src="/javascripts/axios.min.js")

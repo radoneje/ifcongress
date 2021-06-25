@@ -4,8 +4,8 @@ var content=require('./../content')
 
 
 
-router.get('/vote', async (req, res, next) =>{
-res.render("screenVote")
+router.get('/vote/:trackid', async (req, res, next) =>{
+res.render("screenVote",{trackid:req.params.trackid})
 })
 router.get('/q', async (req, res, next) =>{
   res.render("screenQ")
