@@ -308,7 +308,7 @@ html
                             </defs>
                             </svg>
 
-            .playerWr(v-if="currLiveTrack")
+            .playerWr#playerWr(v-if="currLiveTrack")
                 .tower
                     .playerBox
                         .playerLeft
@@ -663,6 +663,7 @@ html
                             include closeBtn
                         .mobileMenuItemWr(v-on:click="menuModal=null")
                             .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('about', 100)") #{content.menu1}
+                            .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('playerWr', 100)" v-if="currLiveTrack")  {{lang=="ru"?"Трансляция":"Broadcast"}}
                             .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('pgm', 100)") #{content.menu2}
                             .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('spk', 100)") #{content.menu3}
                             .mobileMenuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('faq', 100)") #{content.menu4}

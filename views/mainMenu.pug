@@ -99,6 +99,7 @@
 
                     .menuWr.sb()
                         .menuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('about', 100)") !{content.menu1}
+                        .menuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('playerWr', 100)" v-if="currLiveTrack")  {{lang=="ru"?"Трансляция":"Broadcast"}}
                         .menuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('pgm', 100)") !{content.menu2}
                         .menuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('spk', 100)") !{content.menu3}
                         .menuItem(onclick="EPPZScrollTo.scrollVerticalToElementById('faq', 100)") !{content.menu4}
@@ -109,7 +110,7 @@
                             .regBtn(v-on:click="loginModal=true" v-if="!loginUser.id") Log In
                         .regBtn(v-on:click="reqModal=true" v-if="!loginUser.id") !{content.register}
                         .regTextWr( v-else)
-                            .regTextName {{loginUser.f}} {{loginUser.i}}
+                            //.regTextName {{loginUser.f}} {{loginUser.i}}
                             .regBtn( v-on:click="logOut()")
                                 if lang=="ru"
                                     span Выйти
