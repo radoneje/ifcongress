@@ -316,6 +316,7 @@ html
                                 include playerHeadIco
                                 .playerHeadButtonsWr
                                     .playerHeadButton(v-for="item in liveTracks" v-on:click="currLiveTrack=item" v-bind:class="{active:currLiveTrack.id==item.id}") {{lang=="ru"?item.title:item.title_en}}
+                                     div(style="clear:booth")
                             .playerBody#playerBody(v-html='(lang=="ru"?currLiveTrack.iframe_ru:currLiveTrack.iframe_en)')
 
                         .playerRight
