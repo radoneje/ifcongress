@@ -359,7 +359,7 @@ html
                                 .playerChatBox(v-if="!isQ")
                                     .playerChatPole#chatBox
                                         .playerChatPoleWr
-                                            .playerChatItem(v-for="item in chat" )
+                                            .playerChatItem(v-for="item in chat" v-if="item.userid==user.id")
                                                 .playerChatTitle  {{item.f}} {{item.i}}
                                                 .playerChatText {{item.text}}
                                                 .playerChatText(v-if="item.answer && item.answer.length>0")
