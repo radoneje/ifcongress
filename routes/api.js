@@ -67,26 +67,31 @@ router.get('/regUser', adminLogin ,async(req, res, next)=> {
 
 
 
-router.post("/q",userLogin, async(req, res, next)=> {
+router.post("/q", [
+  check('text').isLength({ min: 2, max:600 }).trim().escape(),
+  check('trackid').isInt(),
+      check('userid').isInt(),
+],
+async(req, res, next)=> {
   if(!req.body.text)
     return res.sendStatus(405)
   if(!req.body.text.length>1200)
     return res.sendStatus(405)
 
 
-  var ret=await req.knex("t_cbrf_q").insert({text:req.body.text, userid:req.session.user.id, date:new Date()}, "*")
+  var ret=await req.knex("t_cbrf_q").insert({text:req.body.text, userid:req.body.userid, date:new Date(), trackid:req.body.trackid}, "*")
   ret=await req.knex.select("*").from("v_cbrf_q").where({id:ret[0].id})
 
   res.json(ret[0]);
 });
-router.post("/chat",userLogin, async(req, res, next)=> {
+router.post("/chat", async(req, res, next)=> {
   if(!req.body.text)
     return res.sendStatus(405)
   if(!req.body.text.length>1200)
     return res.sendStatus(405)
 
 
-  var ret=await req.knex("t_cbrf_chat").insert({text:req.body.text, userid:req.session.user.id, date:new Date()}, "*")
+  var ret=await req.knex("t_cbrf_chat").insert({text:req.body.text, userid:req.body.userid, date:new Date()}, "*")
   ret=await req.knex.select("*").from("v_cbrf_chat").where({id:ret[0].id})
 
   res.json(ret[0]);
@@ -96,6 +101,12 @@ router.post("/chat",userLogin, async(req, res, next)=> {
 router.post("/approveQ",adminLogin, async(req, res, next)=> {
 
   var ret=await req.knex("t_cbrf_q").update({isReady:req.body.isReady}, "*").where({id:req.body.id})
+  ret=await req.knex.select("*").from("v_cbrf_q").where({id:ret[0].id})
+  res.json(ret[0]);
+});
+router.post("/stateQ",adminLogin, async(req, res, next)=> {
+
+  var ret=await req.knex("t_cbrf_q").update({state:req.body.state}, "*").where({id:req.body.id})
   ret=await req.knex.select("*").from("v_cbrf_q").where({id:ret[0].id})
   res.json(ret[0]);
 });
@@ -119,9 +130,17 @@ router.delete("/deleteAllQ",adminLogin, async(req, res, next)=> {
 
 
 
+router.get("/chat/:trackid", adminLogin, async(req, res, next)=> {
+  var ret={};
+  ret.q=ret.q=await req.knex.select("*").from("v_cbrf_q").where({ trackid: req.params.trackid}).orderBy("id");
+  ret.chat=await req.knex.select("*").from("v_cbrf_chat").orderBy("id");
+  ret.state=(await req.knex.select("*").from("t_cbrf_state"))[0].val;
+  return res.json(ret);
+});
+
 router.get("/chat", adminLogin, async(req, res, next)=> {
   var ret={};
-  ret.q=await req.knex.select("*").from("v_cbrf_q").orderBy("id");;
+  ret.q=ret.q=await req.knex.select("*").from("v_cbrf_q").orderBy("id");
   ret.chat=await req.knex.select("*").from("v_cbrf_chat").orderBy("id");
   ret.state=(await req.knex.select("*").from("t_cbrf_state"))[0].val;
   return res.json(ret);
@@ -129,7 +148,12 @@ router.get("/chat", adminLogin, async(req, res, next)=> {
 
 router.get("/q", async(req, res, next)=> {
   var ret={};
-  ret.q=await req.knex.select("*").from("v_cbrf_q").where({isReady:true}).orderBy("id");;
+  ret.q=await req.knex.select("*").from("v_cbrf_q").orderBy("id");
+  return res.json(ret);
+});
+router.get("/q/:trackid", async(req, res, next)=> {
+  var ret={};
+  ret.q=await req.knex.select("*").from("v_cbrf_q").where({ trackid: req.params.trackid}).orderBy("id");
   return res.json(ret);
 });
 
@@ -401,6 +425,24 @@ router.get('/votes', async(req, res, next) =>{
   res.json(ret);
 
 })
+router.get('/votes/:trackid', async(req, res, next) =>{
+
+//  req.knex.select("*").from("t_cbrf_codes")
+  var ret=await req.knex.select("*").from("t_cbrf_vote").where({isDeleted:false, trackid:req.params.trackid}).orderBy("id");;
+
+  for(var item of ret){
+    var total=0;
+    var a=await req.knex.select("*").from("t_cbrf_voteanswers").where({isDeleted:false, voteid:item.id}).orderBy("id");
+    a.forEach(b=>{total+=b.count});
+
+    a.forEach(b=>{b.perc=parseFloat(parseFloat(b.count)/parseFloat(total==0?1:total))});
+    item.total=total;
+    item.answers=a
+
+  }
+  res.json(ret);
+
+})
 router.get('/tracks', async(req, res, next) =>{
 
 //  req.knex.select("*").from("t_cbrf_codes")
@@ -424,13 +466,13 @@ router.get('/pgm', async(req, res, next) =>{
 })
 
 
-router.post('/voting', userLogin, async(req, res, next) =>{
+router.post('/voting', async(req, res, next) =>{
   var a=await req.knex.select("*").from("t_cbrf_voteanswers").where({id:req.body.id})
   await req.knex("t_cbrf_voteanswers").update({count:(a[0].count+1)}).where({id:req.body.id})
   res.json(req.body.id)
 });
 
-router.post('/unvote', userLogin, async(req, res, next) =>{
+router.post('/unvote', async(req, res, next) =>{
   for(var item of req.body) {
 
     var a = await req.knex.select("*").from("t_cbrf_voteanswers").where({id: item.id})
@@ -445,7 +487,7 @@ router.post('/unvote', userLogin, async(req, res, next) =>{
 
 
 router.post('/voteAdd', adminLogin,async(req, res, next) =>{
-  var ret=await req.knex("t_cbrf_vote").insert({},"*");
+  var ret=await req.knex("t_cbrf_vote").insert({trackid:req.body.trackid},"*");
   ret[0].answers=await req.knex("t_cbrf_voteanswers").insert([{voteid:ret[0].id},{voteid:ret[0].id}],"*");
   res.json(ret[0]);
 
@@ -518,7 +560,7 @@ router.post('/voteChange', adminLogin,async(req, res, next) =>{
 router.post('/answerChange', adminLogin,async(req, res, next) =>{
   var id=req.body.id;
   delete req.body.id;
-  var ret=await req.knex("t_cbrf_voteanswers").update({title:req.body.title},"*").where({id:id});
+  var ret=await req.knex("t_cbrf_voteanswers").update({title:req.body.title, title_en:req.body.title_en},"*").where({id:id});
   res.json(ret[0]);
 
 })
@@ -593,6 +635,11 @@ async function sendMailToUser(user, lang){
 
 }
 
+
+router.get('/liveTracks',async(req, res, next) =>{
+  var ret=await req.knex.select("*").from("t_cbrf_tracks").where({isDeleted:false, onAir:true});
+  res.json(ret);
+})
 
 
 

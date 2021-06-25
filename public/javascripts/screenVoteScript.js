@@ -2,6 +2,7 @@ var pgm=new Vue({
     el:"#app",
     data:{
         votes:[],
+        lang:"ru"
     },
     methods:{
         updateVote:async function(){
@@ -22,7 +23,14 @@ var pgm=new Vue({
         this.updateVote();
         setTimeout(()=>{   document.body.style.opacity=1;
         },500)
+        setInterval(()=>{
+            if(this.lang=="ru")
+                this.lang="en"
+            else
+                this.lang="ru"
+        },5000)
     }
+
 
 })
 

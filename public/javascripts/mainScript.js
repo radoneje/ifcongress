@@ -21,6 +21,7 @@ var PlayerObserver=false;
                 menuModal: false,
                 lang:lang,
                 loginModal:false,
+                recModal:null,
                 loginUser:JSON.parse(localStorage.getItem("user") || '{"isPromice":false}'),
                 loginUserErr:false,
                 liveTracks:[],
