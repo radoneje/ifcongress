@@ -10,7 +10,7 @@ var pgm=new Vue({
             try {
                 var ret = await axios.get("/api/q/"+this.track);
                 ret.data.q.reverse()
-                this.q = ret.data.q.filter(q=>{return !q.isSpk});
+                this.q = ret.data.q.filter(q=>{return q.isSpk});
             }
             catch (e) {
                 console.warn(e)
