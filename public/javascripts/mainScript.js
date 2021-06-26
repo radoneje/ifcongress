@@ -51,7 +51,7 @@ var PlayerObserver=false;
                     localStorage.setItem("votes",JSON.stringify(this.myVotes) )
                 },
                 checkVote: function(answer){
-                    console.log(this.myVotes.filter(v=>v.voteid==answer.voteid && v.id==answer.id).length>0)
+                    //console.log(this.myVotes.filter(v=>v.voteid==answer.voteid && v.id==answer.id).length>0)
                     return this.myVotes.filter(v=>v.voteid==answer.voteid && v.id==answer.id).length>0
                 },
                 reloadQ:async function(){
@@ -59,7 +59,7 @@ var PlayerObserver=false;
                     try {
                         if (this.currLiveTrack)
                             this.q = (await axios.get("/api/q/" + this.currLiveTrack.id)).data.q;
-                        console.log(this.q)
+                       // console.log(this.q)
                     }
                     catch (e) {
                         console.warn(e)
@@ -225,7 +225,7 @@ var PlayerObserver=false;
 
                     this.reqProcess = true;
                     var ret = await axios.post("/api/logUser/" + lang, this.user);
-                    console.log(" ret.data",  ret.data)
+                   // console.log(" ret.data",  ret.data)
                     if(!ret.data) {
                         this.loginUserErr=true;
                         this.reqProcess = false;
@@ -266,7 +266,7 @@ var PlayerObserver=false;
                     if (this.user.company < 2)
                         return false
 
-                    console.log("validateEmail", validateEmail(this.user.email))
+                    //console.log("validateEmail", validateEmail(this.user.email))
                     if (!validateEmail(this.user.email))
                         return false
 
@@ -330,12 +330,12 @@ var PlayerObserver=false;
                     var link=url.origin+""+ url.pathname+"?sessionid="+pgmItemModal.id;
                     var txt=event.target.innerHTML;
                     await navigator.clipboard.writeText(link)
-                    console.log("event",event)
+                  //  console.log("event",event)
                     event.target.innerHTML= lang=="ru"?"Скопировано" :"Copied";
                     setTimeout(async ()=>{
                         event.target.innerHTML=txt;
                     },2000)
-                    console.log(event, url)
+                   // console.log(event, url)
                 },
                 updatePlayer:async function () {
                     try {
@@ -401,9 +401,9 @@ var PlayerObserver=false;
                     console.log("init on")
                     if(this.currLiveTrack && !PlayerObserver){
                         PlayerObserver = new IntersectionObserver((entries, observer)=>{
-                            console.log("INTERSEPT", entries[0])
+                          //  console.log("INTERSEPT", entries[0])
                             var elem=document.querySelector('#playerBody').querySelector("iframe")
-                            console.log(elem)
+                           // console.log(elem)
                             if(elem) {
                                 if (!entries[0].isIntersecting) {
                                     var top = document.querySelector('#playerBody').offsetTop;
@@ -434,7 +434,7 @@ var PlayerObserver=false;
             },
             mounted: async function () {
                 moment.locale(lang)
-                console.log("loginUser", this.loginUser)
+               // console.log("loginUser", this.loginUser)
                 this.tracks = (await axios.get('/api/tracks')).data;
 
                 this.tracks.forEach(t => {
@@ -523,7 +523,7 @@ var PlayerObserver=false;
                                 if(t.id==p.trackid)
                                     this.currTrack=t;
                             })
-                            console.log("this.pgmItemModa", p)
+                           // console.log("this.pgmItemModa", p)
                             this.pgmItemModal=p;
                         }
                     });
@@ -546,7 +546,7 @@ var PlayerObserver=false;
                         if(inserted==0){
                             var tmp=[];
                             this.curSpeakers[this.curSpeakersPage].forEach(c=>{tmp.push(c)});
-                            console.log("push all spk", tmp)
+                          //  console.log("push all spk", tmp)
                             tmp.forEach(c=>{this.curSpeakers[this.curSpeakersPage].push(c)})
                         }
                         this.curSpeakers = this.curSpeakers.filter(r => {
