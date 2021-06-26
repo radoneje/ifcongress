@@ -3,7 +3,7 @@ var router = express.Router();
 var content=require('./../content')
 
 
-router.get('/admin', async (req, res, next) =>{
+router.get('/ifsuper', async (req, res, next) =>{
   if(req.session.admin)
     res.render('admin', { title: 'admin' ,disable:[] });
   else
