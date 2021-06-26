@@ -130,7 +130,7 @@ router.delete("/deleteAllQ",adminLogin, async(req, res, next)=> {
 
 
 
-router.get("/chat/:trackid", adminLogin, async(req, res, next)=> {
+router.get("/chat/:trackid", async(req, res, next)=> {
   var ret={};
   ret.q=ret.q=await req.knex.select("*").from("v_cbrf_q").where({ trackid: req.params.trackid}).orderBy("id");
   ret.chat=await req.knex.select("*").from("v_cbrf_chat").orderBy("id");
@@ -138,7 +138,7 @@ router.get("/chat/:trackid", adminLogin, async(req, res, next)=> {
   return res.json(ret);
 });
 
-router.get("/chat", adminLogin, async(req, res, next)=> {
+router.get("/chat", async(req, res, next)=> {
   var ret={};
   ret.q=ret.q=await req.knex.select("*").from("v_cbrf_q").orderBy("id");
   ret.chat=await req.knex.select("*").from("v_cbrf_chat").orderBy("id");
