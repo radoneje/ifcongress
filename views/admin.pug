@@ -249,6 +249,7 @@ html
                 .adminSpkItemWr
                   .adminSpkItemId
                     div  ID={{track.id}}
+                      input(v-model="track.hall" placeholder="зал (парядок сортировки)")
                       .adminSpkItemName
                         input(v-model="track.title" placeholder="название")
                         input(v-model="track.title_en" placeholder="title")
