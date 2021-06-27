@@ -8,7 +8,7 @@ var pgm=new Vue({
     methods:{
         reloadQ:async function(){
             try {
-                var ret = await axios.get("/api/q/"+this.track);
+                var ret = await axios.get("/adminApi/q/"+this.track);
                 ret.data.q.reverse()
                 this.q = ret.data.q.filter(q=>{return q.isSpk});
             }
@@ -29,7 +29,7 @@ var pgm=new Vue({
         }
     },
     mounted:async function () {
-        this.tracks=(await axios.get("/api/tracks")).data;
+        this.tracks=(await axios.get("/adminApi/tracks")).data;
         console.log(this.tracks);
         this.updateQ();
         setTimeout(()=>{   document.body.style.opacity=1;

@@ -7,7 +7,7 @@ var pgm=new Vue({
     methods:{
         updateVote:async function(){
             try {
-                var ret = await axios.get("/api/votes");
+                var ret = await axios.get("/adminApi/votes");
                 this.votes = ret.data.filter(v=>v.trackid==trackid);
                 this.votes.forEach(v=>{v.iscompl=true;})
             }
