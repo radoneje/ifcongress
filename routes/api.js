@@ -448,7 +448,6 @@ router.get('/tracks', async(req, res, next) =>{
 //  req.knex.select("*").from("t_cbrf_codes")
   var ret=await req.knex.select("*").from("t_cbrf_tracks").where({isDeleted:false}).orderBy("hall");
   res.json(ret);
-
 })
 router.get('/faq', async(req, res, next) =>{
 
