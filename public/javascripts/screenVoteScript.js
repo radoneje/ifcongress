@@ -28,7 +28,7 @@ var pgm=new Vue({
                 this.lang="en"
             else
                 this.lang="ru"
-        },5000)
+        },10000)
     }
 
 
