@@ -446,7 +446,7 @@ router.get('/votes/:trackid', async(req, res, next) =>{
 router.get('/tracks', async(req, res, next) =>{
 
 //  req.knex.select("*").from("t_cbrf_codes")
-  var ret=await req.knex.select("*").from("t_cbrf_tracks").where({isDeleted:false}).orderBy("hall");
+  var ret=await req.knex.select("*").from("t_cbrf_tracks").where({isDeleted:false}).orderBy("date");
   res.json(ret);
 })
 router.get('/faq', async(req, res, next) =>{
