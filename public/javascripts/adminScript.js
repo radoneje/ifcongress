@@ -314,6 +314,7 @@ var app=new Vue({
 
                 this.state = ret.data.state;
                 ret=await axios.get("/adminApi/tracks");
+                if(this.tracks.length==0)
                 this.tracks=ret.data;
             }
             catch (e) {
