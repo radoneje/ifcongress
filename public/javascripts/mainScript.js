@@ -339,7 +339,9 @@ var PlayerObserver=false;
                 },
                 updatePlayer:async function () {
                     try {
-                        this.liveTracks=(await axios.get("/api/liveTracks")).data;
+                        var tmp=(await axios.get("/api/liveTracks")).data;
+                        tmp.sort((a, b)=>{return a.hall-b.hall});
+                        this.liveTracks=tmp;
 
                     }
                     catch (e) {
