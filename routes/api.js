@@ -346,21 +346,22 @@ router.post('/loginUser', async(req, res, next)=> {
 })
 router.post('/aliveUser', userLogin, async(req, res, next)=> {
 
-  if(req.counter.filter(c=>{return c.id==req.body.userid}).length==0)
-  {
-    req.counter.push({id:req.body.userid, date:moment().unix()});
-    await req.knex("t_cbrf_count").insert({count:req.counter.length, date:new Date()})
-    await req.knex("t_cbrf_logins").insert({
-      userid:req.body.userid,
-      date: new Date(),
-    })
-  }
-  else{
-    req.counter.forEach(c=>{
-      if(c.id==req.body.userid)
-        c.date=moment().unix()
-    })
-  }/*
+  try {
+    if (req.counter.filter(c => {
+      return c.id == req.body.userid
+    }).length == 0) {
+      req.counter.push({id: req.body.userid, date: moment().unix()});
+      await req.knex("t_cbrf_count").insert({count: req.counter.length, date: new Date()})
+      await req.knex("t_cbrf_logins").insert({
+        userid: req.body.userid,
+        date: new Date(),
+      })
+    } else {
+      req.counter.forEach(c => {
+        if (c.id == req.body.userid)
+          c.date = moment().unix()
+      })
+    }/*
   let messages=await req.knex.select("message").from("t_cbrf_users").where({id:req.body.userid, messageIsActive:true})
   let q=await req.knex.select("*").from("v_cbrf_q").where({userid:req.body.userid}).orWhere({isReady:true}).orderBy("id");
   q=q.filter(q=>!q.isDeleted);
@@ -370,14 +371,19 @@ router.post('/aliveUser', userLogin, async(req, res, next)=> {
     messages=[];
   messages=messages.filter(m=>{return m.message.length>0});
 */
-  res.json({
-    userid:req.body.userid,
-    date: new Date(),
-  /*  messages:messages,
-    q,
-    chat,
-    state:(await req.knex.select("*").from("t_cbrf_state"))[0].val*/
-  })
+    res.json({
+      userid: req.body.userid,
+      date: new Date(),
+      /*  messages:messages,
+        q,
+        chat,
+        state:(await req.knex.select("*").from("t_cbrf_state"))[0].val*/
+    })
+  }
+  catch (e) {
+    console.log(e)
+    ret.json(-1)
+  }
 });
 
 router.get('/count', function(req, res, next) {
