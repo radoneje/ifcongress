@@ -616,6 +616,15 @@ var PlayerObserver=false;
                 }catch (e) {
                     console.warn(e)
                 }
+                setInterval(async ()=>{
+                    try {
+                        await axios.post("/api/aliveUser");
+                    }
+                    catch (e) {
+                        console.warn(e)
+                    }
+                }, 20000)
+
             }
 
 
