@@ -345,7 +345,7 @@ router.post('/loginUser', async(req, res, next)=> {
     return res.json(false);
   return res.json(usrs[0]);
 })
-router.post('/aliveUser', userLogin, async(req, res, next)=> {
+router.post('/aliveUser', async(req, res, next)=> {
 
   try {
     if (req.counter.filter(c => {
