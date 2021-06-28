@@ -531,7 +531,7 @@ html
                             .spkPage(v-if="curSpeakers[curSpeakersPage]")
                                     .spkItem(v-for="item in curSpeakers[curSpeakersPage]" v-on:click="showPopSpeaker(item)")
                                         .spkItemPhoto(v-bind:style="{backgroundImage:'url('+item.photo+')'}" v-on:click.stop.prevent="showPopSpeaker(item)")
-                                        .spkItemName {{lang=="ru"?item.i:item.i_en}} {{lang=="ru"?item.f:item.f_en}}
+                                        .spkItemName {{(lang=="ru"?item.i:item.i_en).replace("&nbsp;", " ")}} {{lang=="ru"?item.f:item.f_en}}
                                         .spkItemPos {{lang=="ru"?item.position:item.position_en}}
                                     #spkChild.showMobile(style="width:24px;height:24px;")
                                     div(style="clear:both")
@@ -601,7 +601,7 @@ html
                                     .spkDescrPhoto(v-bind:style="{backgroundImage:'url('+spkItemModal.photo+')'}")
                                     .spkDescrTitleWr
                                         .spkDescrTitleCont
-                                            .spkDescrTitle {{lang=="ru"?spkItemModal.i:spkItemModal.i_en}} {{lang=="ru"?spkItemModal.f:spkItemModal.f_en}}
+                                            .spkDescrTitle {{(lang=="ru"?spkItemModal.i:spkItemModal.i_en).replace("&nbsp;", " ")}} {{lang=="ru"?spkItemModal.f:spkItemModal.f_en}}
                                             .spkDescrPos {{lang=="ru"?spkItemModal.full_pos:spkItemModal.full_pos_en}}
                             .spkToPgmWr
                                     .spkToPgmItem(v-for="item in getSessionFromSpk(spkItemModal)")
