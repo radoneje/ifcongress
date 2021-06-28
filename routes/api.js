@@ -346,37 +346,37 @@ router.post('/loginUser', async(req, res, next)=> {
 })
 router.post('/aliveUser', userLogin, async(req, res, next)=> {
 
-  if(req.counter.filter(c=>{return c.id==req.session.user.id}).length==0)
+  if(req.counter.filter(c=>{return c.id==req.body.userid}).length==0)
   {
-    req.counter.push({id:req.session.user.id, date:moment().unix()});
+    req.counter.push({id:req.body.userid, date:moment().unix()});
     await req.knex("t_cbrf_count").insert({count:req.counter.length, date:new Date()})
     await req.knex("t_cbrf_logins").insert({
-      userid:req.session.user.id,
+      userid:req.body.userid,
       date: new Date(),
     })
   }
   else{
     req.counter.forEach(c=>{
-      if(c.id==req.session.user.id)
+      if(c.id==req.body.userid)
         c.date=moment().unix()
     })
-  }
-  let messages=await req.knex.select("message").from("t_cbrf_users").where({id:req.session.user.id, messageIsActive:true})
-  let q=await req.knex.select("*").from("v_cbrf_q").where({userid:req.session.user.id}).orWhere({isReady:true}).orderBy("id");
+  }/*
+  let messages=await req.knex.select("message").from("t_cbrf_users").where({id:req.body.userid, messageIsActive:true})
+  let q=await req.knex.select("*").from("v_cbrf_q").where({userid:req.body.userid}).orWhere({isReady:true}).orderBy("id");
   q=q.filter(q=>!q.isDeleted);
-  let chat =await req.knex.select("*").from("v_cbrf_chat").where({userid:req.session.user.id}).orderBy("id");
+  let chat =await req.knex.select("*").from("v_cbrf_chat").where({userid:req.body.userid}).orderBy("id");
 
   if(!messages)
     messages=[];
   messages=messages.filter(m=>{return m.message.length>0});
-
+*/
   res.json({
-    userid:req.session.user.id,
+    userid:req.body.userid,
     date: new Date(),
-    messages:messages,
+  /*  messages:messages,
     q,
     chat,
-    state:(await req.knex.select("*").from("t_cbrf_state"))[0].val
+    state:(await req.knex.select("*").from("t_cbrf_state"))[0].val*/
   })
 });
 
