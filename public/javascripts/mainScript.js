@@ -277,14 +277,13 @@ var PlayerObserver=false;
                 },
                 getSpk: function (id) {
                     var ret = this.spk.filter(s => s.id == id);
-                    if(ret.length>0)
-                    if(ret[0].i)
-                    {
-                        ret[0].i= ret[0].i.replace("&nbsp;"," ");
-                    }
-                    if(ret[0].i_en)
-                    {
-                        ret[0].i_en=ret[0].i_en.replace("&nbsp;"," ");
+                    if(ret.length>0) {
+                        if (ret[0].i) {
+                            ret[0].i = ret[0].i.replace("&nbsp;", " ");
+                        }
+                        if (ret[0].i_en) {
+                            ret[0].i_en = ret[0].i_en.replace("&nbsp;", " ");
+                        }
                     }
                     return ret[0];
 
