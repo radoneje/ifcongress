@@ -1444,8 +1444,9 @@ margin-top:4px;
 .voteBox{
   width: 100%;
   border-radius: 4px;
-  //height: 100%;
-  height: auto;
+  height: 100%;
+  overflow-y: auto;
+  //height: auto;
   box-sizing: border-box;
   padding: 20px;
   overflow-y: scroll;
@@ -2104,6 +2105,10 @@ color:#ffffff;
   }
   .voteWr{
     padding: 0;
+  }
+  .voteBox{
+    height: inherit;
+    overflow-y: inherit;;
   }
 }
 @media (max-width:458px) {
