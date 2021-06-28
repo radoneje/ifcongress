@@ -531,7 +531,7 @@ html
                             .spkPage(v-if="curSpeakers[curSpeakersPage]")
                                     .spkItem(v-for="item in curSpeakers[curSpeakersPage]" v-on:click="showPopSpeaker(item)")
                                         .spkItemPhoto(v-bind:style="{backgroundImage:'url('+item.photo+')'}" v-on:click.stop.prevent="showPopSpeaker(item)")
-                                        .spkItemName {{lang=="ru"?item.i:item.i_en}} {{lang=="ru"?item.f:item.f_en}}
+                                        .spkItemName(v-html='(lang=="ru"?item.i:item.i_en) +" " + (lang=="ru"?item.f:item.f_en)')
                                         .spkItemPos {{lang=="ru"?item.position:item.position_en}}
                                     #spkChild.showMobile(style="width:24px;height:24px;")
                                     div(style="clear:both")

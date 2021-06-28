@@ -378,6 +378,8 @@ html
                                     .playerChatInputForm(v-else)
 
                                                 .regBtn2(v-on:click="loginModal=true" v-if="!loginUser.id") {{lang=="ru"?"Войдите, что бы задать вопрос":"Log in to ask a question"}}
+            .playerImg(v-else)
+                img(src="/images/zagl.png")
             .secondWr
                 .tower
                     .row
