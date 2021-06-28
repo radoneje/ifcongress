@@ -435,7 +435,7 @@ html
                                             .carouselItemFace(v-for="(spk, i) in currShowTrack.speakers"  v-if="i<3 && getSpk(spk)" v-on:click.stop.prevent="showPopSpeaker(getSpk(spk))")
                                                 .carouselItemFaceImage(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                 .carouselItemFaceName
-                                                    div(v-html='(lang=="ru"?getSpk(spk).i:getSpk(spk).i_en) +" " + (lang=="ru"?getSpk(spk).f:getSpk(spk).f_en)')
+                                                    div {{lang=="ru"?(getSpk(spk).i):(getSpk(spk).i_en)}}
                                                     div {{lang=="ru"?(getSpk(spk).f):(getSpk(spk).f_en)}}
                                                 .carouselItemFacePos {{lang=="ru"?(getSpk(spk).position):(getSpk(spk).position_en)}}
 
@@ -494,7 +494,7 @@ html
                                                             .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                             .progItemSpkItemNameWr
                                                                 .progItemSpkItemName
-                                                                    span(v-html='(lang=="ru"?getSpk(spk).i:getSpk(spk).i_en) +" " + (lang=="ru"?getSpk(spk).f:getSpk(spk).f_en)')
+                                                                    span {{lang=="ru"?(getSpk(spk).i):(getSpk(spk).i_en)}}
                                                                     span {{lang=="ru"?(getSpk(spk).f):(getSpk(spk).f_en)}}
                                                                 .progItemSpkItemPos {{lang=="ru"?(getSpk(spk).position):(getSpk(spk).position_en)}}
 
@@ -505,7 +505,7 @@ html
                                                             .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                             .progItemSpkItemNameWr
                                                                 .progItemSpkItemName
-                                                                    span(v-html='(lang=="ru"?getSpk(spk).i:getSpk(spk).i_en) +" " + (lang=="ru"?getSpk(spk).f:getSpk(spk).f_en)')
+                                                                    span {{lang=="ru"?(getSpk(spk).i):(getSpk(spk).i_en)}}
                                                                     span {{lang=="ru"?(getSpk(spk).f):(getSpk(spk).f_en)}}
                                                                 .progItemSpkItemPos {{lang=="ru"?(getSpk(spk).position):(getSpk(spk).position_en)}}
 
@@ -531,7 +531,7 @@ html
                             .spkPage(v-if="curSpeakers[curSpeakersPage]")
                                     .spkItem(v-for="item in curSpeakers[curSpeakersPage]" v-on:click="showPopSpeaker(item)")
                                         .spkItemPhoto(v-bind:style="{backgroundImage:'url('+item.photo+')'}" v-on:click.stop.prevent="showPopSpeaker(item)")
-                                        .spkItemName(v-html='(lang=="ru"?item.i:item.i_en) +" " + (lang=="ru"?item.f:item.f_en)')
+                                        .spkItemName {{lang=="ru"?item.i:item.i_en}} {{lang=="ru"?item.f:item.f_en}}
                                         .spkItemPos {{lang=="ru"?item.position:item.position_en}}
                                     #spkChild.showMobile(style="width:24px;height:24px;")
                                     div(style="clear:both")
@@ -579,7 +579,7 @@ html
                                             .progItemSpkItem(v-for="spk in pgmItemModal.moderators")
                                                 .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                 .progItemSpkItemNameWr
-                                                    .progItemSpkItemName(v-html='(lang=="ru"?getSpk(spk).i:getSpk(spk).i_en) +" " + (lang=="ru"?getSpk(spk).f:getSpk(spk).f_en)')
+                                                    .progItemSpkItemName {{lang=="ru"?(getSpk(spk).i):(getSpk(spk).i_en)}} {{lang=="ru"?(getSpk(spk).f):(getSpk(spk).f_en)}}
                                                     .progItemSpkItemPos {{lang=="ru"?(getSpk(spk).full_pos):(getSpk(spk).full_pos_en)}}
 
                                     .progItemModBox
@@ -588,7 +588,7 @@ html
                                             .progItemSpkItem(v-for="spk in pgmItemModal.speakers")
                                                 .progItemSpkItemPhoto(v-bind:style="{backgroundImage:'url('+getSpk(spk).photo+')'}")
                                                 .progItemSpkItemNameWr
-                                                    .progItemSpkItemName(v-html='(lang=="ru"?getSpk(spk).i:getSpk(spk).i_en) +" " + (lang=="ru"?getSpk(spk).f:getSpk(spk).f_en)')
+                                                    .progItemSpkItemName {{lang=="ru"?(getSpk(spk).i):(getSpk(spk).i_en)}} {{lang=="ru"?(getSpk(spk).f):(getSpk(spk).f_en)}}
                                                     .progItemSpkItemPos {{lang=="ru"?(getSpk(spk).full_pos):(getSpk(spk).full_pos_en)}}
 
                 .trackAboutWr(v-if="spkItemModal")
@@ -601,7 +601,7 @@ html
                                     .spkDescrPhoto(v-bind:style="{backgroundImage:'url('+spkItemModal.photo+')'}")
                                     .spkDescrTitleWr
                                         .spkDescrTitleCont
-                                            .spkDescrTitle(v-html='(lang=="ru"?spkItemModal.i:spkItemModal.i_en) +" " + (lang=="ru"?spkItemModal.f:spkItemModal.f_en)')
+                                            .spkDescrTitle {{lang=="ru"?spkItemModal.i:spkItemModal.i_en}} {{lang=="ru"?spkItemModal.f:spkItemModal.f_en}}
                                             .spkDescrPos {{lang=="ru"?spkItemModal.full_pos:spkItemModal.full_pos_en}}
                             .spkToPgmWr
                                     .spkToPgmItem(v-for="item in getSessionFromSpk(spkItemModal)")
