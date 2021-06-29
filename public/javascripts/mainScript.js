@@ -382,6 +382,7 @@ var PlayerObserver=false;
                     }
                 },
                 reqModal: function () {
+                    console.log("reqModal")
                     if (this.reqModal) {
                         this.menuModal = false;
                         this.loginModal=false;
