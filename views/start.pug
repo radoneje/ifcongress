@@ -573,7 +573,8 @@ html
                                     .pgmItemModalCopyLinkWr
                                         .progItemBtn(v-on:click="copyPgmLink(pgmItemModal, $event)") !{content.copyLink}
                                 .aboutText(v-html='getHtml(lang=="ru"?pgmItemModal.descr:pgmItemModal.descr_en)')
-                                .videoWrapper(v-if="pgmItemModal.state==1" v-html='lang=="ru"?pgmItemModal.iframe_ru:pgmItemModal.iframe_en')
+                                .videoWrapperBox(v-if="pgmItemModal.state==1")
+                                    .videoWrapper( v-html='lang=="ru"?pgmItemModal.iframe_ru:pgmItemModal.iframe_en')
                                 .aboutModerator
                                     .progItemModBox(v-if="pgmItemModal.moderators.length>0")
                                         .progItemModTitle !{content.moderator}
@@ -689,7 +690,8 @@ html
                                 .regAboutClose(v-on:click="recModal=null")
                                     include closeBtn
                             .aboutText(v-html='getHtml(lang=="ru"?recModal.descr:recModal.descr_en)')
-                            .videoWrapper(v-html='lang=="ru"?recModal.iframe_ru:recModal.iframe_en')
+                            .videoWrapperBox(v-if="pgmItemModal.state==1")
+                                .videoWrapper(v-html='lang=="ru"?recModal.iframe_ru:recModal.iframe_en')
 
 
         script.
