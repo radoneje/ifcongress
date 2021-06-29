@@ -364,21 +364,21 @@ var PlayerObserver=false;
                     console.log("this.pgmItemModal", this.pgmItemModal)
                     if (this.pgmItemModal) {
                         document.body.style.overflow = "hidden";
-                        document.body.style.position="fixed";
+                        //document.body.style.position="fixed";
                     }
                     else {
                         document.body.style.overflow = "scroll";
-                        document.body.style.position="inherit";
+                       // document.body.style.position="inherit";
                     }
                 },
                 spkItemModal: function () {
                     if (this.spkItemModal){
                         document.body.style.overflow = "hidden";
-                        document.body.style.position="fixed";
+                      //  document.body.style.position="fixed";
                     }
                     else {
                         document.body.style.overflow = "scroll";
-                        document.body.style.position="inherit";
+                      //  document.body.style.position="inherit";
                     }
                 },
                 reqModal: function () {
@@ -386,25 +386,26 @@ var PlayerObserver=false;
                         this.menuModal = false;
                         this.loginModal=false;
                         document.body.style.overflow = "hidden";
-                        document.body.style.position="fixed";
+                     //   document.body.style.position="fixed";
                     } else
                         {document.body.style.overflow = "scroll";
-                            document.body.style.position="inherit";}
+                       //     document.body.style.position="inherit";
+                            }
                 },
                 menuModal: function () {
                     if (this.menuModal){
                         document.body.style.overflow = "hidden";
-                        document.body.style.position="fixed";
+                     //   document.body.style.position="fixed";
                     }
                     else {
                         document.body.style.overflow = "scroll";
-                        document.body.style.position="inherit";
+                      //  document.body.style.position="inherit";
                     }
                 },
                 loginModal: function () {
                     if (this.loginModal) {
                         document.body.style.overflow = "hidden";
-                        document.body.style.position="fixed";
+                     //   document.body.style.position="fixed";
                         this.loginUserErr=false;
                         this.menuModal = false;
                         this.reqModal= false;
@@ -412,7 +413,7 @@ var PlayerObserver=false;
                     else
                     {
                         document.body.style.overflow = "scroll";
-                        document.body.style.position="inherit";
+                      //  document.body.style.position="inherit";
                     }
                 },
                 liveTracks:function () {
