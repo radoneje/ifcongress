@@ -690,7 +690,7 @@ html
                                 .regAboutClose(v-on:click="recModal=null")
                                     include closeBtn
                             .aboutText(v-html='getHtml(lang=="ru"?recModal.descr:recModal.descr_en)')
-                            .videoWrapperBox(v-if="pgmItemModal.state==1")
+                            .videoWrapperBox()
                                 .videoWrapper(v-html='lang=="ru"?recModal.iframe_ru:recModal.iframe_en')
 
 
