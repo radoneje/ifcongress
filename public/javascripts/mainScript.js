@@ -712,18 +712,17 @@ var PlayerObserver=false;
                 }catch (e) {
                     console.warn(e)
                 }
-                setInterval(async ()=>{
+                /*setInterval(async ()=>{
                     try {
-                        if(this.user.id)
-                        await axios.post("/api/aliveUser",{userid:this.user.id});
+                       // if(this.user.id)
+                       // await axios.post("/api/aliveUser",{userid:this.user.id});
                     }
                     catch (e) {
                         console.warn(e)
                     }
-                }, 20000)
+                }, 20000)*/
 
             }
-
 
         })
 
