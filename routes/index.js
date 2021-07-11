@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var content=require('./../content')
+var fs=require('fs')
+
 
 
 router.get('/ifsuper', async (req, res, next) =>{
@@ -67,6 +69,10 @@ res.render("player",{id:req.params.id, lang:req.params.lang})
 })
 
 router.get('/index/:lang?', async (req, res, next) =>{
+
+  const photos = await fs.promises.readdir(__dirname+"/../"+"public/images/photos/lores");
+
+
   if(!req.params.lang)
     req.params.lang="ru"
   req.params.lang=req.params.lang.toLowerCase();
@@ -74,7 +80,7 @@ router.get('/index/:lang?', async (req, res, next) =>{
     return res.redirect("/index/ru")
   //res.render('work', { title: 'under constaction' });
   var content=await req.knex.select("*").from("t_cbrf_settings").orderBy("id", 'desc')
-  res.render('start', {  lang:req.params.lang, content:(content[0].content)[req.params.lang]});
+  res.render('start', {  lang:req.params.lang, content:(content[0].content)[req.params.lang], photos:photos});
 
 });
 

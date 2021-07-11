@@ -275,6 +275,14 @@ h4{
   padding-right: 24px;
   color: rgba(92, 118, 186, 0.8);
 }
+.splide{
+  max-width: 800px;
+  margin: 0 auto;
+}
+.splide__arrow{
+  width: 4em !important;
+  height: 4em !important;
+}
 .regBtn2{
   background: #7F99DA;
   border-radius: 8px;
@@ -976,10 +984,21 @@ position: absolute;
   background-size: contain;
   filter: brightness(100%);
 }
+.DescrPhoto{
+  width: 800px;
+  height: 600px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+}
+.photoItem{
+  height: 185px;
+}
 .spkItemPhoto:hover{
 
   filter: brightness(90%);
 }
+
 
 .spkItemName{
   font-weight: 500;
@@ -2132,6 +2151,12 @@ color:#ffffff;
   .voteBox{
     height: inherit;
     overflow-y: inherit;;
+  }
+  .DescrPhoto{
+    width: ~"calc(100vw - 61px)";
+  }
+  .photoDescrTitleWr{
+    margin-left: 0;
   }
 }
 @media (max-width:458px) {

@@ -34,6 +34,10 @@ var PlayerObserver=false;
                 chatTextSend:false,
                 votes:[],
                 myVotes:[],
+                photos:photos,
+                curPhotosPage:0,
+                curPhotos: [],
+                photoItemModal:null
 
             },
             methods: {
@@ -184,6 +188,18 @@ var PlayerObserver=false;
                     if (this.curSpeakersPage > parseInt(this.spk.length / 8))
                         this.curSpeakersPage=0;
                 },
+
+                curPhotosPagePreview: function () {
+                    this.curPhotosPage--;
+                    if (this.curPhotosPage < 0)
+                        this.curPhotosPage = parseInt(this.photos.length / 8);
+                },
+                curPhotosPageNext: function () {
+                    this.curPhotosPage++;
+                    if (this.curPhotosPage > parseInt(this.photos.length / 8))
+                        this.curPhotosPage=0;
+                },
+
                 getHtml: function (string) {
                     if (!string)
                         return "<br/>";
@@ -332,6 +348,9 @@ var PlayerObserver=false;
                 },
                 showPopSpeaker: function (item) {
                     this.spkItemModal = item
+                },
+                showPopPhoto: function (item) {
+                    this.photoItemModal = item
                 },
                 copyPgmLink:async function(pgmItemModal, event){
                     var url_string= window.location.href
@@ -543,6 +562,19 @@ var PlayerObserver=false;
                         this.curSpeakers[page] = []
                     }
                 })
+                page = 0;
+                i = 0;
+                this.curPhotos[page] = []
+                this.photos.forEach(s => {
+                    this.curPhotos[page].push(s);
+                    i++;
+                    if (i >= 8) {
+                        i = 0;
+                        page++;
+                        this.curPhotos[page] = []
+                    }
+                })
+
                 this.faq = (await axios.get('/api/faq')).data;
 
                 var url_string= window.location.href
@@ -631,6 +663,40 @@ var PlayerObserver=false;
                 setTimeout(() => {
                     spkbserver.observe(document.querySelector('#spkPage'));
                 }, 1000)
+
+
+                ///////////
+                var options = {
+                    root: document.querySelector('#spkPage1'),
+                    rootMargin: '0px',
+                    threshold: 0.1
+                }
+                var callback = (entries, observer) => {
+                    if (entries[0].isIntersecting) {
+                        var currLen = this.curPhotos[this.curPhotosPage].length
+                        var inserted=0;
+                        for (var i = currLen; i < this.photos.length && i < currLen + 8; i++) {
+                            this.curPhotos[this.curPhotosPage].push(this.photos[i])
+                            inserted++;
+                        }
+                        if(inserted==0){
+                            var tmp=[];
+                            this.curPhotos[this.curPhotosPage].forEach(c=>{tmp.push(c)});
+                            //  console.log("push all spk", tmp)
+                            tmp.forEach(c=>{this.curPhotos[this.curPhotosPage].push(c)})
+                        }
+                        this.curPhotos = this.curPhotos.filter(r => {
+                            return true
+                        })
+                    }
+                };
+                var observer = new IntersectionObserver(callback, options);
+                var target = document.querySelector('#spkChild1');
+                setTimeout(() => {
+                    observer.observe(target);
+                    document.querySelectorAll('#spkChild1').forEach(img => observer.observe(img))
+                }, 1000)
+                //////////
 
                 document.body.style.opacity = "1"
                 await this.updatePlayer();
@@ -773,3 +839,13 @@ function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+/*document.addEventListener( 'DOMContentLoaded', function () {
+    new Splide( '.splide',{
+        type   : 'loop',
+        autoWidth: true,
+        gap:'12px',
+        pagination:false,
+        perPage: 3,
+        focus  : 'center',
+    } ).mount();
+} );*/
