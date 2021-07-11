@@ -376,6 +376,15 @@ var PlayerObserver=false;
                         console.warn(e)
                     }
                     setTimeout(()=>{this.updatePlayer()},10000);
+                },
+                downloadImage:function (img) {
+
+                    var link = document.createElement('a');
+                    link.href = '/images/photos/hires/'+img;
+                    link.download = img;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
                 }
             },
             watch: {
@@ -411,6 +420,16 @@ var PlayerObserver=false;
                         {document.body.style.overflow = "scroll";
                        //     document.body.style.position="inherit";
                             }
+                },
+                photoItemModal: function () {
+                    if (this.photoItemModal){
+                        document.body.style.overflow = "hidden";
+                        //   document.body.style.position="fixed";
+                    }
+                    else {
+                        document.body.style.overflow = "scroll";
+                        //  document.body.style.position="inherit";
+                    }
                 },
                 menuModal: function () {
                     if (this.menuModal){

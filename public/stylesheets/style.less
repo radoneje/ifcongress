@@ -990,6 +990,10 @@ position: absolute;
   background-size: contain;
   background-repeat: no-repeat;
   margin: 0 auto;
+  position: relative;
+}
+.DescrPhoto img{
+  width: 100%;
 }
 .photoItem{
   height: 185px;
@@ -1662,6 +1666,14 @@ color:#ffffff;
   width: 100%;
   height: 100%;
 }
+.photoDescrTitleWr{
+  justify-content: center;
+}
+.DescrPhoto .progUpBtn{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 @media (max-width:1280px) {
   .playerBox{
     display: block;
@@ -2157,6 +2169,9 @@ color:#ffffff;
   }
   .photoDescrTitleWr{
     margin-left: 0;
+  }
+  .DescrPhoto .progUpBtn{
+    position: inherit;
   }
 }
 @media (max-width:458px) {

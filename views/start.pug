@@ -644,7 +644,9 @@ html
                                 .regAboutClose(v-on:click="photoItemModal=null")
                                     include closeBtn
                                 .spkDescrTitleBox
-                                    .DescrPhoto(v-bind:style="{backgroundImage:'url(/images/photos/hires/'+photoItemModal+')'}")
+                                    .DescrPhoto
+                                        img(:src="'/images/photos/hires/'+photoItemModal")
+                                        .progUpBtn(v-on:click="downloadImage(photoItemModal)" ) {{lang=="ru"?'Скачать':'Download'}}
 
                 .trackAboutWr(v-if="loginModal")
                     .towerReg
