@@ -308,7 +308,7 @@ html
                             </defs>
                             </svg>
 
-            .spkWr#spkPage1
+            .photoBox
                 .tower
                     .aboutTitle.spkTitle#spk1 {{lang=="ru"?"Фотолента":"Photogallery"}}
                         .spkSwitherWr.hideMobile
@@ -321,6 +321,9 @@ html
                                 <svg width="12" height="23" viewBox="0 0 12 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M0.502034 11.5C0.501349 11.8505 0.623411 12.1902 0.847033 12.46L8.34703 21.46C8.60164 21.7664 8.9675 21.959 9.36414 21.9956C9.76078 22.0321 10.1557 21.9097 10.462 21.655C10.7684 21.4004 10.961 21.0346 10.9976 20.6379C11.0341 20.2413 10.9116 19.8464 10.657 19.54L3.93703 11.5L10.417 3.46004C10.5416 3.30661 10.6347 3.13007 10.6908 2.94056C10.747 2.75105 10.7651 2.55231 10.7442 2.35577C10.7233 2.15923 10.6637 1.96875 10.569 1.7953C10.4742 1.62184 10.3461 1.46883 10.192 1.34504C10.0378 1.20767 9.85686 1.10363 9.66055 1.03944C9.46424 0.975256 9.25679 0.952301 9.05119 0.972015C8.8456 0.99173 8.64629 1.05369 8.46575 1.15401C8.28522 1.25434 8.12735 1.39087 8.00203 1.55504L0.757034 10.555C0.568759 10.8327 0.478978 11.1654 0.502034 11.5Z" fill="white"/>
                                 </svg>
+            .spkWr#spkPage1
+                .tower
+
                     .spkPage(v-if="curPhotos[curPhotosPage]")
                         .spkItem(v-for="item in curPhotos[curPhotosPage]" v-on:click="showPopPhoto(item)")
                             .spkItemPhoto.photoItem(v-bind:style="{backgroundImage:'url('+item.lores+')'}" v-on:click.stop.prevent="showPopPhoto(item)")
