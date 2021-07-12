@@ -651,7 +651,7 @@ html
                                         img(:src="photoItemModal.hires")
                                         .progUpBtn(v-on:click="downloadImage(photoItemModal.hires)" ) {{lang=="ru"?'Скачать':'Download'}}
                                     .spkDescrTitleCont
-                                        .spkDescrTitle {{(lang=="ru"?photoItemModal.title:photoItemModal.title_en).replace("&nbsp;", " ")}}
+                                        .spkDescrTitle {{(lang=="ru"?photoItemModal.title:photoItemModal.title_en)}}
                                         .spkDescrPos {{lang=="ru"?photoItemModal.descr:photoItemModal.descr_en}}
                 .trackAboutWr(v-if="loginModal")
                     .towerReg
