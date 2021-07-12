@@ -310,7 +310,7 @@ html
 
             .spkWr#spkPage1
                 .tower
-                    .aboutTitle.spkTitle#spk1 &nbsp;
+                    .aboutTitle.spkTitle#spk1 {{lang=="ru"?"Фотолента":"Photogallery"}}
                         .spkSwitherWr.hideMobile
                             .spkSwitherWrTitle.hideMobile {{curPhotosPage+1}}/{{parseInt(photos.length/8)+1}}
                             .spkSwitherWrTitleUp(v-on:click="curPhotosPagePreview()" )
@@ -323,7 +323,9 @@ html
                                 </svg>
                     .spkPage(v-if="curPhotos[curPhotosPage]")
                         .spkItem(v-for="item in curPhotos[curPhotosPage]" v-on:click="showPopPhoto(item)")
-                            .spkItemPhoto.photoItem(v-bind:style="{backgroundImage:'url(/images/photos/lores/'+item+')'}" v-on:click.stop.prevent="showPopPhoto(item)")
+                            .spkItemPhoto.photoItem(v-bind:style="{backgroundImage:'url('+item.lores+')'}" v-on:click.stop.prevent="showPopPhoto(item)")
+                            .spkItemName(v-html='(lang=="ru"?item.title:item.title_en)')
+                            .spkItemPos {{lang=="ru"?item.descr:item.descr_en}}
                         #spkChild1.showMobile(style="width:24px;height:24px;")
                         div(style="clear:both")
                     div(style="clear:both")
@@ -643,11 +645,14 @@ html
                             .spkDescrTitleWr.photoDescrTitleWr(style="position:relative")
                                 .regAboutClose(v-on:click="photoItemModal=null")
                                     include closeBtn
-                                .spkDescrTitleBox
+                                .spkDescrTitleBox(style="display:block")
                                     .DescrPhoto
-                                        img(:src="'/images/photos/hires/'+photoItemModal")
-                                        .progUpBtn(v-on:click="downloadImage(photoItemModal)" ) {{lang=="ru"?'Скачать':'Download'}}
-
+                                        //(v-bind:style="{backgroundImage:'url(/images/photos/hires/'+photoItemModal+')'}")
+                                        img(:src="photoItemModal.hires")
+                                        .progUpBtn(v-on:click="downloadImage(photoItemModal.hires)" ) {{lang=="ru"?'Скачать':'Download'}}
+                                    .spkDescrTitleCont
+                                        .spkDescrTitle {{(lang=="ru"?photoItemModal.title:photoItemModal.title_en).replace("&nbsp;", " ")}}
+                                        .spkDescrPos {{lang=="ru"?photoItemModal.descr:photoItemModal.descr_en}}
                 .trackAboutWr(v-if="loginModal")
                     .towerReg
                         .regAboutClose(v-on:click="loginModal=null")

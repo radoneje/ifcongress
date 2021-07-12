@@ -22,6 +22,7 @@ html
           .aminMenuItem(v-on:click="sect=9" v-bind:class="{active:sect==9}" v-show="chekDisable(9)") Треки
           .aminMenuItem(v-on:click="sect=10" v-bind:class="{active:sect==10}" v-show="chekDisable(10)") Программа
           .aminMenuItem(v-on:click="sect=11" v-bind:class="{active:sect==11}" v-show="chekDisable(11)") FAQ
+          .aminMenuItem(v-on:click="sect=14" v-bind:class="{active:sect==14}" v-show="chekDisable(14)") Фото
           .aminMenuItem(v-on:click="sect=7" v-bind:class="{active:sect==7}" v-show="chekDisable(7)") Коды
           .aminMenuItem(v-on:click="sect=6" v-bind:class="{active:sect==6}" v-show="chekDisable(6)") Редирект
       .adminWr
@@ -343,6 +344,32 @@ html
                 .adminSpkItemPosition
                   button(v-on:click="editFaq(item)") Сохранить изменения
                   button(v-on:click="deleteFaq(item)") Удалить
+              .adminSpkItem
+                .adminSpkItemWr
+                .adminSpkItemPosition
+                  button(v-on:click="addFaq()") Добавить FAQ
+        .adminSect(v-if="sect==14" )
+          .adminSectLoader.loaderWr(v-if="showLoader")
+            .loader
+            .loaderText идет загрузка...
+          .adminBody(v-show="!showLoader")
+            .adminSectTitle Photos ({{photos.length}})
+              .adminSpkItem(v-for="item in photos" v-if="!item.isDeleted")
+                .adminSpkItemWr
+                  .adminSpkItemId
+                    div  ID={{item.id}} {{item.lores}}
+                      div
+                        img.adminPhoto(:src="item.lores")
+                      .adminSpkItemName
+                        input(v-model="item.title" placeholder="название")
+                        input(v-model="item.title_en" placeholder="title")
+                      .adminSpkItemName
+                        input(v-model="item.descr" placeholder='Описание')
+                        input(v-model="item.descr_en" placeholder='Description')
+
+                .adminSpkItemPosition
+                  button(v-on:click="editPhoto(item)") Сохранить изменения
+                  button(v-on:click="deletePhoto(item)") Удалить
               .adminSpkItem
                 .adminSpkItemWr
                 .adminSpkItemPosition

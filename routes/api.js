@@ -462,8 +462,14 @@ router.get('/faq', async(req, res, next) =>{
 //  req.knex.select("*").from("t_cbrf_codes")
   var ret=await req.knex.select("*").from("t_cbrf_faq").where({isDeleted:false}).orderBy("id");
   res.json(ret);
-
 })
+router.get('/photos', async(req, res, next) =>{
+
+//  req.knex.select("*").from("t_cbrf_codes")
+  var ret=await req.knex.select("*").from("t_cbrf_photos").where({isDeleted:false}).orderBy("id");
+  res.json(ret);
+})
+
 router.get('/pgm', async(req, res, next) =>{
 
 //  req.knex.select("*").from("t_cbrf_codes")
@@ -545,6 +551,15 @@ router.post('/faqChange', adminLogin,async(req, res, next) =>{
   res.json(ret[0]);
 
 })
+router.post('/photoChange', adminLogin,async(req, res, next) =>{
+
+  var id=req.body.id;
+  delete  req.body.id;
+  var ret=await req.knex("t_cbrf_photos").update(req.body,"*").where({id:id});
+  res.json(ret[0]);
+
+})
+
 
 
 router.post('/addVoteAnswer', adminLogin,async(req, res, next) =>{
