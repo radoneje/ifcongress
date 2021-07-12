@@ -67,7 +67,7 @@ router.get('/player/:id/:lang?', async (req, res, next) =>{
     req.params.lang="ru"
 res.render("player",{id:req.params.id, lang:req.params.lang})
 })
-router.get('/import', async (req, res, next) =>{
+/*router.get('/import', async (req, res, next) =>{
   const photos = await fs.promises.readdir(__dirname+"/../"+"public/images/photos/lores");
   for(var photo of photos) {
     await req.knex("t_cbrf_photos").insert({
@@ -77,7 +77,7 @@ router.get('/import', async (req, res, next) =>{
   }
   res.json(1)
 
-});
+});*/
 
 router.get('/index/:lang?', async (req, res, next) =>{
 
